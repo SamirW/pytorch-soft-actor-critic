@@ -7,7 +7,7 @@ import torch
 from sac import SAC
 from tensorboardX import SummaryWriter
 from normalized_actions import NormalizedActions
-from replay_memory import ReplayMemory
+from buffer import ReplayBuffer
 from make_env import make_env
 from utils import SubprocVecEnv, DummyVecEnv
 
@@ -62,20 +62,21 @@ def make_parallel_env(env_id, n_rollout_threads, seed, discrete_action):
     else:
         return SubprocVecEnv([get_env_fn(i) for i in range(n_rollout_threads)])
 
-# Environment
-# env = NormalizedActions(gym.make(args.env_name))
-env = make_parallel_env(args.env_name, 1, args.seed, False)
-
 torch.manual_seed(args.seed)
 np.random.seed(args.seed)
 
-# Agent
-agent = SAC(env.observation_space[0].shape[0], env.action_space[0], args)
+# Environment
+env = make_parallel_env(args.env_name, 1, args.seed, False)
+sac = SAC.init_from_env(env, args)
 
 writer = SummaryWriter()
 
 # Memory
-memory = ReplayMemory(args.replay_size)
+memory = ReplayBuffer(args.replay_size, sac.nagents,
+                      [obsp.shape[0] for obsp in env.observation_space],
+                      [acsp.shape[0] for acsp in env.action_space])
+
+exit()
 
 # Training Loop
 rewards = []
