@@ -1,5 +1,7 @@
 import math
 import torch
+from torch import Tensor
+from torch.autograd import Variable
 from baselines.common.vec_env import VecEnv, CloudpickleWrapper
 import numpy as np
 
@@ -116,6 +118,11 @@ class DummyVecEnv(VecEnv):
     def reset(self, flip=False):        
         results = [env._reset(flip=flip) for env in self.envs]
         return np.array(results)
+
+    def sample_action_spaces(self):
+        return [[Variable(Tensor(acsp.sample()), requires_grad=False) 
+            for acsp in env.action_space] 
+            for env in self.envs][0]
 
     def render(self):
         [env._render() for env in self.envs]
