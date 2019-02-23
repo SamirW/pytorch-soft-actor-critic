@@ -6,68 +6,28 @@ import torch.nn.functional as F
 from torch.optim import Adam
 from utils import soft_update, hard_update
 from model import GaussianPolicy, QNetwork, ValueNetwork, DeterministicPolicy
+from agents import SACAgent
 
 
 class SAC(object):
-    def __init__(self, num_inputs, action_space, args):
+    def __init__(self, agent_init_params, num_agents,
+                 gamma=0.99, tau=0.005, target_update_interval=1,
+                 policy_type='Gaussian', hidden_size=256, alpha=0.1, 
+                 lr=0.0003, automatic_entropy_tuning=False):
 
-        self.num_inputs = num_inputs
-        self.action_space = action_space.shape[0]
-        self.gamma = args.gamma
-        self.tau = args.tau
-
-        self.policy_type = args.policy
-        self.target_update_interval = args.target_update_interval
-        self.automatic_entropy_tuning = args.automatic_entropy_tuning
-
-        self.critic = QNetwork(self.num_inputs, self.action_space, args.hidden_size)
-        self.critic_optim = Adam(self.critic.parameters(), lr=args.lr)
-
-        if self.policy_type == "Gaussian":
-            self.alpha = args.alpha
-            # Target Entropy = −dim(A) (e.g. , -6 for HalfCheetah-v2) as given in the paper
-            if self.automatic_entropy_tuning == True:
-                self.target_entropy = -torch.prod(torch.Tensor(action_space.shape)).item()
-                self.log_alpha = torch.zeros(1, requires_grad=True)
-                self.alpha_optim = Adam([self.log_alpha], lr=args.lr)
-            else:
-                pass
-
-
-            self.policy = GaussianPolicy(self.num_inputs, self.action_space, args.hidden_size)
-            self.policy_optim = Adam(self.policy.parameters(), lr=args.lr)
-
-            self.value = ValueNetwork(self.num_inputs, args.hidden_size)
-            self.value_target = ValueNetwork(self.num_inputs, args.hidden_size)
-            self.value_optim = Adam(self.value.parameters(), lr=args.lr)
-            hard_update(self.value_target, self.value)
-        else:
-            self.policy = DeterministicPolicy(self.num_inputs, self.action_space, args.hidden_size)
-            self.policy_optim = Adam(self.policy.parameters(), lr=args.lr)
-
-            self.critic_target = QNetwork(self.num_inputs, self.action_space, args.hidden_size)
-            hard_update(self.critic_target, self.critic)
-
-
-
-    def select_action(self, state, eval=False):
-        state = torch.FloatTensor(state).unsqueeze(0)
-        if eval == False:
-            self.policy.train()
-            action, _, _, _, _ = self.policy.sample(state)
-        else:
-            self.policy.eval()
-            _, _, _, action, _ = self.policy.sample(state)
-            if self.policy_type == "Gaussian":
-                action = torch.tanh(action)
-            else:
-                pass
-        #action = torch.tanh(action)
-        action = action.detach().cpu().numpy()
-        return action[0]
-
-
-
+        self.nagents = num_agents
+        self.agents = [SACAgent(automatic_entropy_tuning=automatic_entropy_tuning,
+                            policy_type=policy_type, hidden_size=hidden_size,
+                            alpha=alpha, lr=lr, **params)
+                        for params in agent_init_params]
+        self.distilled_agent = SACAgent(automatic_entropy_tuning=automatic_entropy_tuning,
+                            policy_type=policy_type, hidden_size=hidden_size,
+                            alpha=alpha, lr=lr, **agent_init_params[0])
+        self.agent_init_params = agent_init_params
+        self.gamma = gamma
+        self.tau = tau
+        self.target_update_interval = target_update_interval
+        
     def update_parameters(self, state_batch, action_batch, reward_batch, next_state_batch, mask_batch, updates):
         state_batch = torch.FloatTensor(state_batch)
         next_state_batch = torch.FloatTensor(next_state_batch)
@@ -187,28 +147,55 @@ class SAC(object):
             soft_update(self.value_target, self.value, self.tau)
         return value_loss.item(), q1_value_loss.item(), q2_value_loss.item(), policy_loss.item(), alpha_loss.item(), alpha_logs
 
-    # Save model parameters
-    def save_model(self, env_name, suffix="", actor_path=None, critic_path=None, value_path=None):
-        if not os.path.exists('models/'):
-            os.makedirs('models/')
+    def save(self, filename):
+        """
+        Save trained parameters of all agents into one file
+        """
+        self.prep_training(device='cpu')  # move parameters to CPU before saving
+        save_dict = {'init_dict': self.init_dict,
+                     'agent_params': [a.get_params() for a in self.agents]}
+        torch.save(save_dict, filename)
 
-        if actor_path is None:
-            actor_path = "models/sac_actor_{}_{}".format(env_name, suffix)
-        if critic_path is None:
-            critic_path = "models/sac_critic_{}_{}".format(env_name, suffix)
-        if value_path is None:
-            value_path = "models/sac_value_{}_{}".format(env_name, suffix)
-        print('Saving models to {}, {} and {}'.format(actor_path, critic_path, value_path))
-        torch.save(self.value.state_dict(), value_path)
-        torch.save(self.policy.state_dict(), actor_path)
-        torch.save(self.critic.state_dict(), critic_path)
-    
-    # Load model parameters
-    def load_model(self, actor_path, critic_path, value_path):
-        print('Loading models from {}, {} and {}'.format(actor_path, critic_path, value_path))
-        if actor_path is not None:
-            self.policy.load_state_dict(torch.load(actor_path))
-        if critic_path is not None:
-            self.critic.load_state_dict(torch.load(critic_path))
-        if value_path is not None:
-            self.value.load_state_dict(torch.load(value_path))
+    @classmethod
+    def init_from_env(cls, env, args):
+
+        agent_init_params = []
+        agent_id = 0
+        for acsp, obsp in zip(env.action_space, env.observation_space):
+            # Policy
+            num_in_pol = obsp.shape[0]
+            num_out_pol = acsp.shape[0]
+
+            # Qnetwork and Value network
+            num_in_critic = 0
+            for oobsp in env.observation_space:
+                num_in_critic += oobsp.shape[0]
+            for oacsp in env.action_space:
+                num_in_critic += oacsp.shape[0]
+
+            agent_init_params.append({'agent_id': agent_id,
+                                      'num_in_pol': num_in_pol,
+                                      'num_out_pol': num_out_pol,
+                                      'num_in_critic': num_in_critic})
+            agent_id += 1
+
+        init_dict = {'gamma': args.gamma, 'tau': args.tau, 'lr': args.lr, 'num_agents': agent_id,
+                     'policy_type': args.policy, 'hidden_size': args.hidden_size,
+                     'alpha': args.alpha, 'agent_init_params': agent_init_params,
+                     'automatic_entropy_tuning': args.automatic_entropy_tuning,
+                     'target_update_interval': args.target_update_interval}
+        instance = cls(**init_dict)
+        instance.init_dict = init_dict
+        return instance
+
+    @classmethod
+    def init_from_save(cls, filename):
+        """
+        Instantiate instance of this class from file created by 'save' method
+        """
+        save_dict = torch.load(filename)
+        instance = cls(**save_dict['init_dict'])
+        instance.init_dict = save_dict['init_dict']
+        for a, params in zip(instance.agents, save_dict['agent_params']):
+            a.load_params(params)
+        return instance

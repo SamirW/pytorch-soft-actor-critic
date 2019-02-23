@@ -33,18 +33,23 @@ class ValueNetwork(nn.Module):
         x = self.linear3(x)
         return x
 
+    def randomize(self):
+        nn.init.xavier_uniform_(self.linear1.weight)
+        nn.init.xavier_uniform_(self.linear2.weight)
+        nn.init.xavier_uniform_(self.linear3.weight)
+
 
 class QNetwork(nn.Module):
-    def __init__(self, num_inputs, num_actions, hidden_dim):
+    def __init__(self, num_in_critic, hidden_dim):
         super(QNetwork, self).__init__()
 
         # Q1 architecture
-        self.linear1 = nn.Linear(num_inputs + num_actions, hidden_dim)
+        self.linear1 = nn.Linear(num_in_critic, hidden_dim)
         self.linear2 = nn.Linear(hidden_dim, hidden_dim)
         self.linear3 = nn.Linear(hidden_dim, 1)
 
         # Q2 architecture
-        self.linear4 = nn.Linear(num_inputs + num_actions, hidden_dim)
+        self.linear4 = nn.Linear(num_in_critic, hidden_dim)
         self.linear5 = nn.Linear(hidden_dim, hidden_dim)
         self.linear6 = nn.Linear(hidden_dim, 1)
 
@@ -62,6 +67,15 @@ class QNetwork(nn.Module):
         x2 = self.linear6(x2)
 
         return x1, x2
+
+    def randomize(self):
+        nn.init.xavier_uniform_(self.linear1.weight)
+        nn.init.xavier_uniform_(self.linear2.weight)
+        nn.init.xavier_uniform_(self.linear3.weight)
+
+        nn.init.xavier_uniform_(self.linear4.weight)
+        nn.init.xavier_uniform_(self.linear5.weight)
+        nn.init.xavier_uniform_(self.linear6.weight)
 
 
 class GaussianPolicy(nn.Module):
@@ -96,6 +110,13 @@ class GaussianPolicy(nn.Module):
         log_prob = log_prob.sum(1, keepdim=True)
         return action, log_prob, x_t, mean, log_std
 
+    def randomize(self):
+        nn.init.xavier_uniform_(self.linear1.weight)
+        nn.init.xavier_uniform_(self.linear2.weight)
+        nn.init.xavier_uniform_(self.mean_linear.weight)
+        nn.init.xavier_uniform_(self.log_std_linear.weight)
+
+
 class DeterministicPolicy(nn.Module):
     def __init__(self, num_inputs, num_actions, hidden_dim):
         super(DeterministicPolicy, self).__init__()
@@ -121,3 +142,8 @@ class DeterministicPolicy(nn.Module):
         action = mean + noise
         return action, torch.tensor(0.), torch.tensor(0.), mean, torch.tensor(0.)
     
+
+    def randomize(self):
+        nn.init.xavier_uniform_(self.linear1.weight)
+        nn.init.xavier_uniform_(self.linear2.weight)
+        nn.init.xavier_uniform_(self.mean.weight)
