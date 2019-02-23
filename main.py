@@ -21,8 +21,8 @@ parser.add_argument('--env-name', default="HalfCheetah-v2",
                     help='name of the environment to run')
 parser.add_argument('--policy', default="Gaussian",
                     help='algorithm to use: Gaussian | Deterministic')
-parser.add_argument('--eval', type=bool, default=False,
-                    help='Evaluates a policy a policy every 10 episode (default:False)')
+parser.add_argument('--eval', type=bool, default=True,
+                    help='Evaluates a policy a policy every 10 episode (default:True)')
 parser.add_argument('--gamma', type=float, default=0.99, metavar='G',
                     help='discount factor for reward (default: 0.99)')
 parser.add_argument('--tau', type=float, default=0.005, metavar='G',
@@ -107,7 +107,7 @@ for i_episode in itertools.count():
     if i_episode == args.flip_ep:
         print("Flipping ...")
         replay_buffer = ReplayBuffer(
-            config.buffer_length, sac.nagents,
+            args.replay_size, sac.nagents,
             [obsp.shape[0] for obsp in env.observation_space],
             [acsp.shape[0] for acsp in env.action_space])
         flip = True
@@ -126,20 +126,18 @@ for i_episode in itertools.count():
         if args.start_steps > total_numsteps:
             torch_agent_actions = env.sample_action_spaces()  # Sample action from env
         else:
-            torch_agent_actions = sac.step(torch_obs)  # Sample action from policy
+            torch_agent_actions = sac.step(
+                torch_obs)  # Sample action from policy
 
         # convert actions to numpy arrays
         agent_actions = [ac.data.numpy() for ac in torch_agent_actions]
 
         # Take action in the environment
-        next_obs, rewards, dones, infos = env.step([copy.deepcopy(agent_actions)])
+        next_obs, rewards, dones, infos = env.step(
+            [copy.deepcopy(agent_actions)])
 
         if ep_step == args.max_ep_length - 1:
             dones = dones + 1
-
-        if (i_episode % 10) == 0:
-            time.sleep(0.01)
-            env.render()
 
         # Add to buffer
         replay_buffer.push(obs, agent_actions, rewards, next_obs, dones)
@@ -151,7 +149,8 @@ for i_episode in itertools.count():
                 for i in range(args.updates_per_update):
                     for a_i in range(sac.nagents):
                         # Sample a batch from memory
-                        sample = replay_buffer.sample(args.batch_size, norm_rews=True)
+                        sample = replay_buffer.sample(
+                            args.batch_size, norm_rews=True)
 
                         # Update parameters of all the networks for each agent
                         q_value, value_loss, critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = \
@@ -191,17 +190,31 @@ for i_episode in itertools.count():
                                                                                    np.round(np.mean(total_rewards[-100:]), 2)))
 
     if i_episode % 10 == 0 and args.eval == True:
-        state = torch.Tensor([env.reset()])
+        obs = env.reset(flip=flip)
+        test_ep_step = 0
         episode_reward = 0
         while True:
-            print("eval")
-            action = agent.select_action(state, eval=True)
+            # Render
+            env.render()
 
-            next_state, reward, done, _ = env.step(action)
-            episode_reward += reward
+            # Find action
+            torch_obs = [
+                Variable(torch.Tensor(
+                    np.vstack(obs[:, i])), requires_grad=False)
+                for i in range(sac.nagents)]
+            torch_agent_actions = sac.step(torch_obs, eval=True)
+            agent_actions = [ac.data.numpy() for ac in torch_agent_actions]
 
-            state = next_state
-            if done:
+            # Take action
+            next_obs, rewards, dones, infos = env.step(
+                [copy.deepcopy(agent_actions)])
+
+            # Next step and bookeeping
+            obs = next_obs
+            test_ep_step += 1
+            episode_reward += np.sum(rewards) / sac.nagents
+
+            if test_ep_step == args.max_ep_length - 1:
                 break
 
         writer.add_scalar('reward/test', episode_reward, i_episode)
