@@ -8,14 +8,16 @@ from sac import SAC
 from tensorboardX import SummaryWriter
 from normalized_actions import NormalizedActions
 from replay_memory import ReplayMemory
+from make_env import make_env
+from utils import SubprocVecEnv, DummyVecEnv
 
 parser = argparse.ArgumentParser(description='PyTorch REINFORCE example')
 parser.add_argument('--env-name', default="HalfCheetah-v2",
                     help='name of the environment to run')
 parser.add_argument('--policy', default="Gaussian",
                     help='algorithm to use: Gaussian | Deterministic')
-parser.add_argument('--eval', type=bool, default=True,
-                    help='Evaluates a policy a policy every 10 episode (default:True)')
+parser.add_argument('--eval', type=bool, default=False,
+                    help='Evaluates a policy a policy every 10 episode (default:False)')
 parser.add_argument('--gamma', type=float, default=0.99, metavar='G',
                     help='discount factor for reward (default: 0.99)')
 parser.add_argument('--tau', type=float, default=0.005, metavar='G',
@@ -32,6 +34,8 @@ parser.add_argument('--batch_size', type=int, default=256, metavar='N',
                     help='batch size (default: 256)')
 parser.add_argument('--num_steps', type=int, default=1000001, metavar='N',
                     help='maximum number of steps (default: 1000000)')
+parser.add_argument('--max_ep_length', type=int, default=500, metavar='N',
+                    help='maximum number of steps in episode (default: 50)')
 parser.add_argument('--hidden_size', type=int, default=256, metavar='N',
                     help='hidden size (default: 256)')
 parser.add_argument('--updates_per_step', type=int, default=1, metavar='N',
@@ -44,14 +48,29 @@ parser.add_argument('--replay_size', type=int, default=1000000, metavar='N',
                     help='size of replay buffer (default: 10000000)')
 args = parser.parse_args()
 
+
+def make_parallel_env(env_id, n_rollout_threads, seed, discrete_action):
+    def get_env_fn(rank):
+        def init_env():
+            env = make_env(env_id, discrete_action=discrete_action)
+            env.seed(seed + rank * 1000)
+            np.random.seed(seed + rank * 1000)
+            return env
+        return init_env
+    if n_rollout_threads == 1:
+        return DummyVecEnv([get_env_fn(0)])
+    else:
+        return SubprocVecEnv([get_env_fn(i) for i in range(n_rollout_threads)])
+
 # Environment
-env = NormalizedActions(gym.make(args.env_name))
-env.seed(args.seed)
+# env = NormalizedActions(gym.make(args.env_name))
+env = make_parallel_env(args.env_name, 1, args.seed, False)
+
 torch.manual_seed(args.seed)
 np.random.seed(args.seed)
 
 # Agent
-agent = SAC(env.observation_space.shape[0], env.action_space, args)
+agent = SAC(env.observation_space[0].shape[0], env.action_space[0], args)
 
 writer = SummaryWriter()
 
@@ -68,6 +87,7 @@ for i_episode in itertools.count():
     state = env.reset()
 
     episode_reward = 0
+    ep_step = 0
     while True:
         if args.start_steps > total_numsteps:
             action = env.action_space.sample()
@@ -75,15 +95,23 @@ for i_episode in itertools.count():
             action = agent.select_action(state)  # Sample action from policy
         next_state, reward, done, _ = env.step(action)  # Step
         mask = not done  # 1 for not done and 0 for done
-        memory.push(state, action, reward, next_state, mask)  # Append transition to memory
+        memory.push(state, action, reward, next_state,
+                    mask)  # Append transition to memory
+
+        if (i_episode % 100) == 0:
+            time.sleep(0.01)
+            env.render()
+
         if len(memory) > args.batch_size:
-            for i in range(args.updates_per_step): # Number of updates per step in environment
+            # Number of updates per step in environment
+            for i in range(args.updates_per_step):
                 # Sample a batch from memory
-                state_batch, action_batch, reward_batch, next_state_batch, mask_batch = memory.sample(args.batch_size)
+                state_batch, action_batch, reward_batch, next_state_batch, mask_batch = memory.sample(
+                    args.batch_size)
                 # Update parameters of all the networks
                 value_loss, critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = agent.update_parameters(state_batch, action_batch,
-                                                                                                reward_batch, next_state_batch, 
-                                                                                                mask_batch, updates)
+                                                                                                                 reward_batch, next_state_batch,
+                                                                                                                 mask_batch, updates)
 
                 writer.add_scalar('loss/value', value_loss, updates)
                 writer.add_scalar('loss/critic_1', critic_1_loss, updates)
@@ -96,8 +124,9 @@ for i_episode in itertools.count():
         state = next_state
         total_numsteps += 1
         episode_reward += reward
+        ep_step += 1
 
-        if done:
+        if done or ep_step == args.max_ep_length:
             break
 
     if total_numsteps > args.num_steps:
@@ -105,18 +134,18 @@ for i_episode in itertools.count():
 
     writer.add_scalar('reward/train', episode_reward, i_episode)
     rewards.append(episode_reward)
-    print("Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(rewards[-1],2),
-                                                                                np.round(np.mean(rewards[-100:]),2)))
+    print("Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(rewards[-1], 2),
+                                                                                   np.round(np.mean(rewards[-100:]), 2)))
 
     if i_episode % 10 == 0 and args.eval == True:
         state = torch.Tensor([env.reset()])
         episode_reward = 0
         while True:
+            print("eval")
             action = agent.select_action(state, eval=True)
 
             next_state, reward, done, _ = env.step(action)
             episode_reward += reward
-
 
             state = next_state
             if done:
@@ -126,8 +155,8 @@ for i_episode in itertools.count():
 
         test_rewards.append(episode_reward)
         print("----------------------------------------")
-        print("Test Episode: {}, reward: {}".format(i_episode, test_rewards[-1]))
+        print("Test Episode: {}, reward: {}".format(
+            i_episode, test_rewards[-1]))
         print("----------------------------------------")
 
 env.close()
-
