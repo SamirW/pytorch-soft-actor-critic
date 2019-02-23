@@ -122,7 +122,7 @@ class DummyVecEnv(VecEnv):
     def sample_action_spaces(self):
         return [[Variable(Tensor(acsp.sample()), requires_grad=False) 
             for acsp in env.action_space] 
-            for env in self.envs][0]
+            for env in self.envs]
 
     def render(self):
         [env._render() for env in self.envs]

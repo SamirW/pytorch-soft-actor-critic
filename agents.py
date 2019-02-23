@@ -10,7 +10,8 @@ from model import GaussianPolicy, QNetwork, ValueNetwork, DeterministicPolicy
 
 class SACAgent(object):
 
-    def __init__(self, num_in_pol, num_out_pol, num_in_critic, agent_id, 
+    def __init__(self, num_in_pol, num_out_pol, num_in_critic, 
+                num_in_value, agent_id, 
                 policy_type='Gaussian', 
                 hidden_size=256, 
                 alpha=0.1, 
@@ -43,8 +44,8 @@ class SACAgent(object):
                 num_in_pol, num_out_pol, hidden_size)
             self.policy_optim = Adam(self.policy.parameters(), lr=lr)
 
-            self.value = ValueNetwork(num_in_pol, hidden_size)
-            self.value_target = ValueNetwork(num_in_pol, hidden_size)
+            self.value = ValueNetwork(num_in_value, hidden_size)
+            self.value_target = ValueNetwork(num_in_value, hidden_size)
             self.value_optim = Adam(self.value.parameters(), lr=lr)
             hard_update(self.value_target, self.value)
         else:
@@ -64,13 +65,13 @@ class SACAgent(object):
         else:
             hard_update(self.critic_target, self.critic)
 
-    def select_action(self, state, eval=False):
+    def select_action(self, obs, eval=False):
         if eval == False:
             self.policy.train()
-            action, _, _, _, _ = self.policy.sample(state)
+            action, _, _, _, _ = self.policy.sample(obs)
         else:
             self.policy.eval()
-            _, _, _, action, _ = self.policy.sample(state)
+            _, _, _, action, _ = self.policy.sample(obs)
             if self.policy_type == "Gaussian":
                 action = torch.tanh(action)
             else:

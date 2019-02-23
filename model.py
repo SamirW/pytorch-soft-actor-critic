@@ -55,14 +55,12 @@ class QNetwork(nn.Module):
 
         self.apply(weights_init_)
 
-    def forward(self, state, action):
-        x1 = torch.cat([state, action], 1)
-        x1 = F.relu(self.linear1(x1))
+    def forward(self, critic_input):
+        x1 = F.relu(self.linear1(critic_input))
         x1 = F.relu(self.linear2(x1))
         x1 = self.linear3(x1)
 
-        x2 = torch.cat([state, action], 1)
-        x2 = F.relu(self.linear4(x2))
+        x2 = F.relu(self.linear4(critic_input))
         x2 = F.relu(self.linear5(x2))
         x2 = self.linear6(x2)
 

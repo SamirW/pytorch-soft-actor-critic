@@ -27,53 +27,67 @@ class SAC(object):
         self.gamma = gamma
         self.tau = tau
         self.target_update_interval = target_update_interval
+
+    @property
+    def policies(self):
+        return [a.policy for a in self.agents]
+
+    def step(self, observations, eval=False):
+        return [a.select_action(obs, eval=eval) for a, obs 
+                        in zip(self.agents, observations)]
         
-    def update_parameters(self, state_batch, action_batch, reward_batch, next_state_batch, mask_batch, updates):
-        state_batch = torch.FloatTensor(state_batch)
-        next_state_batch = torch.FloatTensor(next_state_batch)
-        action_batch = torch.FloatTensor(action_batch)
-        reward_batch = torch.FloatTensor(reward_batch).unsqueeze(1)
-        mask_batch = torch.FloatTensor(np.float32(mask_batch)).unsqueeze(1)
+    def update_parameters(self, agent_i, sample, updates):
+        obs, acs, rews, next_obs, dones = sample
+        curr_agent = self.agents[agent_i]
+
+        obs_batch = torch.FloatTensor(obs[agent_i])
+        next_obs_batch = torch.FloatTensor(next_obs[agent_i])
+        action_batch = torch.FloatTensor(acs[agent_i])
+        reward_batch = torch.FloatTensor(rews[agent_i]).unsqueeze(1)
+        mask_batch = torch.FloatTensor(1-np.float32(dones[agent_i])).unsqueeze(1)
 
         """
         Use two Q-functions to mitigate positive bias in the policy improvement step that is known
         to degrade performance of value based methods. Two Q-functions also significantly speed
         up training, especially on harder task.
         """
-        expected_q1_value, expected_q2_value = self.critic(state_batch, action_batch)
-        new_action, log_prob, _, mean, log_std = self.policy.sample(state_batch)
+        qf_in = torch.cat((*obs, *acs), dim=1)
+        expected_q1_value, expected_q2_value = curr_agent.critic(qf_in)
+        new_action, log_prob, _, mean, log_std = curr_agent.policy.sample(obs_batch)
 
-        if self.policy_type == "Gaussian":
-            if self.automatic_entropy_tuning:
+        if curr_agent.policy_type == "Gaussian":
+            if curr_agent.automatic_entropy_tuning:
                 """
                 Alpha Loss
                 """
-                alpha_loss = -(self.log_alpha * (log_prob + self.target_entropy).detach()).mean()
-                self.alpha_optim.zero_grad()
+                alpha_loss = -(curr_agent.log_alpha * (log_prob + curr_agent.target_entropy).detach()).mean()
+                curr_agent.alpha_optim.zero_grad()
                 alpha_loss.backward()
-                self.alpha_optim.step()
-                self.alpha = self.log_alpha.exp()
-                alpha_logs = self.alpha.clone() # For TensorboardX logs
+                curr_agent.alpha_optim.step()
+                curr_agent.alpha = curr_agent.log_alpha.exp()
+                alpha_logs = curr_agent.alpha.clone() # For TensorboardX logs
             else:
                 alpha_loss = torch.tensor(0.)
-                alpha_logs = self.alpha # For TensorboardX logs
+                alpha_logs = curr_agent.alpha # For TensorboardX logs
 
 
             """
             Including a separate function approximator for the soft value can stabilize training.
             """
-            expected_value = self.value(state_batch)
-            target_value = self.value_target(next_state_batch)
+            vf_in = torch.cat((obs), dim=1)
+            expected_value = curr_agent.value(vf_in)
+            target_value = curr_agent.value_target(vf_in)
             next_q_value = reward_batch + mask_batch * self.gamma * (target_value).detach()
         else:
+            raise NotImplementedError()
             """
             There is no need in principle to include a separate function approximator for the state value.
             We use a target critic network for deterministic policy and eradicate the value value network completely.
             """
             alpha_loss = torch.tensor(0.)
-            alpha_logs = self.alpha  # For TensorboardX logs
-            next_state_action, _, _, _, _, = self.policy.sample(next_state_batch)
-            target_critic_1, target_critic_2 = self.critic_target(next_state_batch, next_state_action)
+            alpha_logs = curr_agent.alpha  # For TensorboardX logs
+            next_state_action, _, _, _, _, = curr_agent.policy.sample(next_obs_batch)
+            target_critic_1, target_critic_2 = curr_agent.critic_target(next_obs_batch, next_state_action)
             target_critic = torch.min(target_critic_1, target_critic_2)
             next_q_value = reward_batch + mask_batch * self.gamma * (target_critic).detach()
         
@@ -83,12 +97,15 @@ class SAC(object):
         JQ = 𝔼(st,at)~D[0.5(Q1(st,at) - r(st,at) - γ(𝔼st+1~p[V(st+1)]))^2]
         ∇JQ = ∇Q(st,at)(Q(st,at) - r(st,at) - γV(target)(st+1))
         """
+        all_new_acs = [pi.sample(ob)[0] for pi, ob 
+                                in zip(self.policies, obs)]
+        new_qf_in = torch.cat((*obs, *acs), dim=1)
         q1_value_loss = F.mse_loss(expected_q1_value, next_q_value)
         q2_value_loss = F.mse_loss(expected_q2_value, next_q_value)
-        q1_new, q2_new = self.critic(state_batch, new_action)
+        q1_new, q2_new = curr_agent.critic(new_qf_in)
         expected_new_q_value = torch.min(q1_new, q2_new)
 
-        if self.policy_type == "Gaussian":
+        if curr_agent.policy_type == "Gaussian":
             """
             Including a separate function approximator for the soft value can stabilize training and is convenient to 
             train simultaneously with the other networks
@@ -96,7 +113,7 @@ class SAC(object):
             JV = 𝔼st~D[0.5(V(st) - (𝔼at~π[Qmin(st,at) - α * log π(at|st)]))^2]
             ∇JV = ∇V(st)(V(st) - Q(st,at) + (α * logπ(at|st)))
             """
-            next_value = expected_new_q_value - (self.alpha * log_prob)
+            next_value = expected_new_q_value - (curr_agent.alpha * log_prob)
             value_loss = F.mse_loss(expected_value, next_value.detach())
         else:
             pass
@@ -108,7 +125,7 @@ class SAC(object):
         Jπ = 𝔼st∼D,εt∼N[α * logπ(f(εt;st)|st) − Q(st,f(εt;st))]
         ∇Jπ = ∇log π + ([∇at (α * logπ(at|st)) − ∇at Q(st,at)])∇f(εt;st)
         """
-        policy_loss = ((self.alpha * log_prob) - expected_new_q_value).mean()
+        policy_loss = ((curr_agent.alpha * log_prob) - expected_new_q_value).mean()
 
         # Regularization Loss
         mean_loss = 0.001 * mean.pow(2).mean()
@@ -116,35 +133,35 @@ class SAC(object):
 
         policy_loss += mean_loss + std_loss
 
-        self.critic_optim.zero_grad()
+        curr_agent.critic_optim.zero_grad()
         q1_value_loss.backward()
-        self.critic_optim.step()
+        curr_agent.critic_optim.step()
 
-        self.critic_optim.zero_grad()
+        curr_agent.critic_optim.zero_grad()
         q2_value_loss.backward()
-        self.critic_optim.step()
+        curr_agent.critic_optim.step()
 
-        if self.policy_type == "Gaussian":
-            self.value_optim.zero_grad()
+        if curr_agent.policy_type == "Gaussian":
+            curr_agent.value_optim.zero_grad()
             value_loss.backward()
-            self.value_optim.step()
+            curr_agent.value_optim.step()
         else:
             value_loss = torch.tensor(0.)
 
-        self.policy_optim.zero_grad()
+        curr_agent.policy_optim.zero_grad()
         policy_loss.backward()
-        self.policy_optim.step()
+        curr_agent.policy_optim.step()
         
         
         """
         We update the target weights to match the current value function weights periodically
         Update target parameter after every n(args.target_update_interval) updates
         """
-        if updates % self.target_update_interval == 0 and self.policy_type == "Deterministic":
-            soft_update(self.critic_target, self.critic, self.tau)
+        if updates % self.target_update_interval == 0 and curr_agent.policy_type == "Deterministic":
+            soft_update(curr_agent.critic_target, curr_agent.critic, curr_agent.tau)
 
-        elif updates % self.target_update_interval == 0 and self.policy_type == "Gaussian":
-            soft_update(self.value_target, self.value, self.tau)
+        elif updates % self.target_update_interval == 0 and curr_agent.policy_type == "Gaussian":
+            soft_update(curr_agent.value_target, curr_agent.value, curr_agent.tau)
         return value_loss.item(), q1_value_loss.item(), q2_value_loss.item(), policy_loss.item(), alpha_loss.item(), alpha_logs
 
     def save(self, filename):
@@ -168,15 +185,18 @@ class SAC(object):
 
             # Qnetwork and Value network
             num_in_critic = 0
+            num_in_value = 0
             for oobsp in env.observation_space:
                 num_in_critic += oobsp.shape[0]
+                num_in_value += oobsp.shape[0]
             for oacsp in env.action_space:
                 num_in_critic += oacsp.shape[0]
 
             agent_init_params.append({'agent_id': agent_id,
                                       'num_in_pol': num_in_pol,
                                       'num_out_pol': num_out_pol,
-                                      'num_in_critic': num_in_critic})
+                                      'num_in_critic': num_in_critic,
+                                      'num_in_value': num_in_value})
             agent_id += 1
 
         init_dict = {'gamma': args.gamma, 'tau': args.tau, 'lr': args.lr, 'num_agents': agent_id,
