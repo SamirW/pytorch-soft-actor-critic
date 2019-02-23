@@ -4,6 +4,8 @@ import gym
 import numpy as np
 import itertools
 import torch
+from torch import Tensor
+from torch.autograd import Variable
 from sac import SAC
 from tensorboardX import SummaryWriter
 from normalized_actions import NormalizedActions
@@ -34,7 +36,7 @@ parser.add_argument('--batch_size', type=int, default=256, metavar='N',
                     help='batch size (default: 256)')
 parser.add_argument('--num_steps', type=int, default=1000001, metavar='N',
                     help='maximum number of steps (default: 1000000)')
-parser.add_argument('--max_ep_length', type=int, default=500, metavar='N',
+parser.add_argument('--max_ep_length', type=int, default=25, metavar='N',
                     help='maximum number of steps in episode (default: 50)')
 parser.add_argument('--hidden_size', type=int, default=256, metavar='N',
                     help='hidden size (default: 256)')
@@ -46,6 +48,11 @@ parser.add_argument('--target_update_interval', type=int, default=1, metavar='N'
                     help='Value target update per no. of updates per step (default: 1)')
 parser.add_argument('--replay_size', type=int, default=1000000, metavar='N',
                     help='size of replay buffer (default: 10000000)')
+# New arguments
+parser.add_argument('--flip_ep', type=int, default=1000000, metavar='N',
+                    help='episde after which to use flipped environment (default: 10000000)')
+parser.add_argument('--n_rollout_threads', type=int, default=1, metavar='N',
+                    help='multithreading') 
 args = parser.parse_args()
 
 
@@ -66,68 +73,91 @@ torch.manual_seed(args.seed)
 np.random.seed(args.seed)
 
 # Environment
-env = make_parallel_env(args.env_name, 1, args.seed, False)
+env = make_parallel_env(args.env_name, args.n_rollout_threads, args.seed, False)
 sac = SAC.init_from_env(env, args)
 
 writer = SummaryWriter()
 
 # Memory
-memory = ReplayBuffer(args.replay_size, sac.nagents,
+replay_buffer = ReplayBuffer(args.replay_size, sac.nagents,
                       [obsp.shape[0] for obsp in env.observation_space],
                       [acsp.shape[0] for acsp in env.action_space])
-
-exit()
 
 # Training Loop
 rewards = []
 test_rewards = []
 total_numsteps = 0
 updates = 0
+flip = False
 
 for i_episode in itertools.count():
-    state = env.reset()
+    # Flip episodes          
+    if i_episode == args.flip_ep:
+        print("Flipping")
+        replay_buffer = ReplayBuffer(config.buffer_length, sac.nagents,
+                             [obsp.shape[0] for obsp in env.observation_space],
+                             [acsp.shape[0] if isinstance(acsp, Box) else acsp.n
+                              for acsp in env.action_space])
+        flip = True
+
+    obs = env.reset(flip=flip)
 
     episode_reward = 0
     ep_step = 0
     while True:
+
+        # rearrange observation to be per agent
+        torch_obs = [Variable(torch.Tensor(np.vstack(obs[:, i])),
+                                  requires_grad=False)
+                         for i in range(sac.nagents)]
+
         if args.start_steps > total_numsteps:
-            action = env.action_space.sample()
+            torch_agent_actions = env.sample_action_spaces() # Sample action from env
         else:
-            action = agent.select_action(state)  # Sample action from policy
-        next_state, reward, done, _ = env.step(action)  # Step
-        mask = not done  # 1 for not done and 0 for done
-        memory.push(state, action, reward, next_state,
-                    mask)  # Append transition to memory
+            torch_agent_actions = agent.select_action(obs)  # Sample action from policy
+
+        # convert actions to numpy arrays
+        agent_actions = [ac.data.numpy() for ac in torch_agent_actions]
+        # rearrange actions to be per environment
+        actions = [[ac[i] for ac in agent_actions] for i in range(args.n_rollout_threads)]
+
+        next_obs, rewards, dones, infos = env.step(actions)
+        if ep_step == args.max_ep_length-1:
+            dones = dones+1
 
         if (i_episode % 100) == 0:
             time.sleep(0.01)
             env.render()
 
-        if len(memory) > args.batch_size:
+        replay_buffer.push(obs, agent_actions, rewards, next_obs, dones)
+        obs = next_obs
+        total_numsteps += args.n_rollout_threads
+
+        if len(replay_buffer) > args.batch_size:
             # Number of updates per step in environment
             for i in range(args.updates_per_step):
-                # Sample a batch from memory
-                state_batch, action_batch, reward_batch, next_state_batch, mask_batch = memory.sample(
-                    args.batch_size)
-                # Update parameters of all the networks
-                value_loss, critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = agent.update_parameters(state_batch, action_batch,
-                                                                                                                 reward_batch, next_state_batch,
-                                                                                                                 mask_batch, updates)
+                for a_i in range(sac.agents):
+                    # Sample a batch from memory
+                    sample = replay_buffer.sample(args.batch_size)
+                    # Update parameters of all the networks
+                    value_loss, critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = agent.update_parameters(obs_batch, action_batch,
+                                                                                                                     reward_batch, next_obs_batch,
+                                                                                                                     mask_batch, updates)
 
-                writer.add_scalar('loss/value', value_loss, updates)
-                writer.add_scalar('loss/critic_1', critic_1_loss, updates)
-                writer.add_scalar('loss/critic_2', critic_2_loss, updates)
-                writer.add_scalar('loss/policy', policy_loss, updates)
-                writer.add_scalar('loss/entropy_loss', ent_loss, updates)
-                writer.add_scalar('entropy_temprature/alpha', alpha, updates)
-                updates += 1
+                    writer.add_scalar('loss/value', value_loss, updates)
+                    writer.add_scalar('loss/critic_1', critic_1_loss, updates)
+                    writer.add_scalar('loss/critic_2', critic_2_loss, updates)
+                    writer.add_scalar('loss/policy', policy_loss, updates)
+                    writer.add_scalar('loss/entropy_loss', ent_loss, updates)
+                    writer.add_scalar('entropy_temprature/alpha', alpha, updates)
+                    updates += 1
 
-        state = next_state
+        obs = next_obs
         total_numsteps += 1
         episode_reward += reward
         ep_step += 1
 
-        if done or ep_step == args.max_ep_length:
+        if done:
             break
 
     if total_numsteps > args.num_steps:

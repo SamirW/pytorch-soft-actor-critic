@@ -65,7 +65,6 @@ class SACAgent(object):
             hard_update(self.critic_target, self.critic)
 
     def select_action(self, state, eval=False):
-        state = torch.FloatTensor(state).unsqueeze(0)
         if eval == False:
             self.policy.train()
             action, _, _, _, _ = self.policy.sample(state)
@@ -76,8 +75,6 @@ class SACAgent(object):
                 action = torch.tanh(action)
             else:
                 pass
-        #action = torch.tanh(action)
-        action = action.detach().cpu().numpy()
         return action[0]
 
     def get_params(self):
