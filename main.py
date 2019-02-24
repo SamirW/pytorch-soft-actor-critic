@@ -229,7 +229,8 @@ for i_episode in itertools.count():
         episode_reward = 0
         while True:
             # Render
-            env.render()
+            if i_episode % 200 == 0:
+                env.render()
 
             # Find action
             torch_obs = [
