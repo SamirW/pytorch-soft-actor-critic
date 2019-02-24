@@ -35,6 +35,10 @@ class SAC(object):
     def policies(self):
         return [a.policy for a in self.agents]
 
+    @property
+    def critics(self):
+        return [a.critic for a in self.agents]
+
     def step(self, observations, eval=False):
         return [a.select_action(obs, eval=eval) for a, obs
                 in zip(self.agents, observations)]
@@ -187,15 +191,6 @@ class SAC(object):
             sample = replay_buffer.sample(batch_size, to_gpu=False)
             obs, acs, _, _, _ = sample
 
-            # Find actor outputs for each agent + distilled
-            # all_actor_probs = []
-            # distilled_actor_log_probs = []
-            # for agent, ob in zip(self.agents, obs):
-            #     all_actor_probs.append(
-            #         agent.get_distill_prob(ob, target=True))
-            #     distilled_actor_log_probs.append(
-            #         self.distilled_agent.get_distill_prob(ob, target=False))
-
             # Get distributions for observations
             all_actor_dists = []
             distilled_dists = []
@@ -206,61 +201,54 @@ class SAC(object):
                 distilled_dists.append(
                     self.distilled_agent.get_distribution(ob))
 
-            # print("all_actor_dists:", all_actor_dists)
-            # print("distilled_dists:", distilled_dists)
-
             # Find critic outputs for each agent + distilled
             # Mix input to critic by shuffling
-            # all_critic_logits = []
-            # distilled_critic_logits = []
-            # for p, crit in enumerate(self.critics):
-            #     vf_in = torch.cat((*obs, *acs), dim=1)
+            all_critic_logits = []
+            distilled_critic_logits = []
+            for p, crit in enumerate(self.critics):
+                qf_in = torch.cat((*obs, *acs), dim=1)
 
-            #     dist_vf_in = list(zip(obs, acs))
-            #     np.random.shuffle(dist_vf_in)
-            #     dist_obs, dist_acs = zip(*dist_vf_in)
+                dist_qf_in = list(zip(obs, acs))
+                np.random.shuffle(dist_qf_in)
+                dist_obs, dist_acs = zip(*dist_qf_in)
 
-            #     vf_in_distilled = torch.cat((*dist_obs, *dist_acs), dim=1)
-            #     all_critic_logits.append(crit(vf_in))
-            #     distilled_critic_logits.append(
-            #         self.distilled_agent.critic(vf_in_distilled))
+                qf_in_distilled = torch.cat((*dist_obs, *dist_acs), dim=1)
+
+                crit_logit_1, crit_logit_2 = crit(qf_in)
+                dist_crit_logit_1, dist_crit_logit_2 = self.distilled_agent.critic(
+                    qf_in_distilled)
+
+                all_critic_logits.append(torch.min(crit_logit_1, crit_logit_2))
+                distilled_critic_logits.append(
+                    torch.min(dist_crit_logit_1, dist_crit_logit_2))
 
             for j, agent in enumerate(self.agents):
                 if not pass_actor:
                     # Distill agent
                     self.distilled_agent.policy_optim.zero_grad()
 
-                    # loss = F.kl_div(distilled_actor_log_probs[j],
-                    #                 all_actor_probs[j]) / batch_size
-                    # loss = loss.sum()
-                    # loss.backward()
-
                     kl_loss = kl_divergence(
                         p=all_actor_dists[j],
                         q=distilled_dists[j])
-                    # print("kl_loss:", kl_loss)
                     kl_loss = kl_loss.sum()
-                    # print("kl_loss.sum():", kl_loss)
                     kl_loss.backward()
-                    # import sys
-                    # sys.exit()
 
                     torch.nn.utils.clip_grad_norm_(
                         self.distilled_agent.policy.parameters(), 0.5)
                     self.distilled_agent.policy_optim.step()
 
-                # if not pass_critic:
-                #     # Distill critic
-                #     self.distilled_agent.critic_optimizer.zero_grad()
+                if not pass_critic:
+                    # Distill critic
+                    self.distilled_agent.critic_optim.zero_grad()
 
-                #     target = all_critic_logits[j].detach()
-                #     student = distilled_critic_logits[j]
-                #     loss = MSELoss(student, target)
-                #     loss.backward()
+                    target = all_critic_logits[j].detach()
+                    student = distilled_critic_logits[j]
+                    loss = F.mse_loss(student, target)
+                    loss.backward()
 
-                #     torch.nn.utils.clip_grad_norm_(
-                #         self.distilled_agent.critic.parameters(), 0.5)
-                #     self.distilled_agent.critic_optimizer.step()
+                    torch.nn.utils.clip_grad_norm_(
+                        self.distilled_agent.critic.parameters(), 0.5)
+                    self.distilled_agent.critic_optim.step()
 
         # Update student parameters
         for a in self.agents:
@@ -268,10 +256,9 @@ class SAC(object):
                 a.policy.load_state_dict(
                     self.distilled_agent.policy.state_dict())
 
-            # if not pass_critic:
-            #     a.critic.load_state_dict(
-            #         self.distilled_agent.critic.state_dict())
-            #     a.target_critic.load_state_dict(a.critic.state_dict())
+            if not pass_critic:
+                a.critic.load_state_dict(
+                    self.distilled_agent.critic.state_dict())
 
     def save(self, filename):
         """
