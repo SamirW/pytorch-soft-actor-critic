@@ -1,24 +1,28 @@
-import argparse
-import time
+import os
 import gym
-import itertools
-import torch
+import time
 import copy
+import torch
+import argparse
+import itertools
 import numpy as np
 from torch import Tensor
+from pathlib import Path
+from algorithms.sac import SAC
+from utils.misc import DummyVecEnv
+from utils.make_env import make_env
 from torch.autograd import Variable
-from sac import SAC
+from utils.buffer import ReplayBuffer
 from tensorboardX import SummaryWriter
-from normalized_actions import NormalizedActions
-from buffer import ReplayBuffer
-from make_env import make_env
-from utils import DummyVecEnv
+from utils.normalized_actions import NormalizedActions
 
 
 parser = argparse.ArgumentParser(description='PyTorch REINFORCE example')
 
-parser.add_argument('--env-name', default="HalfCheetah-v2",
+parser.add_argument('env_name', default="HalfCheetah-v2",
                     help='name of the environment to run')
+parser.add_argument('model_name', default="eval_graph",
+                    help='model of the environment to run')
 parser.add_argument('--policy', default="Gaussian",
                     help='algorithm to use: Gaussian | Deterministic')
 parser.add_argument('--eval', type=bool, default=True,
@@ -37,8 +41,8 @@ parser.add_argument('--seed', type=int, default=456, metavar='N',
                     help='random seed (default: 456)')
 parser.add_argument('--batch_size', type=int, default=1024, metavar='N',
                     help='batch size (default: 1024)')
-parser.add_argument('--num_steps', type=int, default=1000001, metavar='N',
-                    help='maximum number of steps (default: 1000000)')
+parser.add_argument('--num_eps', type=int, default=1e5, metavar='N',
+                    help='maximum number of episodes (default: 1e5)')
 parser.add_argument('--max_ep_length', type=int, default=25, metavar='N',
                     help='maximum number of steps in episode (default: 50)')
 parser.add_argument('--hidden_size', type=int, default=256, metavar='N',
@@ -55,28 +59,42 @@ parser.add_argument('--replay_size', type=int, default=1000000, metavar='N',
 parser.add_argument('--steps_per_update', type=int, default=100, metavar='N',
                     help='number of steps before updating (default: 100)')
 parser.add_argument('--flip_ep', type=int, default=1000000, metavar='N',
-                    help='episde after which to use flipped environment (default: 10000000)')
+                    help='episode after which to use flipped environment (default: 10000000)')
 parser.add_argument('--n_rollout_threads', type=int, default=1, metavar='N',
                     help='multithreading')
 parser.add_argument('--n_training_threads', type=int, default=6, metavar='N',
                     help='multithreading')
+# Distill args
+parser.add_argument('--distill_ep', type=int, default=1e7, metavar='N',
+                    help='episode at which to distill agents (default: 1500)')
+parser.add_argument('--distill_num', type=int, default=1024, metavar='N',
+                    help='number of times to perform distillation (default: 1024)')
+parser.add_argument('--distill_batch_size', type=int, default=1024, metavar='N',
+                    help='distillation batch size (default: 1024)')
+parser.add_argument('--distill_pass_actor', action='store_true', default=False,
+                    help='skip actor distillation (default: False)')
+parser.add_argument('--distill_pass_critic', action='store_true', default=False,
+                    help='skip critic distillation (default: False)')
+parser.add_argument('--save_buffer', action='store_true', default=False,
+                    help='save replay buffer (default: False)')
 args = parser.parse_args()
 
 
-def make_parallel_env(env_id, n_rollout_threads, seed, discrete_action):
+def make_parallel_env(env_name, n_rollout_threads, seed, discrete_action):
     # Assert checks
     assert n_rollout_threads == 1
     assert discrete_action is False
 
     def get_env_fn(rank):
         def init_env():
-            env = make_env(env_id, discrete_action=discrete_action)
+            env = make_env(env_name, discrete_action=discrete_action)
             env.seed(seed + rank * 1000)
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
 
     return DummyVecEnv([get_env_fn(0)])
+
 
 torch.manual_seed(args.seed)
 np.random.seed(args.seed)
@@ -86,8 +104,6 @@ torch.set_num_threads(args.n_training_threads)
 env = make_parallel_env(
     args.env_name, args.n_rollout_threads, args.seed, discrete_action=False)
 sac = SAC.init_from_env(env, args)
-
-writer = SummaryWriter()
 
 # Memory
 replay_buffer = ReplayBuffer(
@@ -101,6 +117,24 @@ test_rewards = []
 total_numsteps = 0
 updates = 0
 flip = False
+
+# Savings
+model_dir = Path('./models') / args.env_name / args.model_name
+if not model_dir.exists():
+    curr_run = 'run1'
+else:
+    exst_run_nums = [int(str(folder.name).split('run')[1]) for folder in
+                     model_dir.iterdir() if
+                     str(folder.name).startswith('run')]
+    if len(exst_run_nums) == 0:
+        curr_run = 'run1'
+    else:
+        curr_run = 'run%i' % (max(exst_run_nums) + 1)
+run_dir = model_dir / curr_run
+log_dir = run_dir / 'logs'
+os.makedirs(str(log_dir))
+# log = set_log(args, model_dir)
+writer = SummaryWriter(str(log_dir))
 
 for i_episode in itertools.count():
     # Flip episodes
@@ -181,7 +215,7 @@ for i_episode in itertools.count():
         if dones.all():
             break
 
-    if total_numsteps > args.num_steps:
+    if i_episode > args.num_eps:
         break
 
     writer.add_scalar('reward/train', episode_reward, i_episode)
@@ -225,4 +259,23 @@ for i_episode in itertools.count():
             i_episode, test_rewards[-1]))
         print("----------------------------------------")
 
+    if (i_episode + 1) == args.distill_ep:
+        print("************Distilling***********")
+
+        # Save buffer
+        os.makedirs(str(run_dir / 'incremental'), exist_ok=True)
+        sac.save(str(run_dir / 'incremental' / ('before_distillation.pt')))
+
+        # Distill
+        sac.distill(args.distill_num, args.distill_batch_size, replay_buffer,
+                    pass_actor=args.distill_pass_actor, pass_critic=args.distill_pass_critic)
+
+if args.save_buffer:
+    print("*******Saving Replay Buffer******")
+    import pickle 
+    with open(str(run_dir /'replay_buffer.pkl'), 'wb') as output:
+        pickle.dump(replay_buffer, output, -1)
+
+print("*******Saving and Closing*******")
+sac.save(str(run_dir / 'model.pt'))
 env.close()
