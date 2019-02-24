@@ -8,6 +8,8 @@ from utils.misc import soft_update, hard_update
 from utils.model import GaussianPolicy, QNetwork, ValueNetwork, DeterministicPolicy
 from utils.agents import SACAgent
 
+from torch.distributions.kl import kl_divergence
+
 
 class SAC(object):
 
@@ -186,13 +188,26 @@ class SAC(object):
             obs, acs, _, _, _ = sample
 
             # Find actor outputs for each agent + distilled
-            all_actor_probs = []
-            distilled_actor_log_probs = []
+            # all_actor_probs = []
+            # distilled_actor_log_probs = []
+            # for agent, ob in zip(self.agents, obs):
+            #     all_actor_probs.append(
+            #         agent.get_distill_prob(ob, target=True))
+            #     distilled_actor_log_probs.append(
+            #         self.distilled_agent.get_distill_prob(ob, target=False))
+
+            # Get distributions for observations
+            all_actor_dists = []
+            distilled_dists = []
             for agent, ob in zip(self.agents, obs):
-                all_actor_probs.append(
-                    agent.get_distill_prob(ob, target=True))
-                distilled_actor_log_probs.append(
-                    self.distilled_agent.get_distill_prob(ob, target=False))
+                with torch.no_grad():
+                    all_actor_dists.append(agent.get_distribution(ob))
+
+                distilled_dists.append(
+                    self.distilled_agent.get_distribution(ob))
+
+            # print("all_actor_dists:", all_actor_dists)
+            # print("distilled_dists:", distilled_dists)
 
             # Find critic outputs for each agent + distilled
             # Mix input to critic by shuffling
@@ -211,15 +226,24 @@ class SAC(object):
             #         self.distilled_agent.critic(vf_in_distilled))
 
             for j, agent in enumerate(self.agents):
-
                 if not pass_actor:
                     # Distill agent
                     self.distilled_agent.policy_optim.zero_grad()
 
-                    loss = F.kl_div(distilled_actor_log_probs[j],
-                                  all_actor_probs[j]) / batch_size
-                    loss = loss.sum()
-                    loss.backward()
+                    # loss = F.kl_div(distilled_actor_log_probs[j],
+                    #                 all_actor_probs[j]) / batch_size
+                    # loss = loss.sum()
+                    # loss.backward()
+
+                    kl_loss = kl_divergence(
+                        p=all_actor_dists[j],
+                        q=distilled_dists[j])
+                    # print("kl_loss:", kl_loss)
+                    kl_loss = kl_loss.sum()
+                    # print("kl_loss.sum():", kl_loss)
+                    kl_loss.backward()
+                    # import sys
+                    # sys.exit()
 
                     torch.nn.utils.clip_grad_norm_(
                         self.distilled_agent.policy.parameters(), 0.5)

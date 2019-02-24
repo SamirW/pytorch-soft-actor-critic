@@ -108,6 +108,12 @@ class GaussianPolicy(nn.Module):
         log_prob = log_prob.sum(1, keepdim=True)
         return action, log_prob, x_t, mean, log_std
 
+    def get_distribution(self, obs):
+        mean, log_std = self.forward(obs)
+        std = log_std.exp()
+        normal = Normal(mean, std)
+        return normal
+
     def randomize(self):
         nn.init.xavier_uniform_(self.linear1.weight)
         nn.init.xavier_uniform_(self.linear2.weight)

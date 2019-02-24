@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.optim import Adam
+from torch.distributions import Normal
 from utils.misc import soft_update, hard_update
 from utils.model import GaussianPolicy, QNetwork, ValueNetwork, DeterministicPolicy
 
@@ -86,6 +87,13 @@ class SACAgent(object):
                 return log_prob.exp()
         else: # Return log prob with gradients
             return log_prob
+
+    def get_distribution(self, obs):
+        self.policy.eval()
+        mean, log_std = self.policy(obs)
+        std = log_std.exp()
+        normal = Normal(mean, std)
+        return normal
 
     def get_params(self):
         params = dict()
