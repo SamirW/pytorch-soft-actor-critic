@@ -1,14 +1,15 @@
-import os
-import gym
-import time
-import copy
-import torch
-import argparse
-import itertools
 import numpy as np
+import itertools
+import argparse
+import torch
+import copy
+import time
+import gym
+import os
 from torch import Tensor
 from pathlib import Path
 from algorithms.sac import SAC
+from utils.logging import set_log
 from utils.misc import DummyVecEnv
 from utils.make_env import make_env
 from torch.autograd import Variable
@@ -49,8 +50,8 @@ parser.add_argument('--hidden_size', type=int, default=256, metavar='N',
                     help='hidden size (default: 256)')
 parser.add_argument('--updates_per_update', type=int, default=1, metavar='N',
                     help='model updates per simulator step (default: 1)')
-parser.add_argument('--start_steps', type=int, default=10000, metavar='N',
-                    help='Steps sampling random actions (default: 10000)')
+parser.add_argument('--start_eps', type=int, default=500, metavar='N',
+                    help='Epss sampling random actions (default: 500)')
 parser.add_argument('--target_update_interval', type=int, default=1, metavar='N',
                     help='Value target update per no. of updates per step (default: 1)')
 parser.add_argument('--replay_size', type=int, default=1000000, metavar='N',
@@ -77,7 +78,13 @@ parser.add_argument('--distill_pass_critic', action='store_true', default=False,
                     help='skip critic distillation (default: False)')
 parser.add_argument('--save_buffer', action='store_true', default=False,
                     help='save replay buffer (default: False)')
+parser.add_argument('--log_comment', type=str, default='',
+                    help='comment for log file')
 args = parser.parse_args()
+
+args.log_name = \
+    "env::%s_seed::%s_comment::%s_log" % (
+        args.env_name, str(args.seed), args.log_comment)
 
 
 def make_parallel_env(env_name, n_rollout_threads, seed, discrete_action):
@@ -118,7 +125,7 @@ total_numsteps = 0
 updates = 0
 flip = False
 
-# Savings
+# Saving
 model_dir = Path('./models') / args.env_name / args.model_name
 if not model_dir.exists():
     curr_run = 'run1'
@@ -133,7 +140,7 @@ else:
 run_dir = model_dir / curr_run
 log_dir = run_dir / 'logs'
 os.makedirs(str(log_dir))
-# log = set_log(args, model_dir)
+log = set_log(args, model_dir)
 writer = SummaryWriter(str(log_dir))
 
 for i_episode in itertools.count():
@@ -157,7 +164,7 @@ for i_episode in itertools.count():
             for i in range(sac.nagents)]
 
         # Find action
-        if args.start_steps > total_numsteps:
+        if args.start_eps > i_episode:
             torch_agent_actions = env.sample_action_spaces()  # Sample action from env
         else:
             torch_agent_actions = sac.step(
@@ -209,7 +216,7 @@ for i_episode in itertools.count():
         # For next step
         obs = next_obs
         total_numsteps += args.n_rollout_threads
-        episode_reward += np.sum(rewards) / sac.nagents
+        episode_reward += np.sum(rewards) / sac.nagents / args.max_ep_length
         ep_step += 1
 
         if dones.all():
@@ -218,18 +225,19 @@ for i_episode in itertools.count():
     if i_episode > args.num_eps:
         break
 
-    writer.add_scalar('reward/train', episode_reward, i_episode)
     total_rewards.append(episode_reward)
-    print("Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(total_rewards[-1], 2),
-                                                                                   np.round(np.mean(total_rewards[-100:]), 2)))
 
+    writer.add_scalar('reward/train', episode_reward, i_episode)
+    log[args.log_name].info(
+        " Train Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(total_rewards[-1], 2),
+                                                                                   np.round(np.mean(total_rewards[-100:]), 2)))
     if i_episode % 10 == 0 and args.eval == True:
         obs = env.reset(flip=flip)
         test_ep_step = 0
         episode_reward = 0
         while True:
             # Render
-            if i_episode % 200 == 0:
+            if i_episode % 500 == 0:
                 env.render()
 
             # Find action
@@ -247,17 +255,18 @@ for i_episode in itertools.count():
             # Next step and bookeeping
             obs = next_obs
             test_ep_step += 1
-            episode_reward += np.sum(rewards) / sac.nagents
+            episode_reward += np.sum(rewards) / \
+                sac.nagents / args.max_ep_length
 
             if test_ep_step == args.max_ep_length - 1:
                 break
 
-        writer.add_scalar('reward/test', episode_reward, i_episode)
-
         test_rewards.append(episode_reward)
+        
+        writer.add_scalar('reward/test', episode_reward, i_episode)
         print("----------------------------------------")
-        print("Test Episode: {}, reward: {}".format(
-            i_episode, test_rewards[-1]))
+        log[args.log_name].info(
+            "Test Episode: {}, reward: {}".format(i_episode, test_rewards[-1]))
         print("----------------------------------------")
 
     if (i_episode + 1) == args.distill_ep:
@@ -273,10 +282,12 @@ for i_episode in itertools.count():
 
 if args.save_buffer:
     print("*******Saving Replay Buffer******")
-    import pickle 
-    with open(str(run_dir /'replay_buffer.pkl'), 'wb') as output:
+    import pickle
+    with open(str(run_dir / 'replay_buffer.pkl'), 'wb') as output:
         pickle.dump(replay_buffer, output, -1)
 
 print("*******Saving and Closing*******")
 sac.save(str(run_dir / 'model.pt'))
 env.close()
+writer.export_scalars_to_json(str(log_dir / 'summary.json'))
+writer.close()
