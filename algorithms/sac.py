@@ -39,6 +39,10 @@ class SAC(object):
     def critics(self):
         return [a.critic for a in self.agents]
 
+    @property
+    def values(self):
+        return [a.value for a in self.agents]
+
     def step(self, observations, eval=False):
         return [a.select_action(obs, eval=eval) for a, obs
                 in zip(self.agents, observations)]
@@ -203,20 +207,36 @@ class SAC(object):
 
             # Find critic outputs for each agent + distilled
             # Mix input to critic by shuffling
+            all_values = []
             all_critic_logits = []
+            distilled_values = []
             distilled_critic_logits = []
-            for p, crit in enumerate(self.critics):
+            for (crit, value) in zip(self.critics, self.values):
+                # Inputs for agents
+                vf_in = torch.cat((obs), dim=1)
                 qf_in = torch.cat((*obs, *acs), dim=1)
 
+                # Inputs for distilled agent
+                # Shuffle order of observations/actions
                 dist_qf_in = list(zip(obs, acs))
                 np.random.shuffle(dist_qf_in)
                 dist_obs, dist_acs = zip(*dist_qf_in)
 
+                # Create input for distilled agent
+                vf_in_distilled = torch.cat((dist_obs), dim=1)
                 qf_in_distilled = torch.cat((*dist_obs, *dist_acs), dim=1)
+
+                # Get critic/value outputs
+                val = value(vf_in)
+                dist_val = self.distilled_agent.value(vf_in_distilled)
 
                 crit_logit_1, crit_logit_2 = crit(qf_in)
                 dist_crit_logit_1, dist_crit_logit_2 = self.distilled_agent.critic(
                     qf_in_distilled)
+
+                # Add to arrays
+                all_values.append(val)
+                distilled_values.append(dist_val)
 
                 all_critic_logits.append(torch.min(crit_logit_1, crit_logit_2))
                 distilled_critic_logits.append(
@@ -250,6 +270,18 @@ class SAC(object):
                         self.distilled_agent.critic.parameters(), 0.5)
                     self.distilled_agent.critic_optim.step()
 
+                    # Distill value
+                    self.distilled_agent.value_optim.zero_grad()
+
+                    target = all_values[j].detach()
+                    student = distilled_values[j]
+                    loss = F.mse_loss(student, target)
+                    loss.backward()
+
+                    torch.nn.utils.clip_grad_norm_(
+                        self.distilled_agent.value.parameters(), 0.5)
+                    self.distilled_agent.value_optim.step()
+
         # Update student parameters
         for a in self.agents:
             if not pass_actor:
@@ -259,6 +291,10 @@ class SAC(object):
             if not pass_critic:
                 a.critic.load_state_dict(
                     self.distilled_agent.critic.state_dict())
+                a.value.load_state_dict(
+                    self.distilled_agent.value.state_dict())
+                a.value_target.load_state_dict(
+                    self.distilled_agent.value.state_dict())
 
     def save(self, filename):
         """

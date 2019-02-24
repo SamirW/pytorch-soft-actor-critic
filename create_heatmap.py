@@ -26,7 +26,7 @@ def run(config):
     print("Distilling")
     with open(str(model_dir / "replay_buffer.pkl"), 'rb') as input:
         replay_buffer = pickle.load(input)
-    sac.distill(512, 1024, replay_buffer)
+    sac.distill(2048, 1024, replay_buffer)
 
     print("Creating distilled heatmap")
     heatmap_fn(sac, title="{} Agent Policies After Distillation".format(nagents), save=config.save, continuous=True)
