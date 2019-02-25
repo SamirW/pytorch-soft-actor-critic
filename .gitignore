@@ -4,5 +4,8 @@
 # Ignore dependencies folder
 src/
 
+# Ignore venv folder
+venv
+
 # PyCache
 __pycache__

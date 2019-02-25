@@ -3,10 +3,7 @@ import itertools
 import argparse
 import torch
 import copy
-import time
-import gym
 import os
-from torch import Tensor
 from pathlib import Path
 from algorithms.sac import SAC
 from utils.logging import set_log
@@ -15,7 +12,6 @@ from utils.make_env import make_env
 from torch.autograd import Variable
 from utils.buffer import ReplayBuffer
 from tensorboardX import SummaryWriter
-from utils.normalized_actions import NormalizedActions
 
 
 parser = argparse.ArgumentParser(description='PyTorch REINFORCE example')
@@ -237,7 +233,7 @@ for i_episode in itertools.count():
     log[args.log_name].info(
         " Train Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(total_rewards[-1], 2),
                                                                                         np.round(np.mean(total_rewards[-100:]), 2)))
-    if i_episode % 10 == 0 and args.eval == True:
+    if i_episode % 10 == 0 and args.eval is True:
         obs = env.reset(flip=flip)
         test_ep_step = 0
         episode_reward = 0
