@@ -66,6 +66,8 @@ parser.add_argument('--n_rollout_threads', type=int, default=1, metavar='N',
 parser.add_argument('--n_training_threads', type=int, default=6, metavar='N',
                     help='multithreading')
 # Distill args
+parser.add_argument('--flip_critic', action='store_true', default=False,
+                    help='flip inputs to critic during learning')
 parser.add_argument('--distill_ep', type=int, default=1e7, metavar='N',
                     help='episode at which to distill agents (default: 1500)')
 parser.add_argument('--distill_num', type=int, default=1024, metavar='N',
@@ -200,11 +202,9 @@ for i_episode in itertools.count():
                             args.batch_size, norm_rews=True)
 
                         # Update parameters of all the networks for each agent
-                        q_value, value_loss, critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = \
-                            sac.update_parameters(a_i, sample, updates)
+                        value_loss, critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = \
+                            sac.update_parameters(a_i, sample, updates, flip_critic=args.flip_critic)
 
-                        writer.add_scalar(
-                            'agent_{}/critic/q_value'.format(a_i), q_value, updates)
                         writer.add_scalar(
                             'agent_{}/loss/value'.format(a_i), value_loss, updates)
                         writer.add_scalar(

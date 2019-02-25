@@ -2,6 +2,7 @@ import sys
 import os
 import numpy as np
 import torch
+import itertools
 import torch.nn.functional as F
 from torch.optim import Adam
 from utils.misc import soft_update, hard_update
@@ -47,7 +48,7 @@ class SAC(object):
         return [a.select_action(obs, eval=eval) for a, obs
                 in zip(self.agents, observations)]
 
-    def update_parameters(self, agent_i, sample, updates):
+    def update_parameters(self, agent_i, sample, updates,flip_critic=False):
         obs, acs, rews, next_obs, dones = sample
         curr_agent = self.agents[agent_i]
 
@@ -63,9 +64,21 @@ class SAC(object):
         to degrade performance of value based methods. Two Q-functions also significantly speed
         up training, especially on harder task.
         """
-        qf_in = torch.cat((*obs, *acs), dim=1)
-        expected_q1_value, expected_q2_value = curr_agent.critic(qf_in)
-        current_q_value = torch.min(expected_q1_value, expected_q2_value)
+        if flip_critic:
+            expected_q1_values = []
+            expected_q2_values = []
+
+            for input_pair in itertools.permutations(zip(obs, acs)):
+                o, a = zip(*input_pair)
+                qf_in = torch.cat((*o, *a), dim=1)
+                exp_q1_val, exp_q2_val = curr_agent.critic(qf_in)
+                expected_q1_values.append(exp_q1_val)
+                expected_q2_values.append(exp_q2_val)
+
+        else:
+            qf_in = torch.cat((*obs, *acs), dim=1)
+            expected_q1_value, expected_q2_value = curr_agent.critic(qf_in)
+
         new_action, log_prob, _, mean, log_std = curr_agent.policy.sample(
             obs_batch)
 
@@ -86,11 +99,25 @@ class SAC(object):
             """
             Including a separate function approximator for the soft value can stabilize training.
             """
-            vf_in = torch.cat((obs), dim=1)
-            expected_value = curr_agent.value(vf_in)
-            target_value = curr_agent.value_target(vf_in)
-            next_q_value = reward_batch + mask_batch * \
-                self.gamma * (target_value).detach()
+            if flip_critic:
+                expected_values = []
+                next_q_values = []
+
+                for o in itertools.permutations(obs):
+                    vf_in = torch.cat((o), dim=1)
+                    expected_value = curr_agent.value(vf_in)
+                    target_value = curr_agent.value_target(vf_in)
+                    next_q_value = reward_batch + mask_batch * \
+                        self.gamma * (target_value).detach()
+
+                    expected_values.append(expected_value)
+                    next_q_values.append(next_q_value)
+            else:
+                vf_in = torch.cat((obs), dim=1)
+                expected_value = curr_agent.value(vf_in)
+                target_value = curr_agent.value_target(vf_in)
+                next_q_value = reward_batch + mask_batch * \
+                    self.gamma * (target_value).detach()
         else:
             raise NotImplementedError()
             """
@@ -118,11 +145,27 @@ class SAC(object):
                 all_new_acs.append(new_action)
             else:
                 all_new_acs.append(acs[a_i])
-        new_qf_in = torch.cat((*obs, *all_new_acs), dim=1)
-        q1_value_loss = F.mse_loss(expected_q1_value, next_q_value)
-        q2_value_loss = F.mse_loss(expected_q2_value, next_q_value)
-        q1_new, q2_new = curr_agent.critic(new_qf_in)
-        expected_new_q_value = torch.min(q1_new, q2_new)
+
+        if flip_critic:
+            expected_new_q_values = []
+            q1_value_losses = []
+            q2_value_losses = []
+
+            for new_input_pair in itertools.permutations(zip(obs, all_new_acs)):
+                o, new_acs = zip(*new_input_pair)
+                new_qf_in = torch.cat((*o, *new_acs), dim=1)
+                q1_new, q2_new = curr_agent.critic(new_qf_in)
+                expected_new_q_values.append(torch.min(q1_new, q2_new))
+
+            for i in range(len(expected_q1_values)):
+                q1_value_losses.append(F.mse_loss(expected_q1_values[i], next_q_values[i]))
+                q2_value_losses.append(F.mse_loss(expected_q2_values[i], next_q_values[i]))
+        else:
+            new_qf_in = torch.cat((*obs, *all_new_acs), dim=1)
+            q1_value_loss = F.mse_loss(expected_q1_value, next_q_value)
+            q2_value_loss = F.mse_loss(expected_q2_value, next_q_value)
+            q1_new, q2_new = curr_agent.critic(new_qf_in)
+            expected_new_q_value = torch.min(q1_new, q2_new)
 
         if curr_agent.policy_type == "Gaussian":
             """
@@ -132,8 +175,14 @@ class SAC(object):
             JV = 𝔼st~D[0.5(V(st) - (𝔼at~π[Qmin(st,at) - α * log π(at|st)]))^2]
             ∇JV = ∇V(st)(V(st) - Q(st,at) + (α * logπ(at|st)))
             """
-            next_value = expected_new_q_value - (curr_agent.alpha * log_prob)
-            value_loss = F.mse_loss(expected_value, next_value.detach())
+            if flip_critic:
+                value_losses = []
+                for expected_value, expected_new_q_value in zip(expected_values, expected_new_q_values):
+                    next_value = expected_new_q_value - (curr_agent.alpha * log_prob)
+                    value_losses.append(F.mse_loss(expected_value, next_value.detach()))
+            else:   
+                next_value = expected_new_q_value - (curr_agent.alpha * log_prob)
+                value_loss = F.mse_loss(expected_value, next_value.detach())
         else:
             pass
 
@@ -153,18 +202,34 @@ class SAC(object):
 
         policy_loss += mean_loss + std_loss
 
-        curr_agent.critic_optim.zero_grad()
-        q1_value_loss.backward()
-        curr_agent.critic_optim.step()
+        if flip_critic:
+            for q1_value_loss in q1_value_losses:
+                curr_agent.critic_optim.zero_grad()
+                q1_value_loss.backward()
+                curr_agent.critic_optim.step()
+            for q2_value_loss in q2_value_losses:
+                curr_agent.critic_optim.zero_grad()
+                q2_value_loss.backward()
+                curr_agent.critic_optim.step()
+        else:
+            curr_agent.critic_optim.zero_grad()
+            q1_value_loss.backward()
+            curr_agent.critic_optim.step()
 
-        curr_agent.critic_optim.zero_grad()
-        q2_value_loss.backward()
-        curr_agent.critic_optim.step()
+            curr_agent.critic_optim.zero_grad()
+            q2_value_loss.backward()
+            curr_agent.critic_optim.step()
 
         if curr_agent.policy_type == "Gaussian":
-            curr_agent.value_optim.zero_grad()
-            value_loss.backward()
-            curr_agent.value_optim.step()
+            if flip_critic:
+                for value_loss in value_losses:
+                    curr_agent.value_optim.zero_grad()
+                    value_loss.backward()
+                    curr_agent.value_optim.step()
+            else:
+                curr_agent.value_optim.zero_grad()
+                value_loss.backward()
+                curr_agent.value_optim.step()
         else:
             raise ValueError("Should not be here")
             # value_loss = torch.tensor(0.)
@@ -183,7 +248,7 @@ class SAC(object):
         elif updates % self.target_update_interval == 0 and curr_agent.policy_type == "Gaussian":
             soft_update(curr_agent.value_target, curr_agent.value, self.tau)
 
-        return torch.mean(current_q_value).item(), value_loss.item(), q1_value_loss.item(), q2_value_loss.item(), policy_loss.item(), alpha_loss.item(), alpha_logs
+        return value_loss.item(), q1_value_loss.item(), q2_value_loss.item(), policy_loss.item(), alpha_loss.item(), alpha_logs
 
     def distill(self, num_distill, batch_size, replay_buffer, temperature=0.01, tau=0.01, pass_actor=False, pass_critic=False):
         if pass_actor and pass_critic:
