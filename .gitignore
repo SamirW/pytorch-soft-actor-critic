@@ -1,1 +1,5 @@
+# Ignore replay buffer saves
 *.pkl
+
+# Ignore dependencies folder
+src/

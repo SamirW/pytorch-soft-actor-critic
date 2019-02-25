@@ -82,10 +82,6 @@ parser.add_argument('--log_comment', type=str, default='',
                     help='comment for log file')
 args = parser.parse_args()
 
-args.log_name = \
-    "env::%s_seed::%s_comment::%s_log" % (
-        args.env_name, str(args.seed), args.log_comment)
-
 
 def make_parallel_env(env_name, n_rollout_threads, seed, discrete_action):
     # Assert checks
@@ -137,12 +133,22 @@ else:
         curr_run = 'run1'
     else:
         curr_run = 'run%i' % (max(exst_run_nums) + 1)
+
+# Log files
+if args.log_comment == '':
+    args.log_comment = curr_run
+
+args.log_name = \
+    "env::%s_seed::%s_comment::%s_log" % (
+        args.env_name, str(args.seed), args.log_comment)
+
 run_dir = model_dir / curr_run
 log_dir = run_dir / 'logs'
 os.makedirs(str(log_dir))
 log = set_log(args, model_dir)
 writer = SummaryWriter(str(log_dir))
 
+# Start run
 for i_episode in itertools.count():
     # Flip episodes
     if i_episode == args.flip_ep:
@@ -230,14 +236,14 @@ for i_episode in itertools.count():
     writer.add_scalar('reward/train', episode_reward, i_episode)
     log[args.log_name].info(
         " Train Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(total_rewards[-1], 2),
-                                                                                   np.round(np.mean(total_rewards[-100:]), 2)))
+                                                                                        np.round(np.mean(total_rewards[-100:]), 2)))
     if i_episode % 10 == 0 and args.eval == True:
         obs = env.reset(flip=flip)
         test_ep_step = 0
         episode_reward = 0
         while True:
             # Render
-            if i_episode % 500 == 0:
+            if i_episode % 100 == 0:
                 env.render()
 
             # Find action
@@ -262,7 +268,7 @@ for i_episode in itertools.count():
                 break
 
         test_rewards.append(episode_reward)
-        
+
         writer.add_scalar('reward/test', episode_reward, i_episode)
         print("----------------------------------------")
         log[args.log_name].info(
