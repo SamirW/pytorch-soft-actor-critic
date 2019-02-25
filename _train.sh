@@ -27,10 +27,35 @@ cd $DIR
 # Comment for using GPU
 export CUDA_VISIBLE_DEVICES=-1
 
-# Experiment 1
 python3.6 main.py simple_spread_flip test \
---seed 1 \
---num_eps 5000 \
---flip_ep 1500 \
---distill_ep 1500 \
---log_comment \
+--seed 0 \
+--num_eps 10000 \
+--start_eps 500 \
+--flip_ep 3000 \
+--log_comment "no_distill"
+
+python3.6 main.py simple_spread_flip test \
+--seed 0 \
+--num_eps 10000 \
+--start_eps 500 \
+--flip_ep 3000 \
+--distill_ep 3000 \
+--log_comment "distill_all"
+
+python3.6 main.py simple_spread_flip test \
+--seed 0 \
+--num_eps 10000 \
+--start_eps 500 \
+--flip_ep 3000 \
+--distill_ep 3000 \
+--distill_pass_actor \
+--log_comment "distill_critic_only"
+
+python3.6 main.py simple_spread_flip test \
+--seed 0 \
+--num_eps 10000 \
+--start_eps 500 \
+--flip_ep 3000 \
+--distill_ep 3000 \
+--distill_pass_critic \
+--log_comment "distill_actor_only"
