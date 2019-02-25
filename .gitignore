@@ -3,3 +3,6 @@
 
 # Ignore dependencies folder
 src/
+
+# PyCache
+__pycache__
