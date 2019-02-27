@@ -30,6 +30,8 @@ def make_env(scenario_name, benchmark=False, discrete_action=False):
         .action_space       :   Returns the action space for each agent
         .n                  :   Returns the number of Agents
     '''
+    assert benchmark is False
+
     from multiagent.environment import MultiAgentEnv
     import multiagent.scenarios as scenarios
 
@@ -38,12 +40,7 @@ def make_env(scenario_name, benchmark=False, discrete_action=False):
     # create world
     world = scenario.make_world()
     # create multiagent environment
-    if benchmark:
-        env = MultiAgentEnv(world, scenario.reset_world, scenario.reward,
-                            scenario.observation, scenario.benchmark_data,
-                            discrete_action=discrete_action, post_step_callback=scenario.post_step_callback)
-    else:
-        env = MultiAgentEnv(world, scenario.reset_world, scenario.reward,
-                            scenario.observation,
-                            discrete_action=discrete_action, post_step_callback=scenario.post_step_callback)
+    env = MultiAgentEnv(world, scenario.reset_world, scenario.reward,
+                        scenario.observation)
+
     return env
