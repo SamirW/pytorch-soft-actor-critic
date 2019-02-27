@@ -34,10 +34,9 @@ class SACAgent(object):
             # Target Entropy = −dim(A) (e.g. , -6 for HalfCheetah-v2) as given
             # in the paper
             if self.automatic_entropy_tuning == True:
-                self.target_entropy = - \
-                    torch.prod(torch.Tensor(action_space.shape)).item()
+                self.target_entropy = - num_out_pol
                 self.log_alpha = torch.zeros(1, requires_grad=True)
-                self.alpha_optim = Adam([self.log_alpha], lr=args.lr)
+                self.alpha_optim = Adam([self.log_alpha], lr=lr)
             else:
                 pass
 
