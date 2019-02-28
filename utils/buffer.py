@@ -94,7 +94,7 @@ class ReplayBuffer(object):
         if norm_rews:
             ret_rews = [cast((self.rew_buffs[i][inds] -
                               self.rew_buffs[i][:self.filled_i].mean()) /
-                             self.rew_buffs[i][:self.filled_i].std())
+                             (self.rew_buffs[i][:self.filled_i].std() + 1e-6))
                         for i in range(self.num_agents)]
         else:
             ret_rews = [cast(self.rew_buffs[i][inds]) for i in range(self.num_agents)]
