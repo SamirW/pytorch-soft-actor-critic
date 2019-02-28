@@ -5,6 +5,7 @@ from torch.autograd import Variable
 from baselines.common.vec_env import VecEnv, CloudpickleWrapper
 import numpy as np
 
+
 def create_log_gaussian(mean, log_std, t):
     quadratic = -((0.5 * (t - mean) / (log_std.exp())).pow(2))
     l = mean.shape
@@ -131,8 +132,8 @@ class DummyVecEnv(VecEnv):
         self.actions = None
         return np.array(obs), np.array(rews), np.array(dones), infos
 
-    def reset(self):        
-        results = [env.reset() for env in self.envs]
+    def reset(self, flip):
+        results = [env.reset(flip=flip) for env in self.envs]
         return np.array(results)
 
     def sample_action_spaces(self):

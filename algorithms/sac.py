@@ -54,7 +54,6 @@ class SAC(object):
     def update_parameters(self, agent_i, sample, updates,flip_critic=False):
         obs, acs, rews, next_obs, dones = sample
         curr_agent = self.agents[agent_i]
-        print(curr_agent.alpha)
 
         obs_batch = torch.FloatTensor(obs[agent_i])
         next_obs_batch = torch.FloatTensor(next_obs[agent_i])

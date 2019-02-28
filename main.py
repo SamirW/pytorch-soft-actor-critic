@@ -1,4 +1,3 @@
-import pickle
 import numpy as np
 import itertools
 import argparse
@@ -160,7 +159,7 @@ for i_episode in itertools.count():
             [acsp.shape[0] for acsp in env.action_space])
         flip = True
 
-    obs = env.reset()
+    obs = env.reset(flip=flip)
     episode_reward = 0
     ep_step = 0
 
@@ -188,10 +187,10 @@ for i_episode in itertools.count():
             dones = dones + 1
 
         # Add to buffer
-        replay_buffer.push(obs, agent_actions, rewards, next_obs, dones)
-        # replay_buffer.push(obs, agent_actions, rewards, next_obs, np.array([False, False]).reshape(1, 2))  # NOTE Setting done False
+        # replay_buffer.push(obs, agent_actions, rewards, next_obs, dones)
+        replay_buffer.push(obs, agent_actions, rewards, next_obs, np.array([False, False]).reshape(1, 2))
 
-        if len(replay_buffer) > args.batch_size and i_episode > args.start_eps:
+        if len(replay_buffer) > args.batch_size:
             # Number of steps before updating
             if (total_numsteps % args.steps_per_update) == 0:
                 # Anneal alpha
@@ -242,7 +241,7 @@ for i_episode in itertools.count():
         " Train Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(total_rewards[-1], 2),
                                                                                         np.round(np.mean(total_rewards[-100:]), 2)))
     if i_episode % 10 == 0 and args.eval is True:
-        obs = env.reset()
+        obs = env.reset(flip=flip)
         test_ep_step = 0
         episode_reward = 0
         while True:
@@ -279,30 +278,25 @@ for i_episode in itertools.count():
             "Test Episode: {}, reward: {}".format(i_episode, test_rewards[-1]))
         print("----------------------------------------")
 
-    if i_episode % 5000 == 0:
-        sac.save(str(run_dir / ('model_' + str(i_episode) + '.pt')))
-        with open(str(run_dir / ('replay_buffer_' + str(i_episode) + '.pkl')), 'wb') as output:
-            pickle.dump(replay_buffer, output, -1)
+    if (i_episode + 1) == args.distill_ep:
+        print("************Distilling***********")
 
-    # if (i_episode + 1) == args.distill_ep:
-    #     print("************Distilling***********")
+        # Save buffer
+        os.makedirs(str(run_dir / 'incremental'), exist_ok=True)
+        sac.save(str(run_dir / 'incremental' / ('before_distillation.pt')))
 
-    #     # Save buffer
-    #     os.makedirs(str(run_dir / 'incremental'), exist_ok=True)
-    #     sac.save(str(run_dir / 'incremental' / ('before_distillation.pt')))
+        # Distill
+        sac.distill(args.distill_num, args.distill_batch_size, replay_buffer,
+                    pass_actor=args.distill_pass_actor, pass_critic=args.distill_pass_critic)
 
-    #     # Distill
-    #     sac.distill(args.distill_num, args.distill_batch_size, replay_buffer,
-    #                 pass_actor=args.distill_pass_actor, pass_critic=args.distill_pass_critic)
+if args.save_buffer:
+    print("*******Saving Replay Buffer******")
+    import pickle
+    with open(str(run_dir / 'replay_buffer.pkl'), 'wb') as output:
+        pickle.dump(replay_buffer, output, -1)
 
-# if args.save_buffer:
-#     print("*******Saving Replay Buffer******")
-#     import pickle
-#     with open(str(run_dir / 'replay_buffer.pkl'), 'wb') as output:
-#         pickle.dump(replay_buffer, output, -1)
-# 
-# print("*******Saving and Closing*******")
-# sac.save(str(run_dir / 'model.pt'))
-# env.close()
-# writer.export_scalars_to_json(str(log_dir / 'summary.json'))
-# writer.close()
+print("*******Saving and Closing*******")
+sac.save(str(run_dir / 'model.pt'))
+env.close()
+writer.export_scalars_to_json(str(log_dir / 'summary.json'))
+writer.close()

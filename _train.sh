@@ -27,11 +27,11 @@ cd $DIR
 # Comment for using GPU
 export CUDA_VISIBLE_DEVICES=-1
 
-python3.6 main.py complex_push alpha0.01 \
---seed 3 \
---num_eps 5000 \
---start_eps 1500 \
+python3.6 main.py complex_push test \
+--seed 0 \
+--num_eps 10000 \
+--start_eps 500 \
 --max_ep_length 100 \
---alpha 0.01 \
---lr 0.0001 \
+--flip_ep 4000 \
+--alpha 0 \
 --log_comment "no_distill"
