@@ -3,6 +3,7 @@ import itertools
 import argparse
 import torch
 import copy
+import time
 import os
 from pathlib import Path
 from algorithms.sac import SAC
@@ -240,6 +241,7 @@ for i_episode in itertools.count():
         while True:
             # Render
             if i_episode % 100 == 0:
+                time.sleep(0.01)
                 env.render()
 
             # Find action

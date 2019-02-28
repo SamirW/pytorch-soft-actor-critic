@@ -1,0 +1,1263 @@
+2019-02-26 22:31:24,522 : n_rollout_threads: 1
+2019-02-26 22:31:24,523 : gamma: 0.99
+2019-02-26 22:31:24,523 : log_comment: run4
+2019-02-26 22:31:24,523 : seed: 456
+2019-02-26 22:31:24,524 : log_name: env::simple_spread_flip_3_seed::456_comment::run4_log
+2019-02-26 22:31:24,524 : max_ep_length: 25
+2019-02-26 22:31:24,524 : distill_batch_size: 1024
+2019-02-26 22:31:24,524 : target_update_interval: 1
+2019-02-26 22:31:24,525 : updates_per_update: 1
+2019-02-26 22:31:24,525 : lr: 0.0003
+2019-02-26 22:31:24,525 : distill_num: 1024
+2019-02-26 22:31:24,525 : replay_size: 1000000
+2019-02-26 22:31:24,526 : flip_critic: False
+2019-02-26 22:31:24,526 : num_eps: 100000.0
+2019-02-26 22:31:24,526 : n_training_threads: 6
+2019-02-26 22:31:24,527 : model_name: test
+2019-02-26 22:31:24,527 : env_name: simple_spread_flip_3
+2019-02-26 22:31:24,527 : hidden_size: 256
+2019-02-26 22:31:24,528 : distill_pass_actor: False
+2019-02-26 22:31:24,528 : policy: Gaussian
+2019-02-26 22:31:24,528 : save_buffer: False
+2019-02-26 22:31:24,529 : automatic_entropy_tuning: False
+2019-02-26 22:31:24,529 : alpha: 0.1
+2019-02-26 22:31:24,529 : flip_ep: 1000000
+2019-02-26 22:31:24,530 : distill_pass_critic: False
+2019-02-26 22:31:24,530 : eval: True
+2019-02-26 22:31:24,530 : steps_per_update: 100
+2019-02-26 22:31:24,531 : start_eps: 500
+2019-02-26 22:31:24,531 : tau: 0.005
+2019-02-26 22:31:24,531 : distill_ep: 10000000.0
+2019-02-26 22:31:24,532 : batch_size: 1024
+2019-02-26 22:31:24,611 :  Train Episode: 0, total numsteps: 25, reward: -2.71, average reward: -2.71
+2019-02-26 22:31:25,924 : Test Episode: 0, reward: -2.393504585907199
+2019-02-26 22:31:25,982 :  Train Episode: 1, total numsteps: 50, reward: -2.34, average reward: -2.52
+2019-02-26 22:31:26,040 :  Train Episode: 2, total numsteps: 75, reward: -2.39, average reward: -2.48
+2019-02-26 22:31:26,097 :  Train Episode: 3, total numsteps: 100, reward: -2.81, average reward: -2.56
+2019-02-26 22:31:26,156 :  Train Episode: 4, total numsteps: 125, reward: -2.56, average reward: -2.56
+2019-02-26 22:31:26,214 :  Train Episode: 5, total numsteps: 150, reward: -2.76, average reward: -2.59
+2019-02-26 22:31:26,263 :  Train Episode: 6, total numsteps: 175, reward: -2.59, average reward: -2.59
+2019-02-26 22:31:26,308 :  Train Episode: 7, total numsteps: 200, reward: -2.36, average reward: -2.56
+2019-02-26 22:31:26,356 :  Train Episode: 8, total numsteps: 225, reward: -2.85, average reward: -2.6
+2019-02-26 22:31:26,402 :  Train Episode: 9, total numsteps: 250, reward: -2.22, average reward: -2.56
+2019-02-26 22:31:26,449 :  Train Episode: 10, total numsteps: 275, reward: -2.45, average reward: -2.55
+2019-02-26 22:31:26,557 : Test Episode: 10, reward: -2.530637055057154
+2019-02-26 22:31:26,610 :  Train Episode: 11, total numsteps: 300, reward: -2.08, average reward: -2.51
+2019-02-26 22:31:26,658 :  Train Episode: 12, total numsteps: 325, reward: -2.16, average reward: -2.48
+2019-02-26 22:31:26,703 :  Train Episode: 13, total numsteps: 350, reward: -2.25, average reward: -2.47
+2019-02-26 22:31:26,751 :  Train Episode: 14, total numsteps: 375, reward: -2.2, average reward: -2.45
+2019-02-26 22:31:26,815 :  Train Episode: 15, total numsteps: 400, reward: -2.41, average reward: -2.45
+2019-02-26 22:31:26,882 :  Train Episode: 16, total numsteps: 425, reward: -2.46, average reward: -2.45
+2019-02-26 22:31:26,952 :  Train Episode: 17, total numsteps: 450, reward: -2.61, average reward: -2.46
+2019-02-26 22:31:27,020 :  Train Episode: 18, total numsteps: 475, reward: -3.14, average reward: -2.49
+2019-02-26 22:31:27,087 :  Train Episode: 19, total numsteps: 500, reward: -1.98, average reward: -2.47
+2019-02-26 22:31:27,143 :  Train Episode: 20, total numsteps: 525, reward: -2.78, average reward: -2.48
+2019-02-26 22:31:27,393 : Test Episode: 20, reward: -2.226321679822557
+2019-02-26 22:31:27,449 :  Train Episode: 21, total numsteps: 550, reward: -2.07, average reward: -2.46
+2019-02-26 22:31:27,505 :  Train Episode: 22, total numsteps: 575, reward: -2.34, average reward: -2.46
+2019-02-26 22:31:27,561 :  Train Episode: 23, total numsteps: 600, reward: -2.69, average reward: -2.47
+2019-02-26 22:31:27,615 :  Train Episode: 24, total numsteps: 625, reward: -2.69, average reward: -2.48
+2019-02-26 22:31:27,668 :  Train Episode: 25, total numsteps: 650, reward: -3.01, average reward: -2.5
+2019-02-26 22:31:27,722 :  Train Episode: 26, total numsteps: 675, reward: -2.6, average reward: -2.5
+2019-02-26 22:31:27,773 :  Train Episode: 27, total numsteps: 700, reward: -2.69, average reward: -2.51
+2019-02-26 22:31:27,822 :  Train Episode: 28, total numsteps: 725, reward: -2.34, average reward: -2.5
+2019-02-26 22:31:27,873 :  Train Episode: 29, total numsteps: 750, reward: -2.21, average reward: -2.49
+2019-02-26 22:31:27,925 :  Train Episode: 30, total numsteps: 775, reward: -1.94, average reward: -2.47
+2019-02-26 22:31:28,082 : Test Episode: 30, reward: -2.284923881610873
+2019-02-26 22:31:28,138 :  Train Episode: 31, total numsteps: 800, reward: -3.0, average reward: -2.49
+2019-02-26 22:31:28,200 :  Train Episode: 32, total numsteps: 825, reward: -2.35, average reward: -2.49
+2019-02-26 22:31:28,256 :  Train Episode: 33, total numsteps: 850, reward: -2.32, average reward: -2.48
+2019-02-26 22:31:28,313 :  Train Episode: 34, total numsteps: 875, reward: -3.26, average reward: -2.5
+2019-02-26 22:31:28,373 :  Train Episode: 35, total numsteps: 900, reward: -2.85, average reward: -2.51
+2019-02-26 22:31:28,432 :  Train Episode: 36, total numsteps: 925, reward: -2.48, average reward: -2.51
+2019-02-26 22:31:28,485 :  Train Episode: 37, total numsteps: 950, reward: -2.66, average reward: -2.52
+2019-02-26 22:31:28,540 :  Train Episode: 38, total numsteps: 975, reward: -2.04, average reward: -2.5
+2019-02-26 22:31:28,599 :  Train Episode: 39, total numsteps: 1000, reward: -2.87, average reward: -2.51
+2019-02-26 22:31:28,663 :  Train Episode: 40, total numsteps: 1025, reward: -2.46, average reward: -2.51
+2019-02-26 22:31:28,920 : Test Episode: 40, reward: -2.6881465740028605
+2019-02-26 22:31:28,981 :  Train Episode: 41, total numsteps: 1050, reward: -2.8, average reward: -2.52
+2019-02-26 22:31:29,059 :  Train Episode: 42, total numsteps: 1075, reward: -3.43, average reward: -2.54
+2019-02-26 22:31:29,138 :  Train Episode: 43, total numsteps: 1100, reward: -2.25, average reward: -2.53
+2019-02-26 22:31:31,695 :  Train Episode: 44, total numsteps: 1125, reward: -2.38, average reward: -2.53
+2019-02-26 22:31:31,776 :  Train Episode: 45, total numsteps: 1150, reward: -2.76, average reward: -2.54
+2019-02-26 22:31:31,844 :  Train Episode: 46, total numsteps: 1175, reward: -2.62, average reward: -2.54
+2019-02-26 22:31:31,906 :  Train Episode: 47, total numsteps: 1200, reward: -2.4, average reward: -2.53
+2019-02-26 22:31:33,886 :  Train Episode: 48, total numsteps: 1225, reward: -2.62, average reward: -2.54
+2019-02-26 22:31:33,944 :  Train Episode: 49, total numsteps: 1250, reward: -2.79, average reward: -2.54
+2019-02-26 22:31:34,001 :  Train Episode: 50, total numsteps: 1275, reward: -2.14, average reward: -2.53
+2019-02-26 22:31:34,301 : Test Episode: 50, reward: -2.175848419533852
+2019-02-26 22:31:34,357 :  Train Episode: 51, total numsteps: 1300, reward: -2.17, average reward: -2.53
+2019-02-26 22:31:36,969 :  Train Episode: 52, total numsteps: 1325, reward: -2.06, average reward: -2.52
+2019-02-26 22:31:37,025 :  Train Episode: 53, total numsteps: 1350, reward: -2.91, average reward: -2.52
+2019-02-26 22:31:37,082 :  Train Episode: 54, total numsteps: 1375, reward: -3.01, average reward: -2.53
+2019-02-26 22:31:37,144 :  Train Episode: 55, total numsteps: 1400, reward: -2.53, average reward: -2.53
+2019-02-26 22:31:39,617 :  Train Episode: 56, total numsteps: 1425, reward: -2.18, average reward: -2.53
+2019-02-26 22:31:39,674 :  Train Episode: 57, total numsteps: 1450, reward: -2.19, average reward: -2.52
+2019-02-26 22:31:39,735 :  Train Episode: 58, total numsteps: 1475, reward: -2.59, average reward: -2.52
+2019-02-26 22:31:39,804 :  Train Episode: 59, total numsteps: 1500, reward: -1.99, average reward: -2.51
+2019-02-26 22:31:42,070 :  Train Episode: 60, total numsteps: 1525, reward: -2.47, average reward: -2.51
+2019-02-26 22:31:42,404 : Test Episode: 60, reward: -2.7893803657052327
+2019-02-26 22:31:42,472 :  Train Episode: 61, total numsteps: 1550, reward: -2.49, average reward: -2.51
+2019-02-26 22:31:42,549 :  Train Episode: 62, total numsteps: 1575, reward: -2.03, average reward: -2.51
+2019-02-26 22:31:42,617 :  Train Episode: 63, total numsteps: 1600, reward: -1.83, average reward: -2.49
+2019-02-26 22:31:44,417 :  Train Episode: 64, total numsteps: 1625, reward: -2.14, average reward: -2.49
+2019-02-26 22:31:44,478 :  Train Episode: 65, total numsteps: 1650, reward: -2.55, average reward: -2.49
+2019-02-26 22:31:44,538 :  Train Episode: 66, total numsteps: 1675, reward: -3.01, average reward: -2.5
+2019-02-26 22:31:44,598 :  Train Episode: 67, total numsteps: 1700, reward: -2.19, average reward: -2.49
+2019-02-26 22:31:47,411 :  Train Episode: 68, total numsteps: 1725, reward: -2.8, average reward: -2.5
+2019-02-26 22:31:47,469 :  Train Episode: 69, total numsteps: 1750, reward: -2.71, average reward: -2.5
+2019-02-26 22:31:47,528 :  Train Episode: 70, total numsteps: 1775, reward: -3.04, average reward: -2.51
+2019-02-26 22:31:48,139 : Test Episode: 70, reward: -2.2228756699023924
+2019-02-26 22:31:48,201 :  Train Episode: 71, total numsteps: 1800, reward: -2.18, average reward: -2.5
+2019-02-26 22:31:50,080 :  Train Episode: 72, total numsteps: 1825, reward: -2.09, average reward: -2.5
+2019-02-26 22:31:50,139 :  Train Episode: 73, total numsteps: 1850, reward: -2.71, average reward: -2.5
+2019-02-26 22:31:50,203 :  Train Episode: 74, total numsteps: 1875, reward: -2.79, average reward: -2.5
+2019-02-26 22:31:50,262 :  Train Episode: 75, total numsteps: 1900, reward: -1.93, average reward: -2.5
+2019-02-26 22:31:51,947 :  Train Episode: 76, total numsteps: 1925, reward: -2.34, average reward: -2.5
+2019-02-26 22:31:52,016 :  Train Episode: 77, total numsteps: 1950, reward: -2.42, average reward: -2.49
+2019-02-26 22:31:52,080 :  Train Episode: 78, total numsteps: 1975, reward: -1.83, average reward: -2.49
+2019-02-26 22:31:52,143 :  Train Episode: 79, total numsteps: 2000, reward: -3.11, average reward: -2.49
+2019-02-26 22:31:53,843 :  Train Episode: 80, total numsteps: 2025, reward: -3.17, average reward: -2.5
+2019-02-26 22:31:54,041 : Test Episode: 80, reward: -1.978098365523144
+2019-02-26 22:31:54,098 :  Train Episode: 81, total numsteps: 2050, reward: -2.81, average reward: -2.51
+2019-02-26 22:31:54,157 :  Train Episode: 82, total numsteps: 2075, reward: -2.41, average reward: -2.5
+2019-02-26 22:31:54,214 :  Train Episode: 83, total numsteps: 2100, reward: -2.47, average reward: -2.5
+2019-02-26 22:31:55,803 :  Train Episode: 84, total numsteps: 2125, reward: -2.81, average reward: -2.51
+2019-02-26 22:31:55,864 :  Train Episode: 85, total numsteps: 2150, reward: -3.35, average reward: -2.52
+2019-02-26 22:31:55,924 :  Train Episode: 86, total numsteps: 2175, reward: -2.73, average reward: -2.52
+2019-02-26 22:31:55,981 :  Train Episode: 87, total numsteps: 2200, reward: -2.38, average reward: -2.52
+2019-02-26 22:31:57,645 :  Train Episode: 88, total numsteps: 2225, reward: -2.37, average reward: -2.52
+2019-02-26 22:31:57,693 :  Train Episode: 89, total numsteps: 2250, reward: -2.8, average reward: -2.52
+2019-02-26 22:31:57,746 :  Train Episode: 90, total numsteps: 2275, reward: -2.36, average reward: -2.52
+2019-02-26 22:31:57,903 : Test Episode: 90, reward: -2.317582042351956
+2019-02-26 22:31:57,963 :  Train Episode: 91, total numsteps: 2300, reward: -2.72, average reward: -2.52
+2019-02-26 22:31:59,901 :  Train Episode: 92, total numsteps: 2325, reward: -2.59, average reward: -2.52
+2019-02-26 22:31:59,967 :  Train Episode: 93, total numsteps: 2350, reward: -3.02, average reward: -2.53
+2019-02-26 22:32:00,018 :  Train Episode: 94, total numsteps: 2375, reward: -2.79, average reward: -2.53
+2019-02-26 22:32:00,068 :  Train Episode: 95, total numsteps: 2400, reward: -3.04, average reward: -2.53
+2019-02-26 22:32:01,752 :  Train Episode: 96, total numsteps: 2425, reward: -2.29, average reward: -2.53
+2019-02-26 22:32:01,806 :  Train Episode: 97, total numsteps: 2450, reward: -2.67, average reward: -2.53
+2019-02-26 22:32:01,866 :  Train Episode: 98, total numsteps: 2475, reward: -2.25, average reward: -2.53
+2019-02-26 22:32:01,924 :  Train Episode: 99, total numsteps: 2500, reward: -2.47, average reward: -2.53
+2019-02-26 22:32:04,209 :  Train Episode: 100, total numsteps: 2525, reward: -1.99, average reward: -2.52
+2019-02-26 22:32:04,676 : Test Episode: 100, reward: -2.3217889449098505
+2019-02-26 22:32:04,743 :  Train Episode: 101, total numsteps: 2550, reward: -2.45, average reward: -2.52
+2019-02-26 22:32:04,811 :  Train Episode: 102, total numsteps: 2575, reward: -1.92, average reward: -2.52
+2019-02-26 22:32:04,870 :  Train Episode: 103, total numsteps: 2600, reward: -2.46, average reward: -2.52
+2019-02-26 22:32:06,731 :  Train Episode: 104, total numsteps: 2625, reward: -2.96, average reward: -2.52
+2019-02-26 22:32:06,789 :  Train Episode: 105, total numsteps: 2650, reward: -3.05, average reward: -2.52
+2019-02-26 22:32:06,852 :  Train Episode: 106, total numsteps: 2675, reward: -1.95, average reward: -2.52
+2019-02-26 22:32:06,913 :  Train Episode: 107, total numsteps: 2700, reward: -2.85, average reward: -2.52
+2019-02-26 22:32:08,733 :  Train Episode: 108, total numsteps: 2725, reward: -2.74, average reward: -2.52
+2019-02-26 22:32:08,802 :  Train Episode: 109, total numsteps: 2750, reward: -2.56, average reward: -2.52
+2019-02-26 22:32:08,871 :  Train Episode: 110, total numsteps: 2775, reward: -2.38, average reward: -2.52
+2019-02-26 22:32:09,176 : Test Episode: 110, reward: -2.8307714894482943
+2019-02-26 22:32:09,231 :  Train Episode: 111, total numsteps: 2800, reward: -2.47, average reward: -2.53
+2019-02-26 22:32:11,467 :  Train Episode: 112, total numsteps: 2825, reward: -3.22, average reward: -2.54
+2019-02-26 22:32:11,530 :  Train Episode: 113, total numsteps: 2850, reward: -3.07, average reward: -2.55
+2019-02-26 22:32:11,588 :  Train Episode: 114, total numsteps: 2875, reward: -1.85, average reward: -2.54
+2019-02-26 22:32:11,645 :  Train Episode: 115, total numsteps: 2900, reward: -3.35, average reward: -2.55
+2019-02-26 22:32:13,661 :  Train Episode: 116, total numsteps: 2925, reward: -2.71, average reward: -2.55
+2019-02-26 22:32:13,722 :  Train Episode: 117, total numsteps: 2950, reward: -2.23, average reward: -2.55
+2019-02-26 22:32:13,783 :  Train Episode: 118, total numsteps: 2975, reward: -2.69, average reward: -2.55
+2019-02-26 22:32:13,840 :  Train Episode: 119, total numsteps: 3000, reward: -2.21, average reward: -2.55
+2019-02-26 22:32:15,677 :  Train Episode: 120, total numsteps: 3025, reward: -2.93, average reward: -2.55
+2019-02-26 22:32:15,900 : Test Episode: 120, reward: -2.4017434024134996
+2019-02-26 22:32:15,958 :  Train Episode: 121, total numsteps: 3050, reward: -2.26, average reward: -2.55
+2019-02-26 22:32:16,019 :  Train Episode: 122, total numsteps: 3075, reward: -2.62, average reward: -2.55
+2019-02-26 22:32:16,076 :  Train Episode: 123, total numsteps: 3100, reward: -2.38, average reward: -2.55
+2019-02-26 22:32:18,169 :  Train Episode: 124, total numsteps: 3125, reward: -2.65, average reward: -2.55
+2019-02-26 22:32:18,230 :  Train Episode: 125, total numsteps: 3150, reward: -2.37, average reward: -2.54
+2019-02-26 22:32:18,287 :  Train Episode: 126, total numsteps: 3175, reward: -2.31, average reward: -2.54
+2019-02-26 22:32:18,343 :  Train Episode: 127, total numsteps: 3200, reward: -2.51, average reward: -2.54
+2019-02-26 22:32:20,434 :  Train Episode: 128, total numsteps: 3225, reward: -1.95, average reward: -2.54
+2019-02-26 22:32:20,493 :  Train Episode: 129, total numsteps: 3250, reward: -2.63, average reward: -2.54
+2019-02-26 22:32:20,544 :  Train Episode: 130, total numsteps: 3275, reward: -3.37, average reward: -2.55
+2019-02-26 22:32:20,665 : Test Episode: 130, reward: -2.5238313278380082
+2019-02-26 22:32:20,716 :  Train Episode: 131, total numsteps: 3300, reward: -2.54, average reward: -2.55
+2019-02-26 22:32:22,639 :  Train Episode: 132, total numsteps: 3325, reward: -2.19, average reward: -2.55
+2019-02-26 22:32:22,717 :  Train Episode: 133, total numsteps: 3350, reward: -2.57, average reward: -2.55
+2019-02-26 22:32:22,773 :  Train Episode: 134, total numsteps: 3375, reward: -3.1, average reward: -2.55
+2019-02-26 22:32:22,828 :  Train Episode: 135, total numsteps: 3400, reward: -3.08, average reward: -2.55
+2019-02-26 22:32:24,970 :  Train Episode: 136, total numsteps: 3425, reward: -2.64, average reward: -2.55
+2019-02-26 22:32:25,031 :  Train Episode: 137, total numsteps: 3450, reward: -2.49, average reward: -2.55
+2019-02-26 22:32:25,093 :  Train Episode: 138, total numsteps: 3475, reward: -2.29, average reward: -2.55
+2019-02-26 22:32:25,149 :  Train Episode: 139, total numsteps: 3500, reward: -2.4, average reward: -2.55
+2019-02-26 22:32:27,681 :  Train Episode: 140, total numsteps: 3525, reward: -3.45, average reward: -2.56
+2019-02-26 22:32:27,945 : Test Episode: 140, reward: -1.7122238348769339
+2019-02-26 22:32:27,999 :  Train Episode: 141, total numsteps: 3550, reward: -2.45, average reward: -2.55
+2019-02-26 22:32:28,058 :  Train Episode: 142, total numsteps: 3575, reward: -2.84, average reward: -2.55
+2019-02-26 22:32:28,113 :  Train Episode: 143, total numsteps: 3600, reward: -2.32, average reward: -2.55
+2019-02-26 22:32:29,981 :  Train Episode: 144, total numsteps: 3625, reward: -2.44, average reward: -2.55
+2019-02-26 22:32:30,043 :  Train Episode: 145, total numsteps: 3650, reward: -2.81, average reward: -2.55
+2019-02-26 22:32:30,103 :  Train Episode: 146, total numsteps: 3675, reward: -2.38, average reward: -2.55
+2019-02-26 22:32:30,155 :  Train Episode: 147, total numsteps: 3700, reward: -2.62, average reward: -2.55
+2019-02-26 22:32:31,951 :  Train Episode: 148, total numsteps: 3725, reward: -2.48, average reward: -2.55
+2019-02-26 22:32:32,006 :  Train Episode: 149, total numsteps: 3750, reward: -2.32, average reward: -2.54
+2019-02-26 22:32:32,065 :  Train Episode: 150, total numsteps: 3775, reward: -2.57, average reward: -2.55
+2019-02-26 22:32:32,430 : Test Episode: 150, reward: -1.9517631418286072
+2019-02-26 22:32:32,519 :  Train Episode: 151, total numsteps: 3800, reward: -2.18, average reward: -2.55
+2019-02-26 22:32:34,369 :  Train Episode: 152, total numsteps: 3825, reward: -2.46, average reward: -2.55
+2019-02-26 22:32:34,434 :  Train Episode: 153, total numsteps: 3850, reward: -2.37, average reward: -2.55
+2019-02-26 22:32:34,493 :  Train Episode: 154, total numsteps: 3875, reward: -2.01, average reward: -2.54
+2019-02-26 22:32:34,554 :  Train Episode: 155, total numsteps: 3900, reward: -3.2, average reward: -2.54
+2019-02-26 22:32:36,426 :  Train Episode: 156, total numsteps: 3925, reward: -2.57, average reward: -2.55
+2019-02-26 22:32:36,489 :  Train Episode: 157, total numsteps: 3950, reward: -2.57, average reward: -2.55
+2019-02-26 22:32:36,545 :  Train Episode: 158, total numsteps: 3975, reward: -2.77, average reward: -2.55
+2019-02-26 22:32:36,601 :  Train Episode: 159, total numsteps: 4000, reward: -2.32, average reward: -2.56
+2019-02-26 22:32:38,344 :  Train Episode: 160, total numsteps: 4025, reward: -2.33, average reward: -2.56
+2019-02-26 22:32:38,559 : Test Episode: 160, reward: -2.0105553567184415
+2019-02-26 22:32:38,635 :  Train Episode: 161, total numsteps: 4050, reward: -2.52, average reward: -2.56
+2019-02-26 22:32:38,703 :  Train Episode: 162, total numsteps: 4075, reward: -2.85, average reward: -2.56
+2019-02-26 22:32:38,770 :  Train Episode: 163, total numsteps: 4100, reward: -1.99, average reward: -2.57
+2019-02-26 22:32:41,051 :  Train Episode: 164, total numsteps: 4125, reward: -2.44, average reward: -2.57
+2019-02-26 22:32:41,133 :  Train Episode: 165, total numsteps: 4150, reward: -3.13, average reward: -2.57
+2019-02-26 22:32:41,204 :  Train Episode: 166, total numsteps: 4175, reward: -3.19, average reward: -2.58
+2019-02-26 22:32:41,280 :  Train Episode: 167, total numsteps: 4200, reward: -2.17, average reward: -2.58
+2019-02-26 22:32:43,903 :  Train Episode: 168, total numsteps: 4225, reward: -2.06, average reward: -2.57
+2019-02-26 22:32:43,990 :  Train Episode: 169, total numsteps: 4250, reward: -2.27, average reward: -2.56
+2019-02-26 22:32:44,073 :  Train Episode: 170, total numsteps: 4275, reward: -2.31, average reward: -2.56
+2019-02-26 22:32:44,285 : Test Episode: 170, reward: -2.436790081977451
+2019-02-26 22:32:44,339 :  Train Episode: 171, total numsteps: 4300, reward: -2.8, average reward: -2.56
+2019-02-26 22:32:46,461 :  Train Episode: 172, total numsteps: 4325, reward: -2.17, average reward: -2.56
+2019-02-26 22:32:46,513 :  Train Episode: 173, total numsteps: 4350, reward: -2.6, average reward: -2.56
+2019-02-26 22:32:46,576 :  Train Episode: 174, total numsteps: 4375, reward: -2.43, average reward: -2.56
+2019-02-26 22:32:46,659 :  Train Episode: 175, total numsteps: 4400, reward: -2.58, average reward: -2.57
+2019-02-26 22:32:48,973 :  Train Episode: 176, total numsteps: 4425, reward: -3.38, average reward: -2.58
+2019-02-26 22:32:49,036 :  Train Episode: 177, total numsteps: 4450, reward: -2.96, average reward: -2.58
+2019-02-26 22:32:49,092 :  Train Episode: 178, total numsteps: 4475, reward: -2.72, average reward: -2.59
+2019-02-26 22:32:49,155 :  Train Episode: 179, total numsteps: 4500, reward: -2.67, average reward: -2.59
+2019-02-26 22:32:51,438 :  Train Episode: 180, total numsteps: 4525, reward: -2.23, average reward: -2.58
+2019-02-26 22:32:51,640 : Test Episode: 180, reward: -1.8427549621707549
+2019-02-26 22:32:51,711 :  Train Episode: 181, total numsteps: 4550, reward: -1.92, average reward: -2.57
+2019-02-26 22:32:51,774 :  Train Episode: 182, total numsteps: 4575, reward: -2.19, average reward: -2.57
+2019-02-26 22:32:51,837 :  Train Episode: 183, total numsteps: 4600, reward: -3.38, average reward: -2.57
+2019-02-26 22:32:53,823 :  Train Episode: 184, total numsteps: 4625, reward: -2.39, average reward: -2.57
+2019-02-26 22:32:53,890 :  Train Episode: 185, total numsteps: 4650, reward: -3.07, average reward: -2.57
+2019-02-26 22:32:53,949 :  Train Episode: 186, total numsteps: 4675, reward: -2.18, average reward: -2.56
+2019-02-26 22:32:54,006 :  Train Episode: 187, total numsteps: 4700, reward: -3.09, average reward: -2.57
+2019-02-26 22:32:56,099 :  Train Episode: 188, total numsteps: 4725, reward: -2.57, average reward: -2.57
+2019-02-26 22:32:56,159 :  Train Episode: 189, total numsteps: 4750, reward: -2.73, average reward: -2.57
+2019-02-26 22:32:56,211 :  Train Episode: 190, total numsteps: 4775, reward: -3.09, average reward: -2.58
+2019-02-26 22:32:56,364 : Test Episode: 190, reward: -1.4327885978246906
+2019-02-26 22:32:56,428 :  Train Episode: 191, total numsteps: 4800, reward: -2.15, average reward: -2.57
+2019-02-26 22:32:59,552 :  Train Episode: 192, total numsteps: 4825, reward: -2.53, average reward: -2.57
+2019-02-26 22:32:59,622 :  Train Episode: 193, total numsteps: 4850, reward: -3.04, average reward: -2.57
+2019-02-26 22:32:59,695 :  Train Episode: 194, total numsteps: 4875, reward: -1.98, average reward: -2.56
+2019-02-26 22:32:59,759 :  Train Episode: 195, total numsteps: 4900, reward: -3.22, average reward: -2.57
+2019-02-26 22:33:02,704 :  Train Episode: 196, total numsteps: 4925, reward: -2.71, average reward: -2.57
+2019-02-26 22:33:02,781 :  Train Episode: 197, total numsteps: 4950, reward: -3.18, average reward: -2.57
+2019-02-26 22:33:02,855 :  Train Episode: 198, total numsteps: 4975, reward: -2.24, average reward: -2.57
+2019-02-26 22:33:02,926 :  Train Episode: 199, total numsteps: 5000, reward: -3.12, average reward: -2.58
+2019-02-26 22:33:06,372 :  Train Episode: 200, total numsteps: 5025, reward: -2.84, average reward: -2.59
+2019-02-26 22:33:06,693 : Test Episode: 200, reward: -1.7634625333427705
+2019-02-26 22:33:06,748 :  Train Episode: 201, total numsteps: 5050, reward: -2.24, average reward: -2.59
+2019-02-26 22:33:06,807 :  Train Episode: 202, total numsteps: 5075, reward: -2.98, average reward: -2.6
+2019-02-26 22:33:06,866 :  Train Episode: 203, total numsteps: 5100, reward: -2.83, average reward: -2.6
+2019-02-26 22:33:09,929 :  Train Episode: 204, total numsteps: 5125, reward: -2.56, average reward: -2.6
+2019-02-26 22:33:09,990 :  Train Episode: 205, total numsteps: 5150, reward: -2.15, average reward: -2.59
+2019-02-26 22:33:10,063 :  Train Episode: 206, total numsteps: 5175, reward: -2.98, average reward: -2.6
+2019-02-26 22:33:10,155 :  Train Episode: 207, total numsteps: 5200, reward: -2.26, average reward: -2.59
+2019-02-26 22:33:12,661 :  Train Episode: 208, total numsteps: 5225, reward: -1.96, average reward: -2.59
+2019-02-26 22:33:12,737 :  Train Episode: 209, total numsteps: 5250, reward: -2.17, average reward: -2.58
+2019-02-26 22:33:12,816 :  Train Episode: 210, total numsteps: 5275, reward: -3.48, average reward: -2.59
+2019-02-26 22:33:13,155 : Test Episode: 210, reward: -2.3466085034582407
+2019-02-26 22:33:13,230 :  Train Episode: 211, total numsteps: 5300, reward: -2.09, average reward: -2.59
+2019-02-26 22:33:16,198 :  Train Episode: 212, total numsteps: 5325, reward: -2.11, average reward: -2.58
+2019-02-26 22:33:16,255 :  Train Episode: 213, total numsteps: 5350, reward: -2.83, average reward: -2.58
+2019-02-26 22:33:16,313 :  Train Episode: 214, total numsteps: 5375, reward: -2.54, average reward: -2.58
+2019-02-26 22:33:16,371 :  Train Episode: 215, total numsteps: 5400, reward: -2.21, average reward: -2.57
+2019-02-26 22:33:19,213 :  Train Episode: 216, total numsteps: 5425, reward: -1.99, average reward: -2.56
+2019-02-26 22:33:19,276 :  Train Episode: 217, total numsteps: 5450, reward: -2.62, average reward: -2.57
+2019-02-26 22:33:19,337 :  Train Episode: 218, total numsteps: 5475, reward: -2.89, average reward: -2.57
+2019-02-26 22:33:19,395 :  Train Episode: 219, total numsteps: 5500, reward: -2.22, average reward: -2.57
+2019-02-26 22:33:21,863 :  Train Episode: 220, total numsteps: 5525, reward: -2.76, average reward: -2.57
+2019-02-26 22:33:22,104 : Test Episode: 220, reward: -2.114684001092727
+2019-02-26 22:33:22,180 :  Train Episode: 221, total numsteps: 5550, reward: -2.53, average reward: -2.57
+2019-02-26 22:33:22,258 :  Train Episode: 222, total numsteps: 5575, reward: -2.45, average reward: -2.57
+2019-02-26 22:33:22,316 :  Train Episode: 223, total numsteps: 5600, reward: -2.78, average reward: -2.57
+2019-02-26 22:33:24,146 :  Train Episode: 224, total numsteps: 5625, reward: -3.3, average reward: -2.58
+2019-02-26 22:33:24,193 :  Train Episode: 225, total numsteps: 5650, reward: -2.93, average reward: -2.58
+2019-02-26 22:33:24,240 :  Train Episode: 226, total numsteps: 5675, reward: -2.33, average reward: -2.58
+2019-02-26 22:33:24,287 :  Train Episode: 227, total numsteps: 5700, reward: -2.42, average reward: -2.58
+2019-02-26 22:33:26,164 :  Train Episode: 228, total numsteps: 5725, reward: -2.15, average reward: -2.59
+2019-02-26 22:33:26,219 :  Train Episode: 229, total numsteps: 5750, reward: -2.56, average reward: -2.59
+2019-02-26 22:33:26,284 :  Train Episode: 230, total numsteps: 5775, reward: -2.47, average reward: -2.58
+2019-02-26 22:33:26,416 : Test Episode: 230, reward: -1.7434927812656822
+2019-02-26 22:33:26,471 :  Train Episode: 231, total numsteps: 5800, reward: -3.27, average reward: -2.58
+2019-02-26 22:33:28,293 :  Train Episode: 232, total numsteps: 5825, reward: -2.58, average reward: -2.59
+2019-02-26 22:33:28,361 :  Train Episode: 233, total numsteps: 5850, reward: -2.96, average reward: -2.59
+2019-02-26 22:33:28,424 :  Train Episode: 234, total numsteps: 5875, reward: -2.55, average reward: -2.59
+2019-02-26 22:33:28,483 :  Train Episode: 235, total numsteps: 5900, reward: -3.04, average reward: -2.59
+2019-02-26 22:33:31,175 :  Train Episode: 236, total numsteps: 5925, reward: -2.0, average reward: -2.58
+2019-02-26 22:33:31,252 :  Train Episode: 237, total numsteps: 5950, reward: -2.42, average reward: -2.58
+2019-02-26 22:33:31,315 :  Train Episode: 238, total numsteps: 5975, reward: -3.2, average reward: -2.59
+2019-02-26 22:33:31,376 :  Train Episode: 239, total numsteps: 6000, reward: -2.85, average reward: -2.59
+2019-02-26 22:33:34,141 :  Train Episode: 240, total numsteps: 6025, reward: -3.01, average reward: -2.59
+2019-02-26 22:33:34,556 : Test Episode: 240, reward: -1.6852517896955643
+2019-02-26 22:33:34,623 :  Train Episode: 241, total numsteps: 6050, reward: -1.95, average reward: -2.58
+2019-02-26 22:33:34,684 :  Train Episode: 242, total numsteps: 6075, reward: -2.66, average reward: -2.58
+2019-02-26 22:33:34,740 :  Train Episode: 243, total numsteps: 6100, reward: -2.65, average reward: -2.58
+2019-02-26 22:33:36,939 :  Train Episode: 244, total numsteps: 6125, reward: -3.16, average reward: -2.59
+2019-02-26 22:33:37,010 :  Train Episode: 245, total numsteps: 6150, reward: -2.83, average reward: -2.59
+2019-02-26 22:33:37,074 :  Train Episode: 246, total numsteps: 6175, reward: -2.2, average reward: -2.59
+2019-02-26 22:33:37,135 :  Train Episode: 247, total numsteps: 6200, reward: -1.78, average reward: -2.58
+2019-02-26 22:33:39,039 :  Train Episode: 248, total numsteps: 6225, reward: -2.14, average reward: -2.58
+2019-02-26 22:33:39,098 :  Train Episode: 249, total numsteps: 6250, reward: -3.39, average reward: -2.59
+2019-02-26 22:33:39,149 :  Train Episode: 250, total numsteps: 6275, reward: -2.5, average reward: -2.59
+2019-02-26 22:33:39,483 : Test Episode: 250, reward: -2.2872523540830834
+2019-02-26 22:33:39,542 :  Train Episode: 251, total numsteps: 6300, reward: -2.39, average reward: -2.59
+2019-02-26 22:33:41,769 :  Train Episode: 252, total numsteps: 6325, reward: -2.45, average reward: -2.59
+2019-02-26 22:33:41,836 :  Train Episode: 253, total numsteps: 6350, reward: -2.46, average reward: -2.59
+2019-02-26 22:33:41,897 :  Train Episode: 254, total numsteps: 6375, reward: -2.07, average reward: -2.59
+2019-02-26 22:33:41,955 :  Train Episode: 255, total numsteps: 6400, reward: -2.42, average reward: -2.58
+2019-02-26 22:33:44,481 :  Train Episode: 256, total numsteps: 6425, reward: -2.29, average reward: -2.58
+2019-02-26 22:33:44,547 :  Train Episode: 257, total numsteps: 6450, reward: -2.98, average reward: -2.58
+2019-02-26 22:33:44,601 :  Train Episode: 258, total numsteps: 6475, reward: -2.21, average reward: -2.58
+2019-02-26 22:33:44,664 :  Train Episode: 259, total numsteps: 6500, reward: -2.37, average reward: -2.58
+2019-02-26 22:33:47,145 :  Train Episode: 260, total numsteps: 6525, reward: -2.74, average reward: -2.58
+2019-02-26 22:33:47,503 : Test Episode: 260, reward: -2.3229865994164474
+2019-02-26 22:33:47,561 :  Train Episode: 261, total numsteps: 6550, reward: -2.5, average reward: -2.58
+2019-02-26 22:33:47,627 :  Train Episode: 262, total numsteps: 6575, reward: -1.86, average reward: -2.57
+2019-02-26 22:33:47,684 :  Train Episode: 263, total numsteps: 6600, reward: -2.35, average reward: -2.58
+2019-02-26 22:33:49,701 :  Train Episode: 264, total numsteps: 6625, reward: -2.63, average reward: -2.58
+2019-02-26 22:33:49,762 :  Train Episode: 265, total numsteps: 6650, reward: -2.98, average reward: -2.58
+2019-02-26 22:33:49,816 :  Train Episode: 266, total numsteps: 6675, reward: -2.79, average reward: -2.57
+2019-02-26 22:33:49,879 :  Train Episode: 267, total numsteps: 6700, reward: -2.54, average reward: -2.58
+2019-02-26 22:33:51,733 :  Train Episode: 268, total numsteps: 6725, reward: -3.33, average reward: -2.59
+2019-02-26 22:33:51,787 :  Train Episode: 269, total numsteps: 6750, reward: -2.54, average reward: -2.59
+2019-02-26 22:33:51,849 :  Train Episode: 270, total numsteps: 6775, reward: -2.51, average reward: -2.59
+2019-02-26 22:33:52,252 : Test Episode: 270, reward: -2.2101001857245635
+2019-02-26 22:33:52,322 :  Train Episode: 271, total numsteps: 6800, reward: -3.1, average reward: -2.6
+2019-02-26 22:33:54,322 :  Train Episode: 272, total numsteps: 6825, reward: -2.51, average reward: -2.6
+2019-02-26 22:33:54,378 :  Train Episode: 273, total numsteps: 6850, reward: -2.34, average reward: -2.6
+2019-02-26 22:33:54,433 :  Train Episode: 274, total numsteps: 6875, reward: -2.66, average reward: -2.6
+2019-02-26 22:33:54,490 :  Train Episode: 275, total numsteps: 6900, reward: -2.63, average reward: -2.6
+2019-02-26 22:33:56,449 :  Train Episode: 276, total numsteps: 6925, reward: -2.37, average reward: -2.59
+2019-02-26 22:33:56,500 :  Train Episode: 277, total numsteps: 6950, reward: -2.95, average reward: -2.59
+2019-02-26 22:33:56,577 :  Train Episode: 278, total numsteps: 6975, reward: -2.81, average reward: -2.59
+2019-02-26 22:33:56,638 :  Train Episode: 279, total numsteps: 7000, reward: -1.86, average reward: -2.58
+2019-02-26 22:33:58,492 :  Train Episode: 280, total numsteps: 7025, reward: -2.62, average reward: -2.59
+2019-02-26 22:33:58,642 : Test Episode: 280, reward: -1.7474987762586578
+2019-02-26 22:33:58,724 :  Train Episode: 281, total numsteps: 7050, reward: -2.89, average reward: -2.6
+2019-02-26 22:33:58,805 :  Train Episode: 282, total numsteps: 7075, reward: -2.42, average reward: -2.6
+2019-02-26 22:33:58,872 :  Train Episode: 283, total numsteps: 7100, reward: -2.86, average reward: -2.59
+2019-02-26 22:34:00,890 :  Train Episode: 284, total numsteps: 7125, reward: -2.33, average reward: -2.59
+2019-02-26 22:34:00,954 :  Train Episode: 285, total numsteps: 7150, reward: -3.04, average reward: -2.59
+2019-02-26 22:34:01,021 :  Train Episode: 286, total numsteps: 7175, reward: -2.48, average reward: -2.6
+2019-02-26 22:34:01,088 :  Train Episode: 287, total numsteps: 7200, reward: -2.34, average reward: -2.59
+2019-02-26 22:34:03,113 :  Train Episode: 288, total numsteps: 7225, reward: -2.52, average reward: -2.59
+2019-02-26 22:34:03,158 :  Train Episode: 289, total numsteps: 7250, reward: -2.57, average reward: -2.59
+2019-02-26 22:34:03,203 :  Train Episode: 290, total numsteps: 7275, reward: -2.61, average reward: -2.58
+2019-02-26 22:34:03,323 : Test Episode: 290, reward: -1.766487530462126
+2019-02-26 22:34:03,376 :  Train Episode: 291, total numsteps: 7300, reward: -2.15, average reward: -2.58
+2019-02-26 22:34:05,282 :  Train Episode: 292, total numsteps: 7325, reward: -2.21, average reward: -2.58
+2019-02-26 22:34:05,339 :  Train Episode: 293, total numsteps: 7350, reward: -3.26, average reward: -2.58
+2019-02-26 22:34:05,395 :  Train Episode: 294, total numsteps: 7375, reward: -2.7, average reward: -2.59
+2019-02-26 22:34:05,452 :  Train Episode: 295, total numsteps: 7400, reward: -2.89, average reward: -2.59
+2019-02-26 22:34:07,398 :  Train Episode: 296, total numsteps: 7425, reward: -1.97, average reward: -2.58
+2019-02-26 22:34:07,458 :  Train Episode: 297, total numsteps: 7450, reward: -2.01, average reward: -2.57
+2019-02-26 22:34:07,510 :  Train Episode: 298, total numsteps: 7475, reward: -2.82, average reward: -2.57
+2019-02-26 22:34:07,556 :  Train Episode: 299, total numsteps: 7500, reward: -1.76, average reward: -2.56
+2019-02-26 22:34:09,387 :  Train Episode: 300, total numsteps: 7525, reward: -2.41, average reward: -2.55
+2019-02-26 22:34:09,792 : Test Episode: 300, reward: -2.0101727344696747
+2019-02-26 22:34:09,846 :  Train Episode: 301, total numsteps: 7550, reward: -3.05, average reward: -2.56
+2019-02-26 22:34:09,902 :  Train Episode: 302, total numsteps: 7575, reward: -2.26, average reward: -2.56
+2019-02-26 22:34:09,947 :  Train Episode: 303, total numsteps: 7600, reward: -2.99, average reward: -2.56
+2019-02-26 22:34:11,844 :  Train Episode: 304, total numsteps: 7625, reward: -2.3, average reward: -2.55
+2019-02-26 22:34:11,906 :  Train Episode: 305, total numsteps: 7650, reward: -2.75, average reward: -2.56
+2019-02-26 22:34:11,977 :  Train Episode: 306, total numsteps: 7675, reward: -2.55, average reward: -2.56
+2019-02-26 22:34:12,044 :  Train Episode: 307, total numsteps: 7700, reward: -2.79, average reward: -2.56
+2019-02-26 22:34:13,950 :  Train Episode: 308, total numsteps: 7725, reward: -3.22, average reward: -2.57
+2019-02-26 22:34:14,000 :  Train Episode: 309, total numsteps: 7750, reward: -2.74, average reward: -2.58
+2019-02-26 22:34:14,059 :  Train Episode: 310, total numsteps: 7775, reward: -2.27, average reward: -2.57
+2019-02-26 22:34:14,242 : Test Episode: 310, reward: -1.667187375867845
+2019-02-26 22:34:14,308 :  Train Episode: 311, total numsteps: 7800, reward: -2.9, average reward: -2.58
+2019-02-26 22:34:15,999 :  Train Episode: 312, total numsteps: 7825, reward: -2.97, average reward: -2.58
+2019-02-26 22:34:16,072 :  Train Episode: 313, total numsteps: 7850, reward: -2.37, average reward: -2.58
+2019-02-26 22:34:16,132 :  Train Episode: 314, total numsteps: 7875, reward: -2.97, average reward: -2.58
+2019-02-26 22:34:16,191 :  Train Episode: 315, total numsteps: 7900, reward: -2.54, average reward: -2.59
+2019-02-26 22:34:17,905 :  Train Episode: 316, total numsteps: 7925, reward: -2.62, average reward: -2.59
+2019-02-26 22:34:17,961 :  Train Episode: 317, total numsteps: 7950, reward: -2.7, average reward: -2.59
+2019-02-26 22:34:18,014 :  Train Episode: 318, total numsteps: 7975, reward: -3.16, average reward: -2.6
+2019-02-26 22:34:18,072 :  Train Episode: 319, total numsteps: 8000, reward: -2.22, average reward: -2.6
+2019-02-26 22:34:20,201 :  Train Episode: 320, total numsteps: 8025, reward: -2.19, average reward: -2.59
+2019-02-26 22:34:20,468 : Test Episode: 320, reward: -1.4900886515504617
+2019-02-26 22:34:20,526 :  Train Episode: 321, total numsteps: 8050, reward: -1.95, average reward: -2.59
+2019-02-26 22:34:20,584 :  Train Episode: 322, total numsteps: 8075, reward: -2.13, average reward: -2.58
+2019-02-26 22:34:20,646 :  Train Episode: 323, total numsteps: 8100, reward: -2.74, average reward: -2.58
+2019-02-26 22:34:22,553 :  Train Episode: 324, total numsteps: 8125, reward: -2.26, average reward: -2.57
+2019-02-26 22:34:22,612 :  Train Episode: 325, total numsteps: 8150, reward: -2.98, average reward: -2.57
+2019-02-26 22:34:22,673 :  Train Episode: 326, total numsteps: 8175, reward: -3.1, average reward: -2.58
+2019-02-26 22:34:22,730 :  Train Episode: 327, total numsteps: 8200, reward: -3.06, average reward: -2.59
+2019-02-26 22:34:25,191 :  Train Episode: 328, total numsteps: 8225, reward: -2.51, average reward: -2.59
+2019-02-26 22:34:25,246 :  Train Episode: 329, total numsteps: 8250, reward: -2.17, average reward: -2.59
+2019-02-26 22:34:25,299 :  Train Episode: 330, total numsteps: 8275, reward: -1.92, average reward: -2.58
+2019-02-26 22:34:25,661 : Test Episode: 330, reward: -1.9497615853081822
+2019-02-26 22:34:25,733 :  Train Episode: 331, total numsteps: 8300, reward: -2.61, average reward: -2.57
+2019-02-26 22:34:28,047 :  Train Episode: 332, total numsteps: 8325, reward: -3.21, average reward: -2.58
+2019-02-26 22:34:28,103 :  Train Episode: 333, total numsteps: 8350, reward: -2.62, average reward: -2.58
+2019-02-26 22:34:28,162 :  Train Episode: 334, total numsteps: 8375, reward: -2.3, average reward: -2.57
+2019-02-26 22:34:28,209 :  Train Episode: 335, total numsteps: 8400, reward: -1.91, average reward: -2.56
+2019-02-26 22:34:30,418 :  Train Episode: 336, total numsteps: 8425, reward: -2.29, average reward: -2.57
+2019-02-26 22:34:30,476 :  Train Episode: 337, total numsteps: 8450, reward: -2.65, average reward: -2.57
+2019-02-26 22:34:30,540 :  Train Episode: 338, total numsteps: 8475, reward: -2.95, average reward: -2.57
+2019-02-26 22:34:30,597 :  Train Episode: 339, total numsteps: 8500, reward: -2.44, average reward: -2.56
+2019-02-26 22:34:33,319 :  Train Episode: 340, total numsteps: 8525, reward: -2.76, average reward: -2.56
+2019-02-26 22:34:33,571 : Test Episode: 340, reward: -1.622632561593555
+2019-02-26 22:34:33,626 :  Train Episode: 341, total numsteps: 8550, reward: -2.32, average reward: -2.56
+2019-02-26 22:34:33,682 :  Train Episode: 342, total numsteps: 8575, reward: -2.09, average reward: -2.56
+2019-02-26 22:34:33,729 :  Train Episode: 343, total numsteps: 8600, reward: -2.35, average reward: -2.55
+2019-02-26 22:34:35,673 :  Train Episode: 344, total numsteps: 8625, reward: -2.15, average reward: -2.54
+2019-02-26 22:34:35,740 :  Train Episode: 345, total numsteps: 8650, reward: -2.09, average reward: -2.54
+2019-02-26 22:34:35,814 :  Train Episode: 346, total numsteps: 8675, reward: -2.43, average reward: -2.54
+2019-02-26 22:34:35,858 :  Train Episode: 347, total numsteps: 8700, reward: -2.42, average reward: -2.55
+2019-02-26 22:34:37,777 :  Train Episode: 348, total numsteps: 8725, reward: -3.21, average reward: -2.56
+2019-02-26 22:34:37,833 :  Train Episode: 349, total numsteps: 8750, reward: -2.84, average reward: -2.55
+2019-02-26 22:34:37,893 :  Train Episode: 350, total numsteps: 8775, reward: -2.38, average reward: -2.55
+2019-02-26 22:34:38,063 : Test Episode: 350, reward: -2.1190494559843205
+2019-02-26 22:34:38,133 :  Train Episode: 351, total numsteps: 8800, reward: -3.09, average reward: -2.56
+2019-02-26 22:34:40,172 :  Train Episode: 352, total numsteps: 8825, reward: -2.44, average reward: -2.56
+2019-02-26 22:34:40,239 :  Train Episode: 353, total numsteps: 8850, reward: -2.2, average reward: -2.55
+2019-02-26 22:34:40,298 :  Train Episode: 354, total numsteps: 8875, reward: -2.77, average reward: -2.56
+2019-02-26 22:34:40,361 :  Train Episode: 355, total numsteps: 8900, reward: -2.77, average reward: -2.56
+2019-02-26 22:34:42,297 :  Train Episode: 356, total numsteps: 8925, reward: -2.27, average reward: -2.56
+2019-02-26 22:34:42,368 :  Train Episode: 357, total numsteps: 8950, reward: -2.64, average reward: -2.56
+2019-02-26 22:34:42,427 :  Train Episode: 358, total numsteps: 8975, reward: -3.27, average reward: -2.57
+2019-02-26 22:34:42,489 :  Train Episode: 359, total numsteps: 9000, reward: -2.89, average reward: -2.58
+2019-02-26 22:34:44,864 :  Train Episode: 360, total numsteps: 9025, reward: -2.07, average reward: -2.57
+2019-02-26 22:34:45,092 : Test Episode: 360, reward: -1.849928627820758
+2019-02-26 22:34:45,150 :  Train Episode: 361, total numsteps: 9050, reward: -2.48, average reward: -2.57
+2019-02-26 22:34:45,211 :  Train Episode: 362, total numsteps: 9075, reward: -2.93, average reward: -2.58
+2019-02-26 22:34:45,268 :  Train Episode: 363, total numsteps: 9100, reward: -2.34, average reward: -2.58
+2019-02-26 22:34:47,656 :  Train Episode: 364, total numsteps: 9125, reward: -2.22, average reward: -2.58
+2019-02-26 22:34:47,737 :  Train Episode: 365, total numsteps: 9150, reward: -2.29, average reward: -2.57
+2019-02-26 22:34:47,797 :  Train Episode: 366, total numsteps: 9175, reward: -2.62, average reward: -2.57
+2019-02-26 22:34:47,855 :  Train Episode: 367, total numsteps: 9200, reward: -2.84, average reward: -2.57
+2019-02-26 22:34:50,006 :  Train Episode: 368, total numsteps: 9225, reward: -2.54, average reward: -2.56
+2019-02-26 22:34:50,066 :  Train Episode: 369, total numsteps: 9250, reward: -2.14, average reward: -2.56
+2019-02-26 22:34:50,121 :  Train Episode: 370, total numsteps: 9275, reward: -3.39, average reward: -2.57
+2019-02-26 22:34:50,344 : Test Episode: 370, reward: -1.6297960625303358
+2019-02-26 22:34:50,406 :  Train Episode: 371, total numsteps: 9300, reward: -2.48, average reward: -2.56
+2019-02-26 22:34:52,240 :  Train Episode: 372, total numsteps: 9325, reward: -2.19, average reward: -2.56
+2019-02-26 22:34:52,301 :  Train Episode: 373, total numsteps: 9350, reward: -2.95, average reward: -2.56
+2019-02-26 22:34:52,360 :  Train Episode: 374, total numsteps: 9375, reward: -1.99, average reward: -2.56
+2019-02-26 22:34:52,417 :  Train Episode: 375, total numsteps: 9400, reward: -2.66, average reward: -2.56
+2019-02-26 22:34:54,121 :  Train Episode: 376, total numsteps: 9425, reward: -2.75, average reward: -2.56
+2019-02-26 22:34:54,184 :  Train Episode: 377, total numsteps: 9450, reward: -2.13, average reward: -2.55
+2019-02-26 22:34:54,249 :  Train Episode: 378, total numsteps: 9475, reward: -2.32, average reward: -2.55
+2019-02-26 22:34:54,307 :  Train Episode: 379, total numsteps: 9500, reward: -2.5, average reward: -2.55
+2019-02-26 22:34:56,212 :  Train Episode: 380, total numsteps: 9525, reward: -2.45, average reward: -2.55
+2019-02-26 22:34:56,434 : Test Episode: 380, reward: -1.9205451190406204
+2019-02-26 22:34:56,504 :  Train Episode: 381, total numsteps: 9550, reward: -2.49, average reward: -2.55
+2019-02-26 22:34:56,568 :  Train Episode: 382, total numsteps: 9575, reward: -3.15, average reward: -2.56
+2019-02-26 22:34:56,628 :  Train Episode: 383, total numsteps: 9600, reward: -2.03, average reward: -2.55
+2019-02-26 22:34:58,809 :  Train Episode: 384, total numsteps: 9625, reward: -2.44, average reward: -2.55
+2019-02-26 22:34:58,864 :  Train Episode: 385, total numsteps: 9650, reward: -1.88, average reward: -2.54
+2019-02-26 22:34:58,923 :  Train Episode: 386, total numsteps: 9675, reward: -2.88, average reward: -2.54
+2019-02-26 22:34:58,982 :  Train Episode: 387, total numsteps: 9700, reward: -2.56, average reward: -2.54
+2019-02-26 22:35:00,685 :  Train Episode: 388, total numsteps: 9725, reward: -2.99, average reward: -2.55
+2019-02-26 22:35:00,746 :  Train Episode: 389, total numsteps: 9750, reward: -2.15, average reward: -2.54
+2019-02-26 22:35:00,802 :  Train Episode: 390, total numsteps: 9775, reward: -2.58, average reward: -2.54
+2019-02-26 22:35:01,054 : Test Episode: 390, reward: -2.040048903599606
+2019-02-26 22:35:01,126 :  Train Episode: 391, total numsteps: 9800, reward: -1.67, average reward: -2.54
+2019-02-26 22:35:02,933 :  Train Episode: 392, total numsteps: 9825, reward: -2.66, average reward: -2.54
+2019-02-26 22:35:02,992 :  Train Episode: 393, total numsteps: 9850, reward: -3.57, average reward: -2.55
+2019-02-26 22:35:03,052 :  Train Episode: 394, total numsteps: 9875, reward: -2.52, average reward: -2.54
+2019-02-26 22:35:03,109 :  Train Episode: 395, total numsteps: 9900, reward: -2.72, average reward: -2.54
+2019-02-26 22:35:05,296 :  Train Episode: 396, total numsteps: 9925, reward: -2.09, average reward: -2.54
+2019-02-26 22:35:05,357 :  Train Episode: 397, total numsteps: 9950, reward: -2.98, average reward: -2.55
+2019-02-26 22:35:05,416 :  Train Episode: 398, total numsteps: 9975, reward: -2.65, average reward: -2.55
+2019-02-26 22:35:05,470 :  Train Episode: 399, total numsteps: 10000, reward: -2.79, average reward: -2.56
+2019-02-26 22:35:07,769 :  Train Episode: 400, total numsteps: 10025, reward: -3.1, average reward: -2.57
+2019-02-26 22:35:08,222 : Test Episode: 400, reward: -1.9685924697801436
+2019-02-26 22:35:08,279 :  Train Episode: 401, total numsteps: 10050, reward: -2.8, average reward: -2.57
+2019-02-26 22:35:08,339 :  Train Episode: 402, total numsteps: 10075, reward: -2.66, average reward: -2.57
+2019-02-26 22:35:08,406 :  Train Episode: 403, total numsteps: 10100, reward: -2.56, average reward: -2.57
+2019-02-26 22:35:10,602 :  Train Episode: 404, total numsteps: 10125, reward: -3.23, average reward: -2.58
+2019-02-26 22:35:10,657 :  Train Episode: 405, total numsteps: 10150, reward: -2.84, average reward: -2.58
+2019-02-26 22:35:10,713 :  Train Episode: 406, total numsteps: 10175, reward: -2.29, average reward: -2.57
+2019-02-26 22:35:10,773 :  Train Episode: 407, total numsteps: 10200, reward: -3.3, average reward: -2.58
+2019-02-26 22:35:13,326 :  Train Episode: 408, total numsteps: 10225, reward: -2.01, average reward: -2.57
+2019-02-26 22:35:13,382 :  Train Episode: 409, total numsteps: 10250, reward: -1.96, average reward: -2.56
+2019-02-26 22:35:13,457 :  Train Episode: 410, total numsteps: 10275, reward: -2.52, average reward: -2.56
+2019-02-26 22:35:13,595 : Test Episode: 410, reward: -1.980821785404143
+2019-02-26 22:35:13,652 :  Train Episode: 411, total numsteps: 10300, reward: -2.46, average reward: -2.56
+2019-02-26 22:35:15,950 :  Train Episode: 412, total numsteps: 10325, reward: -2.98, average reward: -2.56
+2019-02-26 22:35:16,037 :  Train Episode: 413, total numsteps: 10350, reward: -1.99, average reward: -2.55
+2019-02-26 22:35:16,119 :  Train Episode: 414, total numsteps: 10375, reward: -2.89, average reward: -2.55
+2019-02-26 22:35:16,201 :  Train Episode: 415, total numsteps: 10400, reward: -2.46, average reward: -2.55
+2019-02-26 22:35:18,832 :  Train Episode: 416, total numsteps: 10425, reward: -1.95, average reward: -2.55
+2019-02-26 22:35:18,888 :  Train Episode: 417, total numsteps: 10450, reward: -2.38, average reward: -2.54
+2019-02-26 22:35:18,946 :  Train Episode: 418, total numsteps: 10475, reward: -2.8, average reward: -2.54
+2019-02-26 22:35:19,005 :  Train Episode: 419, total numsteps: 10500, reward: -2.85, average reward: -2.55
+2019-02-26 22:35:21,322 :  Train Episode: 420, total numsteps: 10525, reward: -2.88, average reward: -2.55
+2019-02-26 22:35:21,673 : Test Episode: 420, reward: -1.647400370494315
+2019-02-26 22:35:21,731 :  Train Episode: 421, total numsteps: 10550, reward: -3.14, average reward: -2.56
+2019-02-26 22:35:21,793 :  Train Episode: 422, total numsteps: 10575, reward: -2.96, average reward: -2.57
+2019-02-26 22:35:21,850 :  Train Episode: 423, total numsteps: 10600, reward: -2.78, average reward: -2.57
+2019-02-26 22:35:24,069 :  Train Episode: 424, total numsteps: 10625, reward: -2.44, average reward: -2.57
+2019-02-26 22:35:24,127 :  Train Episode: 425, total numsteps: 10650, reward: -2.83, average reward: -2.57
+2019-02-26 22:35:24,195 :  Train Episode: 426, total numsteps: 10675, reward: -2.34, average reward: -2.57
+2019-02-26 22:35:24,255 :  Train Episode: 427, total numsteps: 10700, reward: -2.29, average reward: -2.56
+2019-02-26 22:35:26,187 :  Train Episode: 428, total numsteps: 10725, reward: -3.12, average reward: -2.56
+2019-02-26 22:35:26,249 :  Train Episode: 429, total numsteps: 10750, reward: -3.09, average reward: -2.57
+2019-02-26 22:35:26,304 :  Train Episode: 430, total numsteps: 10775, reward: -2.81, average reward: -2.58
+2019-02-26 22:35:26,584 : Test Episode: 430, reward: -1.9006975169773024
+2019-02-26 22:35:26,643 :  Train Episode: 431, total numsteps: 10800, reward: -2.76, average reward: -2.58
+2019-02-26 22:35:28,515 :  Train Episode: 432, total numsteps: 10825, reward: -2.93, average reward: -2.58
+2019-02-26 22:35:28,577 :  Train Episode: 433, total numsteps: 10850, reward: -2.64, average reward: -2.58
+2019-02-26 22:35:28,637 :  Train Episode: 434, total numsteps: 10875, reward: -2.87, average reward: -2.59
+2019-02-26 22:35:28,694 :  Train Episode: 435, total numsteps: 10900, reward: -2.57, average reward: -2.59
+2019-02-26 22:35:30,650 :  Train Episode: 436, total numsteps: 10925, reward: -2.85, average reward: -2.6
+2019-02-26 22:35:30,707 :  Train Episode: 437, total numsteps: 10950, reward: -2.88, average reward: -2.6
+2019-02-26 22:35:30,766 :  Train Episode: 438, total numsteps: 10975, reward: -2.47, average reward: -2.6
+2019-02-26 22:35:30,824 :  Train Episode: 439, total numsteps: 11000, reward: -2.31, average reward: -2.59
+2019-02-26 22:35:32,385 :  Train Episode: 440, total numsteps: 11025, reward: -2.57, average reward: -2.59
+2019-02-26 22:35:32,644 : Test Episode: 440, reward: -1.4965981824586043
+2019-02-26 22:35:32,700 :  Train Episode: 441, total numsteps: 11050, reward: -2.73, average reward: -2.6
+2019-02-26 22:35:32,756 :  Train Episode: 442, total numsteps: 11075, reward: -2.63, average reward: -2.6
+2019-02-26 22:35:32,820 :  Train Episode: 443, total numsteps: 11100, reward: -2.6, average reward: -2.6
+2019-02-26 22:35:34,793 :  Train Episode: 444, total numsteps: 11125, reward: -2.52, average reward: -2.61
+2019-02-26 22:35:34,853 :  Train Episode: 445, total numsteps: 11150, reward: -2.83, average reward: -2.62
+2019-02-26 22:35:34,923 :  Train Episode: 446, total numsteps: 11175, reward: -2.46, average reward: -2.62
+2019-02-26 22:35:34,992 :  Train Episode: 447, total numsteps: 11200, reward: -3.04, average reward: -2.62
+2019-02-26 22:35:36,745 :  Train Episode: 448, total numsteps: 11225, reward: -2.98, average reward: -2.62
+2019-02-26 22:35:36,806 :  Train Episode: 449, total numsteps: 11250, reward: -2.93, average reward: -2.62
+2019-02-26 22:35:36,867 :  Train Episode: 450, total numsteps: 11275, reward: -2.78, average reward: -2.63
+2019-02-26 22:35:37,072 : Test Episode: 450, reward: -1.5875769441124057
+2019-02-26 22:35:37,130 :  Train Episode: 451, total numsteps: 11300, reward: -2.23, average reward: -2.62
+2019-02-26 22:35:39,295 :  Train Episode: 452, total numsteps: 11325, reward: -2.69, average reward: -2.62
+2019-02-26 22:35:39,354 :  Train Episode: 453, total numsteps: 11350, reward: -2.26, average reward: -2.62
+2019-02-26 22:35:39,407 :  Train Episode: 454, total numsteps: 11375, reward: -1.96, average reward: -2.61
+2019-02-26 22:35:39,454 :  Train Episode: 455, total numsteps: 11400, reward: -2.86, average reward: -2.61
+2019-02-26 22:35:41,632 :  Train Episode: 456, total numsteps: 11425, reward: -2.2, average reward: -2.61
+2019-02-26 22:35:41,687 :  Train Episode: 457, total numsteps: 11450, reward: -3.4, average reward: -2.62
+2019-02-26 22:35:41,743 :  Train Episode: 458, total numsteps: 11475, reward: -2.6, average reward: -2.61
+2019-02-26 22:35:41,811 :  Train Episode: 459, total numsteps: 11500, reward: -2.95, average reward: -2.61
+2019-02-26 22:35:43,737 :  Train Episode: 460, total numsteps: 11525, reward: -2.12, average reward: -2.61
+2019-02-26 22:35:43,996 : Test Episode: 460, reward: -1.5235082347525712
+2019-02-26 22:35:44,058 :  Train Episode: 461, total numsteps: 11550, reward: -2.93, average reward: -2.62
+2019-02-26 22:35:44,114 :  Train Episode: 462, total numsteps: 11575, reward: -2.22, average reward: -2.61
+2019-02-26 22:35:44,167 :  Train Episode: 463, total numsteps: 11600, reward: -2.92, average reward: -2.62
+2019-02-26 22:35:46,584 :  Train Episode: 464, total numsteps: 11625, reward: -2.41, average reward: -2.62
+2019-02-26 22:35:46,646 :  Train Episode: 465, total numsteps: 11650, reward: -2.5, average reward: -2.62
+2019-02-26 22:35:46,707 :  Train Episode: 466, total numsteps: 11675, reward: -2.65, average reward: -2.62
+2019-02-26 22:35:46,773 :  Train Episode: 467, total numsteps: 11700, reward: -2.71, average reward: -2.62
+2019-02-26 22:35:48,650 :  Train Episode: 468, total numsteps: 11725, reward: -2.18, average reward: -2.62
+2019-02-26 22:35:48,708 :  Train Episode: 469, total numsteps: 11750, reward: -2.21, average reward: -2.62
+2019-02-26 22:35:48,763 :  Train Episode: 470, total numsteps: 11775, reward: -2.96, average reward: -2.61
+2019-02-26 22:35:49,036 : Test Episode: 470, reward: -1.586453594750635
+2019-02-26 22:35:49,093 :  Train Episode: 471, total numsteps: 11800, reward: -2.05, average reward: -2.61
+2019-02-26 22:35:50,995 :  Train Episode: 472, total numsteps: 11825, reward: -2.81, average reward: -2.61
+2019-02-26 22:35:51,067 :  Train Episode: 473, total numsteps: 11850, reward: -1.74, average reward: -2.6
+2019-02-26 22:35:51,139 :  Train Episode: 474, total numsteps: 11875, reward: -2.17, average reward: -2.6
+2019-02-26 22:35:51,209 :  Train Episode: 475, total numsteps: 11900, reward: -2.67, average reward: -2.6
+2019-02-26 22:35:53,012 :  Train Episode: 476, total numsteps: 11925, reward: -2.93, average reward: -2.61
+2019-02-26 22:35:53,075 :  Train Episode: 477, total numsteps: 11950, reward: -2.03, average reward: -2.61
+2019-02-26 22:35:53,138 :  Train Episode: 478, total numsteps: 11975, reward: -2.55, average reward: -2.61
+2019-02-26 22:35:53,195 :  Train Episode: 479, total numsteps: 12000, reward: -2.28, average reward: -2.61
+2019-02-26 22:35:55,080 :  Train Episode: 480, total numsteps: 12025, reward: -2.6, average reward: -2.61
+2019-02-26 22:35:55,302 : Test Episode: 480, reward: -1.5194547510585652
+2019-02-26 22:35:55,366 :  Train Episode: 481, total numsteps: 12050, reward: -2.03, average reward: -2.6
+2019-02-26 22:35:55,434 :  Train Episode: 482, total numsteps: 12075, reward: -2.26, average reward: -2.59
+2019-02-26 22:35:55,492 :  Train Episode: 483, total numsteps: 12100, reward: -2.78, average reward: -2.6
+2019-02-26 22:35:57,285 :  Train Episode: 484, total numsteps: 12125, reward: -1.92, average reward: -2.6
+2019-02-26 22:35:57,342 :  Train Episode: 485, total numsteps: 12150, reward: -3.16, average reward: -2.61
+2019-02-26 22:35:57,404 :  Train Episode: 486, total numsteps: 12175, reward: -2.22, average reward: -2.6
+2019-02-26 22:35:57,464 :  Train Episode: 487, total numsteps: 12200, reward: -2.64, average reward: -2.6
+2019-02-26 22:35:59,346 :  Train Episode: 488, total numsteps: 12225, reward: -2.45, average reward: -2.6
+2019-02-26 22:35:59,406 :  Train Episode: 489, total numsteps: 12250, reward: -3.2, average reward: -2.61
+2019-02-26 22:35:59,474 :  Train Episode: 490, total numsteps: 12275, reward: -3.15, average reward: -2.61
+2019-02-26 22:35:59,708 : Test Episode: 490, reward: -1.5670074777599325
+2019-02-26 22:35:59,765 :  Train Episode: 491, total numsteps: 12300, reward: -2.43, average reward: -2.62
+2019-02-26 22:36:01,647 :  Train Episode: 492, total numsteps: 12325, reward: -2.13, average reward: -2.62
+2019-02-26 22:36:01,705 :  Train Episode: 493, total numsteps: 12350, reward: -2.21, average reward: -2.6
+2019-02-26 22:36:01,763 :  Train Episode: 494, total numsteps: 12375, reward: -2.81, average reward: -2.61
+2019-02-26 22:36:01,824 :  Train Episode: 495, total numsteps: 12400, reward: -2.48, average reward: -2.6
+2019-02-26 22:36:03,833 :  Train Episode: 496, total numsteps: 12425, reward: -2.74, average reward: -2.61
+2019-02-26 22:36:03,917 :  Train Episode: 497, total numsteps: 12450, reward: -2.59, average reward: -2.61
+2019-02-26 22:36:04,001 :  Train Episode: 498, total numsteps: 12475, reward: -3.13, average reward: -2.61
+2019-02-26 22:36:04,060 :  Train Episode: 499, total numsteps: 12500, reward: -2.12, average reward: -2.6
+2019-02-26 22:36:06,669 :  Train Episode: 500, total numsteps: 12525, reward: -2.07, average reward: -2.59
+2019-02-26 22:36:07,117 : Test Episode: 500, reward: -1.8343084888703947
+2019-02-26 22:36:07,286 :  Train Episode: 501, total numsteps: 12550, reward: -2.45, average reward: -2.59
+2019-02-26 22:36:07,405 :  Train Episode: 502, total numsteps: 12575, reward: -1.73, average reward: -2.58
+2019-02-26 22:36:07,535 :  Train Episode: 503, total numsteps: 12600, reward: -2.67, average reward: -2.58
+2019-02-26 22:36:09,853 :  Train Episode: 504, total numsteps: 12625, reward: -2.33, average reward: -2.57
+2019-02-26 22:36:10,114 :  Train Episode: 505, total numsteps: 12650, reward: -2.22, average reward: -2.57
+2019-02-26 22:36:10,257 :  Train Episode: 506, total numsteps: 12675, reward: -2.92, average reward: -2.57
+2019-02-26 22:36:10,369 :  Train Episode: 507, total numsteps: 12700, reward: -2.5, average reward: -2.56
+2019-02-26 22:36:13,047 :  Train Episode: 508, total numsteps: 12725, reward: -1.99, average reward: -2.56
+2019-02-26 22:36:13,368 :  Train Episode: 509, total numsteps: 12750, reward: -2.44, average reward: -2.57
+2019-02-26 22:36:13,499 :  Train Episode: 510, total numsteps: 12775, reward: -1.95, average reward: -2.56
+2019-02-26 22:36:13,722 : Test Episode: 510, reward: -1.8221417026104114
+2019-02-26 22:36:14,001 :  Train Episode: 511, total numsteps: 12800, reward: -1.74, average reward: -2.56
+2019-02-26 22:36:16,641 :  Train Episode: 512, total numsteps: 12825, reward: -2.05, average reward: -2.55
+2019-02-26 22:36:16,913 :  Train Episode: 513, total numsteps: 12850, reward: -2.53, average reward: -2.55
+2019-02-26 22:36:17,140 :  Train Episode: 514, total numsteps: 12875, reward: -2.17, average reward: -2.55
+2019-02-26 22:36:17,332 :  Train Episode: 515, total numsteps: 12900, reward: -2.44, average reward: -2.54
+2019-02-26 22:36:19,693 :  Train Episode: 516, total numsteps: 12925, reward: -2.42, average reward: -2.55
+2019-02-26 22:36:19,931 :  Train Episode: 517, total numsteps: 12950, reward: -2.2, average reward: -2.55
+2019-02-26 22:36:20,140 :  Train Episode: 518, total numsteps: 12975, reward: -2.21, average reward: -2.54
+2019-02-26 22:36:20,272 :  Train Episode: 519, total numsteps: 13000, reward: -2.4, average reward: -2.54
+2019-02-26 22:36:22,580 :  Train Episode: 520, total numsteps: 13025, reward: -2.73, average reward: -2.54
+2019-02-26 22:36:22,691 : Test Episode: 520, reward: -1.7103902765038006
+2019-02-26 22:36:22,817 :  Train Episode: 521, total numsteps: 13050, reward: -2.25, average reward: -2.53
+2019-02-26 22:36:22,941 :  Train Episode: 522, total numsteps: 13075, reward: -2.76, average reward: -2.52
+2019-02-26 22:36:23,100 :  Train Episode: 523, total numsteps: 13100, reward: -2.06, average reward: -2.52
+2019-02-26 22:36:25,147 :  Train Episode: 524, total numsteps: 13125, reward: -2.05, average reward: -2.51
+2019-02-26 22:36:25,340 :  Train Episode: 525, total numsteps: 13150, reward: -2.72, average reward: -2.51
+2019-02-26 22:36:25,462 :  Train Episode: 526, total numsteps: 13175, reward: -2.16, average reward: -2.51
+2019-02-26 22:36:25,590 :  Train Episode: 527, total numsteps: 13200, reward: -2.44, average reward: -2.51
+2019-02-26 22:36:27,574 :  Train Episode: 528, total numsteps: 13225, reward: -1.8, average reward: -2.5
+2019-02-26 22:36:27,704 :  Train Episode: 529, total numsteps: 13250, reward: -2.06, average reward: -2.49
+2019-02-26 22:36:27,868 :  Train Episode: 530, total numsteps: 13275, reward: -2.24, average reward: -2.48
+2019-02-26 22:36:27,976 : Test Episode: 530, reward: -1.9291124934153363
+2019-02-26 22:36:28,094 :  Train Episode: 531, total numsteps: 13300, reward: -2.23, average reward: -2.48
+2019-02-26 22:36:30,287 :  Train Episode: 532, total numsteps: 13325, reward: -2.08, average reward: -2.47
+2019-02-26 22:36:30,423 :  Train Episode: 533, total numsteps: 13350, reward: -2.16, average reward: -2.46
+2019-02-26 22:36:30,617 :  Train Episode: 534, total numsteps: 13375, reward: -2.3, average reward: -2.46
+2019-02-26 22:36:30,739 :  Train Episode: 535, total numsteps: 13400, reward: -2.59, average reward: -2.46
+2019-02-26 22:36:32,736 :  Train Episode: 536, total numsteps: 13425, reward: -1.83, average reward: -2.45
+2019-02-26 22:36:32,978 :  Train Episode: 537, total numsteps: 13450, reward: -2.38, average reward: -2.44
+2019-02-26 22:36:33,132 :  Train Episode: 538, total numsteps: 13475, reward: -1.8, average reward: -2.44
+2019-02-26 22:36:33,327 :  Train Episode: 539, total numsteps: 13500, reward: -2.49, average reward: -2.44
+2019-02-26 22:36:35,239 :  Train Episode: 540, total numsteps: 13525, reward: -2.07, average reward: -2.43
+2019-02-26 22:36:35,353 : Test Episode: 540, reward: -1.9823651805434315
+2019-02-26 22:36:35,499 :  Train Episode: 541, total numsteps: 13550, reward: -2.55, average reward: -2.43
+2019-02-26 22:36:35,747 :  Train Episode: 542, total numsteps: 13575, reward: -2.38, average reward: -2.43
+2019-02-26 22:36:35,922 :  Train Episode: 543, total numsteps: 13600, reward: -2.73, average reward: -2.43
+2019-02-26 22:36:37,988 :  Train Episode: 544, total numsteps: 13625, reward: -2.06, average reward: -2.43
+2019-02-26 22:36:38,166 :  Train Episode: 545, total numsteps: 13650, reward: -2.27, average reward: -2.42
+2019-02-26 22:36:38,351 :  Train Episode: 546, total numsteps: 13675, reward: -1.97, average reward: -2.42
+2019-02-26 22:36:38,504 :  Train Episode: 547, total numsteps: 13700, reward: -2.07, average reward: -2.41
+2019-02-26 22:36:40,300 :  Train Episode: 548, total numsteps: 13725, reward: -2.09, average reward: -2.4
+2019-02-26 22:36:40,481 :  Train Episode: 549, total numsteps: 13750, reward: -2.44, average reward: -2.39
+2019-02-26 22:36:40,683 :  Train Episode: 550, total numsteps: 13775, reward: -2.36, average reward: -2.39
+2019-02-26 22:36:40,816 : Test Episode: 550, reward: -2.0034864978290083
+2019-02-26 22:36:40,970 :  Train Episode: 551, total numsteps: 13800, reward: -2.35, average reward: -2.39
+2019-02-26 22:36:42,757 :  Train Episode: 552, total numsteps: 13825, reward: -2.33, average reward: -2.39
+2019-02-26 22:36:42,902 :  Train Episode: 553, total numsteps: 13850, reward: -1.93, average reward: -2.38
+2019-02-26 22:36:43,088 :  Train Episode: 554, total numsteps: 13875, reward: -2.38, average reward: -2.39
+2019-02-26 22:36:43,227 :  Train Episode: 555, total numsteps: 13900, reward: -2.21, average reward: -2.38
+2019-02-26 22:36:45,233 :  Train Episode: 556, total numsteps: 13925, reward: -1.81, average reward: -2.38
+2019-02-26 22:36:45,407 :  Train Episode: 557, total numsteps: 13950, reward: -1.89, average reward: -2.36
+2019-02-26 22:36:45,599 :  Train Episode: 558, total numsteps: 13975, reward: -2.41, average reward: -2.36
+2019-02-26 22:36:45,916 :  Train Episode: 559, total numsteps: 14000, reward: -2.83, average reward: -2.36
+2019-02-26 22:36:48,143 :  Train Episode: 560, total numsteps: 14025, reward: -2.48, average reward: -2.36
+2019-02-26 22:36:48,294 : Test Episode: 560, reward: -1.9709144747599918
+2019-02-26 22:36:48,518 :  Train Episode: 561, total numsteps: 14050, reward: -2.04, average reward: -2.35
+2019-02-26 22:36:48,775 :  Train Episode: 562, total numsteps: 14075, reward: -2.26, average reward: -2.35
+2019-02-26 22:36:49,007 :  Train Episode: 563, total numsteps: 14100, reward: -2.07, average reward: -2.34
+2019-02-26 22:36:50,649 :  Train Episode: 564, total numsteps: 14125, reward: -1.8, average reward: -2.34
+2019-02-26 22:36:50,876 :  Train Episode: 565, total numsteps: 14150, reward: -3.47, average reward: -2.35
+2019-02-26 22:36:51,101 :  Train Episode: 566, total numsteps: 14175, reward: -3.07, average reward: -2.35
+2019-02-26 22:36:51,235 :  Train Episode: 567, total numsteps: 14200, reward: -2.8, average reward: -2.35
+2019-02-26 22:36:53,128 :  Train Episode: 568, total numsteps: 14225, reward: -2.39, average reward: -2.36
+2019-02-26 22:36:53,246 :  Train Episode: 569, total numsteps: 14250, reward: -2.64, average reward: -2.36
+2019-02-26 22:36:53,366 :  Train Episode: 570, total numsteps: 14275, reward: -2.17, average reward: -2.35
+2019-02-26 22:36:53,540 : Test Episode: 570, reward: -1.734348928351111
+2019-02-26 22:36:53,727 :  Train Episode: 571, total numsteps: 14300, reward: -1.82, average reward: -2.35
+2019-02-26 22:36:55,582 :  Train Episode: 572, total numsteps: 14325, reward: -2.73, average reward: -2.35
+2019-02-26 22:36:55,784 :  Train Episode: 573, total numsteps: 14350, reward: -2.19, average reward: -2.35
+2019-02-26 22:36:55,958 :  Train Episode: 574, total numsteps: 14375, reward: -1.86, average reward: -2.35
+2019-02-26 22:36:56,181 :  Train Episode: 575, total numsteps: 14400, reward: -2.14, average reward: -2.34
+2019-02-26 22:36:58,308 :  Train Episode: 576, total numsteps: 14425, reward: -2.68, average reward: -2.34
+2019-02-26 22:36:58,469 :  Train Episode: 577, total numsteps: 14450, reward: -2.22, average reward: -2.34
+2019-02-26 22:36:58,673 :  Train Episode: 578, total numsteps: 14475, reward: -2.25, average reward: -2.34
+2019-02-26 22:36:58,833 :  Train Episode: 579, total numsteps: 14500, reward: -2.26, average reward: -2.34
+2019-02-26 22:37:00,991 :  Train Episode: 580, total numsteps: 14525, reward: -2.24, average reward: -2.34
+2019-02-26 22:37:01,173 : Test Episode: 580, reward: -1.6579209645170176
+2019-02-26 22:37:01,359 :  Train Episode: 581, total numsteps: 14550, reward: -2.24, average reward: -2.34
+2019-02-26 22:37:01,563 :  Train Episode: 582, total numsteps: 14575, reward: -2.34, average reward: -2.34
+2019-02-26 22:37:01,721 :  Train Episode: 583, total numsteps: 14600, reward: -2.04, average reward: -2.33
+2019-02-26 22:37:03,780 :  Train Episode: 584, total numsteps: 14625, reward: -2.33, average reward: -2.34
+2019-02-26 22:37:03,987 :  Train Episode: 585, total numsteps: 14650, reward: -2.1, average reward: -2.33
+2019-02-26 22:37:04,223 :  Train Episode: 586, total numsteps: 14675, reward: -2.17, average reward: -2.33
+2019-02-26 22:37:04,463 :  Train Episode: 587, total numsteps: 14700, reward: -1.87, average reward: -2.32
+2019-02-26 22:37:06,541 :  Train Episode: 588, total numsteps: 14725, reward: -2.44, average reward: -2.32
+2019-02-26 22:37:06,783 :  Train Episode: 589, total numsteps: 14750, reward: -2.01, average reward: -2.31
+2019-02-26 22:37:07,005 :  Train Episode: 590, total numsteps: 14775, reward: -2.33, average reward: -2.3
+2019-02-26 22:37:07,119 : Test Episode: 590, reward: -1.6450218513181363
+2019-02-26 22:37:07,263 :  Train Episode: 591, total numsteps: 14800, reward: -2.86, average reward: -2.3
+2019-02-26 22:37:09,453 :  Train Episode: 592, total numsteps: 14825, reward: -1.79, average reward: -2.3
+2019-02-26 22:37:09,613 :  Train Episode: 593, total numsteps: 14850, reward: -2.01, average reward: -2.3
+2019-02-26 22:37:09,728 :  Train Episode: 594, total numsteps: 14875, reward: -2.22, average reward: -2.29
+2019-02-26 22:37:09,842 :  Train Episode: 595, total numsteps: 14900, reward: -2.23, average reward: -2.29
+2019-02-26 22:37:12,010 :  Train Episode: 596, total numsteps: 14925, reward: -2.03, average reward: -2.28
+2019-02-26 22:37:12,155 :  Train Episode: 597, total numsteps: 14950, reward: -1.77, average reward: -2.27
+2019-02-26 22:37:12,300 :  Train Episode: 598, total numsteps: 14975, reward: -2.22, average reward: -2.26
+2019-02-26 22:37:12,438 :  Train Episode: 599, total numsteps: 15000, reward: -1.9, average reward: -2.26
+2019-02-26 22:37:14,510 :  Train Episode: 600, total numsteps: 15025, reward: -1.99, average reward: -2.26
+2019-02-26 22:37:14,759 : Test Episode: 600, reward: -1.8049358132011801
+2019-02-26 22:37:14,883 :  Train Episode: 601, total numsteps: 15050, reward: -2.3, average reward: -2.26
+2019-02-26 22:37:15,003 :  Train Episode: 602, total numsteps: 15075, reward: -2.04, average reward: -2.26
+2019-02-26 22:37:15,322 :  Train Episode: 603, total numsteps: 15100, reward: -2.16, average reward: -2.26
+2019-02-26 22:37:17,661 :  Train Episode: 604, total numsteps: 15125, reward: -2.19, average reward: -2.26
+2019-02-26 22:37:17,810 :  Train Episode: 605, total numsteps: 15150, reward: -2.09, average reward: -2.25
+2019-02-26 22:37:17,938 :  Train Episode: 606, total numsteps: 15175, reward: -1.95, average reward: -2.25
+2019-02-26 22:37:18,152 :  Train Episode: 607, total numsteps: 15200, reward: -2.19, average reward: -2.24
+2019-02-26 22:37:20,168 :  Train Episode: 608, total numsteps: 15225, reward: -2.07, average reward: -2.24
+2019-02-26 22:37:20,284 :  Train Episode: 609, total numsteps: 15250, reward: -2.4, average reward: -2.24
+2019-02-26 22:37:20,402 :  Train Episode: 610, total numsteps: 15275, reward: -1.7, average reward: -2.24
+2019-02-26 22:37:20,622 : Test Episode: 610, reward: -1.3545659525960956
+2019-02-26 22:37:20,799 :  Train Episode: 611, total numsteps: 15300, reward: -2.71, average reward: -2.25
+2019-02-26 22:37:22,851 :  Train Episode: 612, total numsteps: 15325, reward: -2.29, average reward: -2.25
+2019-02-26 22:37:22,972 :  Train Episode: 613, total numsteps: 15350, reward: -2.52, average reward: -2.25
+2019-02-26 22:37:23,108 :  Train Episode: 614, total numsteps: 15375, reward: -2.35, average reward: -2.25
+2019-02-26 22:37:23,365 :  Train Episode: 615, total numsteps: 15400, reward: -2.16, average reward: -2.25
+2019-02-26 22:37:25,333 :  Train Episode: 616, total numsteps: 15425, reward: -2.61, average reward: -2.25
+2019-02-26 22:37:25,446 :  Train Episode: 617, total numsteps: 15450, reward: -1.67, average reward: -2.25
+2019-02-26 22:37:25,559 :  Train Episode: 618, total numsteps: 15475, reward: -1.71, average reward: -2.24
+2019-02-26 22:37:25,770 :  Train Episode: 619, total numsteps: 15500, reward: -1.7, average reward: -2.24
+2019-02-26 22:37:27,758 :  Train Episode: 620, total numsteps: 15525, reward: -2.57, average reward: -2.23
+2019-02-26 22:37:27,868 : Test Episode: 620, reward: -1.420451977885719
+2019-02-26 22:37:27,988 :  Train Episode: 621, total numsteps: 15550, reward: -2.73, average reward: -2.24
+2019-02-26 22:37:28,105 :  Train Episode: 622, total numsteps: 15575, reward: -2.14, average reward: -2.23
+2019-02-26 22:37:28,220 :  Train Episode: 623, total numsteps: 15600, reward: -3.06, average reward: -2.24
+2019-02-26 22:37:30,249 :  Train Episode: 624, total numsteps: 15625, reward: -2.29, average reward: -2.24
+2019-02-26 22:37:30,365 :  Train Episode: 625, total numsteps: 15650, reward: -1.87, average reward: -2.24
+2019-02-26 22:37:30,480 :  Train Episode: 626, total numsteps: 15675, reward: -1.9, average reward: -2.23
+2019-02-26 22:37:30,595 :  Train Episode: 627, total numsteps: 15700, reward: -2.4, average reward: -2.23
+2019-02-26 22:37:32,609 :  Train Episode: 628, total numsteps: 15725, reward: -2.1, average reward: -2.24
+2019-02-26 22:37:32,743 :  Train Episode: 629, total numsteps: 15750, reward: -1.78, average reward: -2.23
+2019-02-26 22:37:32,887 :  Train Episode: 630, total numsteps: 15775, reward: -2.05, average reward: -2.23
+2019-02-26 22:37:33,014 : Test Episode: 630, reward: -1.7601520495889864
+2019-02-26 22:37:33,191 :  Train Episode: 631, total numsteps: 15800, reward: -2.24, average reward: -2.23
+2019-02-26 22:37:35,155 :  Train Episode: 632, total numsteps: 15825, reward: -2.09, average reward: -2.23
+2019-02-26 22:37:35,270 :  Train Episode: 633, total numsteps: 15850, reward: -1.81, average reward: -2.23
+2019-02-26 22:37:35,384 :  Train Episode: 634, total numsteps: 15875, reward: -2.89, average reward: -2.23
+2019-02-26 22:37:35,496 :  Train Episode: 635, total numsteps: 15900, reward: -2.3, average reward: -2.23
+2019-02-26 22:37:37,575 :  Train Episode: 636, total numsteps: 15925, reward: -2.23, average reward: -2.24
+2019-02-26 22:37:37,687 :  Train Episode: 637, total numsteps: 15950, reward: -2.23, average reward: -2.23
+2019-02-26 22:37:37,800 :  Train Episode: 638, total numsteps: 15975, reward: -2.07, average reward: -2.24
+2019-02-26 22:37:37,914 :  Train Episode: 639, total numsteps: 16000, reward: -1.83, average reward: -2.23
+2019-02-26 22:37:40,311 :  Train Episode: 640, total numsteps: 16025, reward: -2.24, average reward: -2.23
+2019-02-26 22:37:40,439 : Test Episode: 640, reward: -1.826062079814868
+2019-02-26 22:37:40,574 :  Train Episode: 641, total numsteps: 16050, reward: -1.96, average reward: -2.23
+2019-02-26 22:37:40,707 :  Train Episode: 642, total numsteps: 16075, reward: -1.87, average reward: -2.22
+2019-02-26 22:37:40,976 :  Train Episode: 643, total numsteps: 16100, reward: -2.1, average reward: -2.21
+2019-02-26 22:37:42,855 :  Train Episode: 644, total numsteps: 16125, reward: -2.4, average reward: -2.22
+2019-02-26 22:37:43,005 :  Train Episode: 645, total numsteps: 16150, reward: -2.53, average reward: -2.22
+2019-02-26 22:37:43,155 :  Train Episode: 646, total numsteps: 16175, reward: -2.07, average reward: -2.22
+2019-02-26 22:37:43,305 :  Train Episode: 647, total numsteps: 16200, reward: -2.25, average reward: -2.22
+2019-02-26 22:37:45,290 :  Train Episode: 648, total numsteps: 16225, reward: -2.05, average reward: -2.22
+2019-02-26 22:37:45,472 :  Train Episode: 649, total numsteps: 16250, reward: -2.26, average reward: -2.22
+2019-02-26 22:37:45,593 :  Train Episode: 650, total numsteps: 16275, reward: -2.05, average reward: -2.22
+2019-02-26 22:37:45,707 : Test Episode: 650, reward: -2.029170308658454
+2019-02-26 22:37:45,831 :  Train Episode: 651, total numsteps: 16300, reward: -2.19, average reward: -2.22
+2019-02-26 22:37:48,104 :  Train Episode: 652, total numsteps: 16325, reward: -2.04, average reward: -2.21
+2019-02-26 22:37:48,302 :  Train Episode: 653, total numsteps: 16350, reward: -1.75, average reward: -2.21
+2019-02-26 22:37:48,456 :  Train Episode: 654, total numsteps: 16375, reward: -2.54, average reward: -2.21
+2019-02-26 22:37:48,576 :  Train Episode: 655, total numsteps: 16400, reward: -2.23, average reward: -2.21
+2019-02-26 22:37:50,857 :  Train Episode: 656, total numsteps: 16425, reward: -2.07, average reward: -2.22
+2019-02-26 22:37:51,051 :  Train Episode: 657, total numsteps: 16450, reward: -2.22, average reward: -2.22
+2019-02-26 22:37:51,187 :  Train Episode: 658, total numsteps: 16475, reward: -1.92, average reward: -2.21
+2019-02-26 22:37:51,318 :  Train Episode: 659, total numsteps: 16500, reward: -2.66, average reward: -2.21
+2019-02-26 22:37:53,320 :  Train Episode: 660, total numsteps: 16525, reward: -2.06, average reward: -2.21
+2019-02-26 22:37:53,465 : Test Episode: 660, reward: -1.9931988929108924
+2019-02-26 22:37:53,647 :  Train Episode: 661, total numsteps: 16550, reward: -2.52, average reward: -2.21
+2019-02-26 22:37:53,833 :  Train Episode: 662, total numsteps: 16575, reward: -2.3, average reward: -2.21
+2019-02-26 22:37:54,021 :  Train Episode: 663, total numsteps: 16600, reward: -2.43, average reward: -2.22
+2019-02-26 22:37:56,424 :  Train Episode: 664, total numsteps: 16625, reward: -1.88, average reward: -2.22
+2019-02-26 22:37:56,628 :  Train Episode: 665, total numsteps: 16650, reward: -2.49, average reward: -2.21
+2019-02-26 22:37:56,756 :  Train Episode: 666, total numsteps: 16675, reward: -2.45, average reward: -2.2
+2019-02-26 22:37:57,035 :  Train Episode: 667, total numsteps: 16700, reward: -2.28, average reward: -2.2
+2019-02-26 22:37:59,457 :  Train Episode: 668, total numsteps: 16725, reward: -2.72, average reward: -2.2
+2019-02-26 22:37:59,576 :  Train Episode: 669, total numsteps: 16750, reward: -2.44, average reward: -2.2
+2019-02-26 22:37:59,688 :  Train Episode: 670, total numsteps: 16775, reward: -2.14, average reward: -2.2
+2019-02-26 22:37:59,794 : Test Episode: 670, reward: -1.6233173546536053
+2019-02-26 22:38:00,039 :  Train Episode: 671, total numsteps: 16800, reward: -1.94, average reward: -2.2
+2019-02-26 22:38:02,056 :  Train Episode: 672, total numsteps: 16825, reward: -2.11, average reward: -2.19
+2019-02-26 22:38:02,320 :  Train Episode: 673, total numsteps: 16850, reward: -2.29, average reward: -2.19
+2019-02-26 22:38:02,431 :  Train Episode: 674, total numsteps: 16875, reward: -1.81, average reward: -2.19
+2019-02-26 22:38:02,690 :  Train Episode: 675, total numsteps: 16900, reward: -2.38, average reward: -2.2
+2019-02-26 22:38:04,795 :  Train Episode: 676, total numsteps: 16925, reward: -2.17, average reward: -2.19
+2019-02-26 22:38:04,960 :  Train Episode: 677, total numsteps: 16950, reward: -2.01, average reward: -2.19
+2019-02-26 22:38:05,094 :  Train Episode: 678, total numsteps: 16975, reward: -1.98, average reward: -2.19
+2019-02-26 22:38:05,237 :  Train Episode: 679, total numsteps: 17000, reward: -2.19, average reward: -2.18
+2019-02-26 22:38:07,206 :  Train Episode: 680, total numsteps: 17025, reward: -1.9, average reward: -2.18
+2019-02-26 22:38:07,369 : Test Episode: 680, reward: -1.9101885110684882
+2019-02-26 22:38:07,529 :  Train Episode: 681, total numsteps: 17050, reward: -2.89, average reward: -2.19
+2019-02-26 22:38:07,688 :  Train Episode: 682, total numsteps: 17075, reward: -2.17, average reward: -2.19
+2019-02-26 22:38:07,885 :  Train Episode: 683, total numsteps: 17100, reward: -2.66, average reward: -2.19
+2019-02-26 22:38:09,837 :  Train Episode: 684, total numsteps: 17125, reward: -2.33, average reward: -2.19
+2019-02-26 22:38:09,964 :  Train Episode: 685, total numsteps: 17150, reward: -1.84, average reward: -2.19
+2019-02-26 22:38:10,095 :  Train Episode: 686, total numsteps: 17175, reward: -1.8, average reward: -2.19
+2019-02-26 22:38:10,286 :  Train Episode: 687, total numsteps: 17200, reward: -1.78, average reward: -2.19
+2019-02-26 22:38:12,334 :  Train Episode: 688, total numsteps: 17225, reward: -2.4, average reward: -2.19
+2019-02-26 22:38:12,461 :  Train Episode: 689, total numsteps: 17250, reward: -2.09, average reward: -2.19
+2019-02-26 22:38:12,585 :  Train Episode: 690, total numsteps: 17275, reward: -2.06, average reward: -2.18
+2019-02-26 22:38:12,768 : Test Episode: 690, reward: -2.0847381037585517
+2019-02-26 22:38:13,085 :  Train Episode: 691, total numsteps: 17300, reward: -1.97, average reward: -2.17
+2019-02-26 22:38:14,933 :  Train Episode: 692, total numsteps: 17325, reward: -2.29, average reward: -2.18
+2019-02-26 22:38:15,083 :  Train Episode: 693, total numsteps: 17350, reward: -2.27, average reward: -2.18
+2019-02-26 22:38:15,385 :  Train Episode: 694, total numsteps: 17375, reward: -2.21, average reward: -2.18
+2019-02-26 22:38:15,719 :  Train Episode: 695, total numsteps: 17400, reward: -1.88, average reward: -2.18
+2019-02-26 22:38:18,526 :  Train Episode: 696, total numsteps: 17425, reward: -2.03, average reward: -2.18
+2019-02-26 22:38:18,718 :  Train Episode: 697, total numsteps: 17450, reward: -1.98, average reward: -2.18
+2019-02-26 22:38:18,885 :  Train Episode: 698, total numsteps: 17475, reward: -2.31, average reward: -2.18
+2019-02-26 22:38:19,068 :  Train Episode: 699, total numsteps: 17500, reward: -2.28, average reward: -2.18
+2019-02-26 22:38:20,620 :  Train Episode: 700, total numsteps: 17525, reward: -2.48, average reward: -2.19
+2019-02-26 22:38:21,019 : Test Episode: 700, reward: -2.158638403645124
+2019-02-26 22:38:21,223 :  Train Episode: 701, total numsteps: 17550, reward: -2.05, average reward: -2.19
+2019-02-26 22:38:21,338 :  Train Episode: 702, total numsteps: 17575, reward: -2.31, average reward: -2.19
+2019-02-26 22:38:21,469 :  Train Episode: 703, total numsteps: 17600, reward: -2.35, average reward: -2.19
+2019-02-26 22:38:23,225 :  Train Episode: 704, total numsteps: 17625, reward: -2.23, average reward: -2.19
+2019-02-26 22:38:23,339 :  Train Episode: 705, total numsteps: 17650, reward: -1.66, average reward: -2.19
+2019-02-26 22:38:23,630 :  Train Episode: 706, total numsteps: 17675, reward: -2.04, average reward: -2.19
+2019-02-26 22:38:23,780 :  Train Episode: 707, total numsteps: 17700, reward: -2.15, average reward: -2.19
+2019-02-26 22:38:25,681 :  Train Episode: 708, total numsteps: 17725, reward: -2.34, average reward: -2.19
+2019-02-26 22:38:25,802 :  Train Episode: 709, total numsteps: 17750, reward: -1.87, average reward: -2.19
+2019-02-26 22:38:26,071 :  Train Episode: 710, total numsteps: 17775, reward: -1.93, average reward: -2.19
+2019-02-26 22:38:26,199 : Test Episode: 710, reward: -1.7247252529965296
+2019-02-26 22:38:26,394 :  Train Episode: 711, total numsteps: 17800, reward: -2.26, average reward: -2.18
+2019-02-26 22:38:28,221 :  Train Episode: 712, total numsteps: 17825, reward: -2.31, average reward: -2.18
+2019-02-26 22:38:28,336 :  Train Episode: 713, total numsteps: 17850, reward: -1.6, average reward: -2.17
+2019-02-26 22:38:28,448 :  Train Episode: 714, total numsteps: 17875, reward: -2.27, average reward: -2.17
+2019-02-26 22:38:28,558 :  Train Episode: 715, total numsteps: 17900, reward: -1.95, average reward: -2.17
+2019-02-26 22:38:30,723 :  Train Episode: 716, total numsteps: 17925, reward: -2.13, average reward: -2.17
+2019-02-26 22:38:30,852 :  Train Episode: 717, total numsteps: 17950, reward: -2.12, average reward: -2.17
+2019-02-26 22:38:30,979 :  Train Episode: 718, total numsteps: 17975, reward: -2.21, average reward: -2.18
+2019-02-26 22:38:31,207 :  Train Episode: 719, total numsteps: 18000, reward: -1.83, average reward: -2.18
+2019-02-26 22:38:33,253 :  Train Episode: 720, total numsteps: 18025, reward: -1.66, average reward: -2.17
+2019-02-26 22:38:33,368 : Test Episode: 720, reward: -1.4848505388696527
+2019-02-26 22:38:33,491 :  Train Episode: 721, total numsteps: 18050, reward: -1.89, average reward: -2.16
+2019-02-26 22:38:33,614 :  Train Episode: 722, total numsteps: 18075, reward: -2.37, average reward: -2.16
+2019-02-26 22:38:33,819 :  Train Episode: 723, total numsteps: 18100, reward: -2.5, average reward: -2.16
+2019-02-26 22:38:35,699 :  Train Episode: 724, total numsteps: 18125, reward: -2.66, average reward: -2.16
+2019-02-26 22:38:35,823 :  Train Episode: 725, total numsteps: 18150, reward: -2.36, average reward: -2.17
+2019-02-26 22:38:35,945 :  Train Episode: 726, total numsteps: 18175, reward: -2.07, average reward: -2.17
+2019-02-26 22:38:36,066 :  Train Episode: 727, total numsteps: 18200, reward: -2.11, average reward: -2.16
+2019-02-26 22:38:38,108 :  Train Episode: 728, total numsteps: 18225, reward: -2.0, average reward: -2.16
+2019-02-26 22:38:38,219 :  Train Episode: 729, total numsteps: 18250, reward: -2.63, average reward: -2.17
+2019-02-26 22:38:38,329 :  Train Episode: 730, total numsteps: 18275, reward: -2.09, average reward: -2.17
+2019-02-26 22:38:38,439 : Test Episode: 730, reward: -1.8470265317247214
+2019-02-26 22:38:38,725 :  Train Episode: 731, total numsteps: 18300, reward: -2.06, average reward: -2.17
+2019-02-26 22:38:40,997 :  Train Episode: 732, total numsteps: 18325, reward: -2.18, average reward: -2.17
+2019-02-26 22:38:41,190 :  Train Episode: 733, total numsteps: 18350, reward: -2.3, average reward: -2.18
+2019-02-26 22:38:41,351 :  Train Episode: 734, total numsteps: 18375, reward: -2.2, average reward: -2.17
+2019-02-26 22:38:41,513 :  Train Episode: 735, total numsteps: 18400, reward: -1.95, average reward: -2.17
+2019-02-26 22:38:43,397 :  Train Episode: 736, total numsteps: 18425, reward: -2.7, average reward: -2.17
+2019-02-26 22:38:43,576 :  Train Episode: 737, total numsteps: 18450, reward: -2.33, average reward: -2.17
+2019-02-26 22:38:43,693 :  Train Episode: 738, total numsteps: 18475, reward: -1.6, average reward: -2.17
+2019-02-26 22:38:43,806 :  Train Episode: 739, total numsteps: 18500, reward: -2.08, average reward: -2.17
+2019-02-26 22:38:45,789 :  Train Episode: 740, total numsteps: 18525, reward: -2.07, average reward: -2.17
+2019-02-26 22:38:46,116 : Test Episode: 740, reward: -1.479687952680318
+2019-02-26 22:38:46,354 :  Train Episode: 741, total numsteps: 18550, reward: -1.75, average reward: -2.17
+2019-02-26 22:38:46,848 :  Train Episode: 742, total numsteps: 18575, reward: -2.45, average reward: -2.17
+2019-02-26 22:38:47,118 :  Train Episode: 743, total numsteps: 18600, reward: -1.79, average reward: -2.17
+2019-02-26 22:38:49,423 :  Train Episode: 744, total numsteps: 18625, reward: -2.39, average reward: -2.17
+2019-02-26 22:38:49,553 :  Train Episode: 745, total numsteps: 18650, reward: -2.4, average reward: -2.17
+2019-02-26 22:38:49,700 :  Train Episode: 746, total numsteps: 18675, reward: -2.13, average reward: -2.17
+2019-02-26 22:38:49,931 :  Train Episode: 747, total numsteps: 18700, reward: -2.1, average reward: -2.17
+2019-02-26 22:38:51,841 :  Train Episode: 748, total numsteps: 18725, reward: -2.73, average reward: -2.17
+2019-02-26 22:38:51,970 :  Train Episode: 749, total numsteps: 18750, reward: -1.94, average reward: -2.17
+2019-02-26 22:38:52,089 :  Train Episode: 750, total numsteps: 18775, reward: -2.15, average reward: -2.17
+2019-02-26 22:38:52,274 : Test Episode: 750, reward: -1.4199639435921112
+2019-02-26 22:38:52,593 :  Train Episode: 751, total numsteps: 18800, reward: -2.84, average reward: -2.18
+2019-02-26 22:38:54,567 :  Train Episode: 752, total numsteps: 18825, reward: -2.34, average reward: -2.18
+2019-02-26 22:38:54,698 :  Train Episode: 753, total numsteps: 18850, reward: -2.47, average reward: -2.19
+2019-02-26 22:38:54,817 :  Train Episode: 754, total numsteps: 18875, reward: -2.89, average reward: -2.19
+2019-02-26 22:38:54,933 :  Train Episode: 755, total numsteps: 18900, reward: -2.2, average reward: -2.19
+2019-02-26 22:38:57,045 :  Train Episode: 756, total numsteps: 18925, reward: -1.99, average reward: -2.19
+2019-02-26 22:38:57,159 :  Train Episode: 757, total numsteps: 18950, reward: -2.37, average reward: -2.19
+2019-02-26 22:38:57,272 :  Train Episode: 758, total numsteps: 18975, reward: -2.57, average reward: -2.2
+2019-02-26 22:38:57,388 :  Train Episode: 759, total numsteps: 19000, reward: -1.8, average reward: -2.19
+2019-02-26 22:38:59,264 :  Train Episode: 760, total numsteps: 19025, reward: -1.95, average reward: -2.19
+2019-02-26 22:38:59,441 : Test Episode: 760, reward: -1.8855958564429616
+2019-02-26 22:38:59,580 :  Train Episode: 761, total numsteps: 19050, reward: -2.38, average reward: -2.19
+2019-02-26 22:38:59,706 :  Train Episode: 762, total numsteps: 19075, reward: -2.56, average reward: -2.19
+2019-02-26 22:38:59,825 :  Train Episode: 763, total numsteps: 19100, reward: -2.43, average reward: -2.19
+2019-02-26 22:39:02,093 :  Train Episode: 764, total numsteps: 19125, reward: -2.76, average reward: -2.2
+2019-02-26 22:39:02,242 :  Train Episode: 765, total numsteps: 19150, reward: -2.0, average reward: -2.19
+2019-02-26 22:39:02,377 :  Train Episode: 766, total numsteps: 19175, reward: -2.18, average reward: -2.19
+2019-02-26 22:39:02,490 :  Train Episode: 767, total numsteps: 19200, reward: -1.87, average reward: -2.19
+2019-02-26 22:39:04,613 :  Train Episode: 768, total numsteps: 19225, reward: -2.5, average reward: -2.18
+2019-02-26 22:39:04,785 :  Train Episode: 769, total numsteps: 19250, reward: -1.85, average reward: -2.18
+2019-02-26 22:39:04,925 :  Train Episode: 770, total numsteps: 19275, reward: -2.2, average reward: -2.18
+2019-02-26 22:39:05,058 : Test Episode: 770, reward: -1.5580375298013391
+2019-02-26 22:39:05,227 :  Train Episode: 771, total numsteps: 19300, reward: -1.79, average reward: -2.18
+2019-02-26 22:39:07,150 :  Train Episode: 772, total numsteps: 19325, reward: -2.28, average reward: -2.18
+2019-02-26 22:39:07,272 :  Train Episode: 773, total numsteps: 19350, reward: -1.59, average reward: -2.17
+2019-02-26 22:39:07,388 :  Train Episode: 774, total numsteps: 19375, reward: -2.35, average reward: -2.18
+2019-02-26 22:39:07,508 :  Train Episode: 775, total numsteps: 19400, reward: -1.8, average reward: -2.17
+2019-02-26 22:39:09,506 :  Train Episode: 776, total numsteps: 19425, reward: -1.9, average reward: -2.17
+2019-02-26 22:39:09,728 :  Train Episode: 777, total numsteps: 19450, reward: -2.39, average reward: -2.17
+2019-02-26 22:39:09,852 :  Train Episode: 778, total numsteps: 19475, reward: -2.37, average reward: -2.18
+2019-02-26 22:39:09,977 :  Train Episode: 779, total numsteps: 19500, reward: -1.79, average reward: -2.17
+2019-02-26 22:39:11,879 :  Train Episode: 780, total numsteps: 19525, reward: -2.3, average reward: -2.18
+2019-02-26 22:39:12,087 : Test Episode: 780, reward: -1.550804430336473
+2019-02-26 22:39:12,249 :  Train Episode: 781, total numsteps: 19550, reward: -2.01, average reward: -2.17
+2019-02-26 22:39:12,365 :  Train Episode: 782, total numsteps: 19575, reward: -1.7, average reward: -2.16
+2019-02-26 22:39:12,482 :  Train Episode: 783, total numsteps: 19600, reward: -2.45, average reward: -2.16
+2019-02-26 22:39:14,979 :  Train Episode: 784, total numsteps: 19625, reward: -2.5, average reward: -2.16
+2019-02-26 22:39:15,166 :  Train Episode: 785, total numsteps: 19650, reward: -2.2, average reward: -2.17
+2019-02-26 22:39:15,390 :  Train Episode: 786, total numsteps: 19675, reward: -1.97, average reward: -2.17
+2019-02-26 22:39:15,506 :  Train Episode: 787, total numsteps: 19700, reward: -1.52, average reward: -2.17
+2019-02-26 22:39:18,009 :  Train Episode: 788, total numsteps: 19725, reward: -2.03, average reward: -2.16
+2019-02-26 22:39:18,160 :  Train Episode: 789, total numsteps: 19750, reward: -2.46, average reward: -2.17
+2019-02-26 22:39:18,317 :  Train Episode: 790, total numsteps: 19775, reward: -2.83, average reward: -2.17
+2019-02-26 22:39:18,426 : Test Episode: 790, reward: -1.446650723444675
+2019-02-26 22:39:18,551 :  Train Episode: 791, total numsteps: 19800, reward: -1.95, average reward: -2.17
+2019-02-26 22:39:20,520 :  Train Episode: 792, total numsteps: 19825, reward: -2.51, average reward: -2.18
+2019-02-26 22:39:20,710 :  Train Episode: 793, total numsteps: 19850, reward: -2.26, average reward: -2.18
+2019-02-26 22:39:20,891 :  Train Episode: 794, total numsteps: 19875, reward: -2.03, average reward: -2.17
+2019-02-26 22:39:21,019 :  Train Episode: 795, total numsteps: 19900, reward: -1.97, average reward: -2.17
+2019-02-26 22:39:22,978 :  Train Episode: 796, total numsteps: 19925, reward: -1.78, average reward: -2.17
+2019-02-26 22:39:23,228 :  Train Episode: 797, total numsteps: 19950, reward: -1.94, average reward: -2.17
+2019-02-26 22:39:23,430 :  Train Episode: 798, total numsteps: 19975, reward: -2.02, average reward: -2.17
+2019-02-26 22:39:23,598 :  Train Episode: 799, total numsteps: 20000, reward: -1.92, average reward: -2.17
+2019-02-26 22:39:25,688 :  Train Episode: 800, total numsteps: 20025, reward: -2.6, average reward: -2.17
+2019-02-26 22:39:26,057 : Test Episode: 800, reward: -1.308712342521622
+2019-02-26 22:39:26,171 :  Train Episode: 801, total numsteps: 20050, reward: -1.75, average reward: -2.16
+2019-02-26 22:39:26,286 :  Train Episode: 802, total numsteps: 20075, reward: -2.04, average reward: -2.16
+2019-02-26 22:39:26,405 :  Train Episode: 803, total numsteps: 20100, reward: -2.42, average reward: -2.16
+2019-02-26 22:39:28,679 :  Train Episode: 804, total numsteps: 20125, reward: -2.5, average reward: -2.16
+2019-02-26 22:39:28,805 :  Train Episode: 805, total numsteps: 20150, reward: -1.89, average reward: -2.17
+2019-02-26 22:39:28,991 :  Train Episode: 806, total numsteps: 20175, reward: -1.97, average reward: -2.17
+2019-02-26 22:39:29,194 :  Train Episode: 807, total numsteps: 20200, reward: -1.88, average reward: -2.16
+2019-02-26 22:39:31,360 :  Train Episode: 808, total numsteps: 20225, reward: -2.46, average reward: -2.16
+2019-02-26 22:39:31,476 :  Train Episode: 809, total numsteps: 20250, reward: -1.95, average reward: -2.16
+2019-02-26 22:39:31,594 :  Train Episode: 810, total numsteps: 20275, reward: -2.33, average reward: -2.17
+2019-02-26 22:39:31,705 : Test Episode: 810, reward: -1.4708470905470445
+2019-02-26 22:39:31,826 :  Train Episode: 811, total numsteps: 20300, reward: -2.24, average reward: -2.17
+2019-02-26 22:39:33,815 :  Train Episode: 812, total numsteps: 20325, reward: -2.15, average reward: -2.17
+2019-02-26 22:39:33,944 :  Train Episode: 813, total numsteps: 20350, reward: -2.58, average reward: -2.18
+2019-02-26 22:39:34,074 :  Train Episode: 814, total numsteps: 20375, reward: -2.02, average reward: -2.17
+2019-02-26 22:39:34,204 :  Train Episode: 815, total numsteps: 20400, reward: -1.71, average reward: -2.17
+2019-02-26 22:39:36,268 :  Train Episode: 816, total numsteps: 20425, reward: -1.97, average reward: -2.17
+2019-02-26 22:39:36,403 :  Train Episode: 817, total numsteps: 20450, reward: -1.94, average reward: -2.17
+2019-02-26 22:39:36,524 :  Train Episode: 818, total numsteps: 20475, reward: -2.24, average reward: -2.17
+2019-02-26 22:39:36,647 :  Train Episode: 819, total numsteps: 20500, reward: -1.76, average reward: -2.17
+2019-02-26 22:39:38,665 :  Train Episode: 820, total numsteps: 20525, reward: -1.5, average reward: -2.17
+2019-02-26 22:39:38,808 : Test Episode: 820, reward: -1.6306276176735282
+2019-02-26 22:39:38,964 :  Train Episode: 821, total numsteps: 20550, reward: -1.9, average reward: -2.17
+2019-02-26 22:39:39,082 :  Train Episode: 822, total numsteps: 20575, reward: -2.11, average reward: -2.16
+2019-02-26 22:39:39,276 :  Train Episode: 823, total numsteps: 20600, reward: -2.61, average reward: -2.17
+2019-02-26 22:39:41,783 :  Train Episode: 824, total numsteps: 20625, reward: -1.9, average reward: -2.16
+2019-02-26 22:39:42,003 :  Train Episode: 825, total numsteps: 20650, reward: -2.36, average reward: -2.16
+2019-02-26 22:39:42,262 :  Train Episode: 826, total numsteps: 20675, reward: -2.06, average reward: -2.16
+2019-02-26 22:39:42,479 :  Train Episode: 827, total numsteps: 20700, reward: -2.53, average reward: -2.16
+2019-02-26 22:39:44,576 :  Train Episode: 828, total numsteps: 20725, reward: -1.85, average reward: -2.16
+2019-02-26 22:39:44,693 :  Train Episode: 829, total numsteps: 20750, reward: -2.07, average reward: -2.15
+2019-02-26 22:39:44,810 :  Train Episode: 830, total numsteps: 20775, reward: -1.56, average reward: -2.15
+2019-02-26 22:39:44,921 : Test Episode: 830, reward: -1.547089322594663
+2019-02-26 22:39:45,039 :  Train Episode: 831, total numsteps: 20800, reward: -1.65, average reward: -2.15
+2019-02-26 22:39:47,369 :  Train Episode: 832, total numsteps: 20825, reward: -2.01, average reward: -2.14
+2019-02-26 22:39:47,579 :  Train Episode: 833, total numsteps: 20850, reward: -2.2, average reward: -2.14
+2019-02-26 22:39:47,705 :  Train Episode: 834, total numsteps: 20875, reward: -2.42, average reward: -2.14
+2019-02-26 22:39:47,833 :  Train Episode: 835, total numsteps: 20900, reward: -2.31, average reward: -2.15
+2019-02-26 22:39:49,698 :  Train Episode: 836, total numsteps: 20925, reward: -1.77, average reward: -2.14
+2019-02-26 22:39:49,901 :  Train Episode: 837, total numsteps: 20950, reward: -2.4, average reward: -2.14
+2019-02-26 22:39:50,083 :  Train Episode: 838, total numsteps: 20975, reward: -2.09, average reward: -2.14
+2019-02-26 22:39:50,325 :  Train Episode: 839, total numsteps: 21000, reward: -2.24, average reward: -2.15
+2019-02-26 22:39:52,456 :  Train Episode: 840, total numsteps: 21025, reward: -2.36, average reward: -2.15
+2019-02-26 22:39:52,622 : Test Episode: 840, reward: -1.6766932395112972
+2019-02-26 22:39:52,736 :  Train Episode: 841, total numsteps: 21050, reward: -1.61, average reward: -2.15
+2019-02-26 22:39:52,856 :  Train Episode: 842, total numsteps: 21075, reward: -1.67, average reward: -2.14
+2019-02-26 22:39:52,972 :  Train Episode: 843, total numsteps: 21100, reward: -2.3, average reward: -2.14
+2019-02-26 22:39:55,080 :  Train Episode: 844, total numsteps: 21125, reward: -2.41, average reward: -2.15
+2019-02-26 22:39:55,261 :  Train Episode: 845, total numsteps: 21150, reward: -1.78, average reward: -2.14
+2019-02-26 22:39:55,410 :  Train Episode: 846, total numsteps: 21175, reward: -2.01, average reward: -2.14
+2019-02-26 22:39:55,576 :  Train Episode: 847, total numsteps: 21200, reward: -1.75, average reward: -2.13
+2019-02-26 22:39:57,624 :  Train Episode: 848, total numsteps: 21225, reward: -2.02, average reward: -2.13
+2019-02-26 22:39:57,768 :  Train Episode: 849, total numsteps: 21250, reward: -2.58, average reward: -2.13
+2019-02-26 22:39:57,923 :  Train Episode: 850, total numsteps: 21275, reward: -2.15, average reward: -2.13
+2019-02-26 22:39:58,041 : Test Episode: 850, reward: -1.7479437802234172
+2019-02-26 22:39:58,170 :  Train Episode: 851, total numsteps: 21300, reward: -2.19, average reward: -2.13
+2019-02-26 22:40:00,256 :  Train Episode: 852, total numsteps: 21325, reward: -1.8, average reward: -2.12
+2019-02-26 22:40:00,422 :  Train Episode: 853, total numsteps: 21350, reward: -2.1, average reward: -2.12
+2019-02-26 22:40:00,604 :  Train Episode: 854, total numsteps: 21375, reward: -2.12, average reward: -2.11
+2019-02-26 22:40:00,723 :  Train Episode: 855, total numsteps: 21400, reward: -1.84, average reward: -2.11
+2019-02-26 22:40:02,742 :  Train Episode: 856, total numsteps: 21425, reward: -1.93, average reward: -2.11
+2019-02-26 22:40:02,946 :  Train Episode: 857, total numsteps: 21450, reward: -2.0, average reward: -2.1
+2019-02-26 22:40:03,140 :  Train Episode: 858, total numsteps: 21475, reward: -2.15, average reward: -2.1
+2019-02-26 22:40:03,329 :  Train Episode: 859, total numsteps: 21500, reward: -2.58, average reward: -2.11
+2019-02-26 22:40:05,436 :  Train Episode: 860, total numsteps: 21525, reward: -1.72, average reward: -2.1
+2019-02-26 22:40:05,584 : Test Episode: 860, reward: -1.1357319572478077
+2019-02-26 22:40:05,751 :  Train Episode: 861, total numsteps: 21550, reward: -2.54, average reward: -2.11
+2019-02-26 22:40:05,912 :  Train Episode: 862, total numsteps: 21575, reward: -2.16, average reward: -2.1
+2019-02-26 22:40:06,025 :  Train Episode: 863, total numsteps: 21600, reward: -1.98, average reward: -2.1
+2019-02-26 22:40:08,233 :  Train Episode: 864, total numsteps: 21625, reward: -1.83, average reward: -2.09
+2019-02-26 22:40:08,419 :  Train Episode: 865, total numsteps: 21650, reward: -1.78, average reward: -2.09
+2019-02-26 22:40:08,619 :  Train Episode: 866, total numsteps: 21675, reward: -1.91, average reward: -2.08
+2019-02-26 22:40:08,742 :  Train Episode: 867, total numsteps: 21700, reward: -2.68, average reward: -2.09
+2019-02-26 22:40:10,782 :  Train Episode: 868, total numsteps: 21725, reward: -2.14, average reward: -2.09
+2019-02-26 22:40:11,048 :  Train Episode: 869, total numsteps: 21750, reward: -2.44, average reward: -2.09
+2019-02-26 22:40:11,226 :  Train Episode: 870, total numsteps: 21775, reward: -1.75, average reward: -2.09
+2019-02-26 22:40:11,366 : Test Episode: 870, reward: -1.4218566102572003
+2019-02-26 22:40:11,522 :  Train Episode: 871, total numsteps: 21800, reward: -2.08, average reward: -2.09
+2019-02-26 22:40:13,750 :  Train Episode: 872, total numsteps: 21825, reward: -2.01, average reward: -2.09
+2019-02-26 22:40:13,896 :  Train Episode: 873, total numsteps: 21850, reward: -2.09, average reward: -2.09
+2019-02-26 22:40:14,032 :  Train Episode: 874, total numsteps: 21875, reward: -2.17, average reward: -2.09
+2019-02-26 22:40:14,177 :  Train Episode: 875, total numsteps: 21900, reward: -2.0, average reward: -2.09
+2019-02-26 22:40:16,887 :  Train Episode: 876, total numsteps: 21925, reward: -2.0, average reward: -2.09
+2019-02-26 22:40:17,080 :  Train Episode: 877, total numsteps: 21950, reward: -2.1, average reward: -2.09
+2019-02-26 22:40:17,402 :  Train Episode: 878, total numsteps: 21975, reward: -2.06, average reward: -2.09
+2019-02-26 22:40:17,760 :  Train Episode: 879, total numsteps: 22000, reward: -2.18, average reward: -2.09
+2019-02-26 22:40:19,558 :  Train Episode: 880, total numsteps: 22025, reward: -2.18, average reward: -2.09
+2019-02-26 22:40:19,840 : Test Episode: 880, reward: -1.7772299950530306
+2019-02-26 22:40:19,968 :  Train Episode: 881, total numsteps: 22050, reward: -2.48, average reward: -2.1
+2019-02-26 22:40:20,086 :  Train Episode: 882, total numsteps: 22075, reward: -2.32, average reward: -2.1
+2019-02-26 22:40:20,204 :  Train Episode: 883, total numsteps: 22100, reward: -1.86, average reward: -2.1
+2019-02-26 22:40:22,255 :  Train Episode: 884, total numsteps: 22125, reward: -1.69, average reward: -2.09
+2019-02-26 22:40:22,386 :  Train Episode: 885, total numsteps: 22150, reward: -2.24, average reward: -2.09
+2019-02-26 22:40:22,516 :  Train Episode: 886, total numsteps: 22175, reward: -2.14, average reward: -2.09
+2019-02-26 22:40:22,640 :  Train Episode: 887, total numsteps: 22200, reward: -1.81, average reward: -2.09
+2019-02-26 22:40:24,755 :  Train Episode: 888, total numsteps: 22225, reward: -1.9, average reward: -2.09
+2019-02-26 22:40:24,867 :  Train Episode: 889, total numsteps: 22250, reward: -1.95, average reward: -2.09
+2019-02-26 22:40:24,986 :  Train Episode: 890, total numsteps: 22275, reward: -2.18, average reward: -2.08
+2019-02-26 22:40:25,096 : Test Episode: 890, reward: -1.649086291117427
+2019-02-26 22:40:25,209 :  Train Episode: 891, total numsteps: 22300, reward: -2.16, average reward: -2.08
+2019-02-26 22:40:27,244 :  Train Episode: 892, total numsteps: 22325, reward: -2.21, average reward: -2.08
+2019-02-26 22:40:27,371 :  Train Episode: 893, total numsteps: 22350, reward: -2.29, average reward: -2.08
+2019-02-26 22:40:27,493 :  Train Episode: 894, total numsteps: 22375, reward: -2.13, average reward: -2.08
+2019-02-26 22:40:27,615 :  Train Episode: 895, total numsteps: 22400, reward: -2.19, average reward: -2.08
+2019-02-26 22:40:29,646 :  Train Episode: 896, total numsteps: 22425, reward: -2.34, average reward: -2.09
+2019-02-26 22:40:29,857 :  Train Episode: 897, total numsteps: 22450, reward: -2.79, average reward: -2.1
+2019-02-26 22:40:29,986 :  Train Episode: 898, total numsteps: 22475, reward: -2.13, average reward: -2.1
+2019-02-26 22:40:30,106 :  Train Episode: 899, total numsteps: 22500, reward: -1.78, average reward: -2.1
+2019-02-26 22:40:32,154 :  Train Episode: 900, total numsteps: 22525, reward: -1.7, average reward: -2.09
+2019-02-26 22:40:32,367 : Test Episode: 900, reward: -1.7375408129300227
+2019-02-26 22:40:32,497 :  Train Episode: 901, total numsteps: 22550, reward: -1.82, average reward: -2.09
+2019-02-26 22:40:32,624 :  Train Episode: 902, total numsteps: 22575, reward: -2.07, average reward: -2.09
+2019-02-26 22:40:32,754 :  Train Episode: 903, total numsteps: 22600, reward: -2.35, average reward: -2.09
+2019-02-26 22:40:34,675 :  Train Episode: 904, total numsteps: 22625, reward: -2.01, average reward: -2.08
+2019-02-26 22:40:34,875 :  Train Episode: 905, total numsteps: 22650, reward: -1.93, average reward: -2.08
+2019-02-26 22:40:34,997 :  Train Episode: 906, total numsteps: 22675, reward: -2.79, average reward: -2.09
+2019-02-26 22:40:35,115 :  Train Episode: 907, total numsteps: 22700, reward: -2.35, average reward: -2.1
+2019-02-26 22:40:37,007 :  Train Episode: 908, total numsteps: 22725, reward: -2.37, average reward: -2.1
+2019-02-26 22:40:37,232 :  Train Episode: 909, total numsteps: 22750, reward: -2.03, average reward: -2.1
+2019-02-26 22:40:37,362 :  Train Episode: 910, total numsteps: 22775, reward: -2.4, average reward: -2.1
+2019-02-26 22:40:37,483 : Test Episode: 910, reward: -1.7076908884036077
+2019-02-26 22:40:37,613 :  Train Episode: 911, total numsteps: 22800, reward: -1.97, average reward: -2.09
+2019-02-26 22:40:39,784 :  Train Episode: 912, total numsteps: 22825, reward: -1.9, average reward: -2.09
+2019-02-26 22:40:39,948 :  Train Episode: 913, total numsteps: 22850, reward: -2.04, average reward: -2.09
+2019-02-26 22:40:40,077 :  Train Episode: 914, total numsteps: 22875, reward: -2.07, average reward: -2.09
+2019-02-26 22:40:40,207 :  Train Episode: 915, total numsteps: 22900, reward: -1.9, average reward: -2.09
+2019-02-26 22:40:42,335 :  Train Episode: 916, total numsteps: 22925, reward: -2.25, average reward: -2.09
+2019-02-26 22:40:42,471 :  Train Episode: 917, total numsteps: 22950, reward: -1.84, average reward: -2.09
+2019-02-26 22:40:42,595 :  Train Episode: 918, total numsteps: 22975, reward: -2.4, average reward: -2.09
+2019-02-26 22:40:42,805 :  Train Episode: 919, total numsteps: 23000, reward: -2.04, average reward: -2.1
+2019-02-26 22:40:44,711 :  Train Episode: 920, total numsteps: 23025, reward: -2.49, average reward: -2.11
+2019-02-26 22:40:44,820 : Test Episode: 920, reward: -1.6806333716148938
+2019-02-26 22:40:44,936 :  Train Episode: 921, total numsteps: 23050, reward: -2.15, average reward: -2.11
+2019-02-26 22:40:45,048 :  Train Episode: 922, total numsteps: 23075, reward: -2.05, average reward: -2.11
+2019-02-26 22:40:45,161 :  Train Episode: 923, total numsteps: 23100, reward: -2.66, average reward: -2.11
+2019-02-26 22:40:47,333 :  Train Episode: 924, total numsteps: 23125, reward: -1.57, average reward: -2.1
+2019-02-26 22:40:47,555 :  Train Episode: 925, total numsteps: 23150, reward: -1.8, average reward: -2.1
+2019-02-26 22:40:47,746 :  Train Episode: 926, total numsteps: 23175, reward: -2.25, average reward: -2.1
+2019-02-26 22:40:47,884 :  Train Episode: 927, total numsteps: 23200, reward: -2.16, average reward: -2.1
+2019-02-26 22:40:49,852 :  Train Episode: 928, total numsteps: 23225, reward: -2.34, average reward: -2.1
+2019-02-26 22:40:49,969 :  Train Episode: 929, total numsteps: 23250, reward: -2.74, average reward: -2.11
+2019-02-26 22:40:50,145 :  Train Episode: 930, total numsteps: 23275, reward: -2.24, average reward: -2.12
+2019-02-26 22:40:50,322 : Test Episode: 930, reward: -1.2712825704790618
+2019-02-26 22:40:50,479 :  Train Episode: 931, total numsteps: 23300, reward: -2.15, average reward: -2.12
+2019-02-26 22:40:52,655 :  Train Episode: 932, total numsteps: 23325, reward: -1.86, average reward: -2.12
+2019-02-26 22:40:52,888 :  Train Episode: 933, total numsteps: 23350, reward: -1.71, average reward: -2.11
+2019-02-26 22:40:53,064 :  Train Episode: 934, total numsteps: 23375, reward: -2.29, average reward: -2.11
+2019-02-26 22:40:53,245 :  Train Episode: 935, total numsteps: 23400, reward: -1.95, average reward: -2.11
+2019-02-26 22:40:55,064 :  Train Episode: 936, total numsteps: 23425, reward: -1.83, average reward: -2.11
+2019-02-26 22:40:55,251 :  Train Episode: 937, total numsteps: 23450, reward: -2.12, average reward: -2.11
+2019-02-26 22:40:55,442 :  Train Episode: 938, total numsteps: 23475, reward: -2.05, average reward: -2.11
+2019-02-26 22:40:55,595 :  Train Episode: 939, total numsteps: 23500, reward: -2.07, average reward: -2.1
+2019-02-26 22:40:57,677 :  Train Episode: 940, total numsteps: 23525, reward: -2.33, average reward: -2.1
+2019-02-26 22:40:57,878 : Test Episode: 940, reward: -1.4708389221223583
+2019-02-26 22:40:58,009 :  Train Episode: 941, total numsteps: 23550, reward: -2.26, average reward: -2.11
+2019-02-26 22:40:58,171 :  Train Episode: 942, total numsteps: 23575, reward: -2.05, average reward: -2.11
+2019-02-26 22:40:58,327 :  Train Episode: 943, total numsteps: 23600, reward: -1.91, average reward: -2.11
+2019-02-26 22:41:00,053 :  Train Episode: 944, total numsteps: 23625, reward: -2.04, average reward: -2.11
+2019-02-26 22:41:00,233 :  Train Episode: 945, total numsteps: 23650, reward: -2.59, average reward: -2.12
+2019-02-26 22:41:00,373 :  Train Episode: 946, total numsteps: 23675, reward: -1.84, average reward: -2.11
+2019-02-26 22:41:00,503 :  Train Episode: 947, total numsteps: 23700, reward: -1.87, average reward: -2.11
+2019-02-26 22:41:02,462 :  Train Episode: 948, total numsteps: 23725, reward: -2.19, average reward: -2.12
+2019-02-26 22:41:02,673 :  Train Episode: 949, total numsteps: 23750, reward: -1.82, average reward: -2.11
+2019-02-26 22:41:02,998 :  Train Episode: 950, total numsteps: 23775, reward: -1.93, average reward: -2.11
+2019-02-26 22:41:03,183 : Test Episode: 950, reward: -1.6317504910509315
+2019-02-26 22:41:03,389 :  Train Episode: 951, total numsteps: 23800, reward: -1.96, average reward: -2.1
+2019-02-26 22:41:05,738 :  Train Episode: 952, total numsteps: 23825, reward: -2.21, average reward: -2.11
+2019-02-26 22:41:05,904 :  Train Episode: 953, total numsteps: 23850, reward: -1.82, average reward: -2.11
+2019-02-26 22:41:06,142 :  Train Episode: 954, total numsteps: 23875, reward: -2.26, average reward: -2.11
+2019-02-26 22:41:06,304 :  Train Episode: 955, total numsteps: 23900, reward: -2.57, average reward: -2.11
+2019-02-26 22:41:08,226 :  Train Episode: 956, total numsteps: 23925, reward: -2.05, average reward: -2.12
+2019-02-26 22:41:08,463 :  Train Episode: 957, total numsteps: 23950, reward: -2.16, average reward: -2.12
+2019-02-26 22:41:08,620 :  Train Episode: 958, total numsteps: 23975, reward: -2.17, average reward: -2.12
+2019-02-26 22:41:08,887 :  Train Episode: 959, total numsteps: 24000, reward: -1.69, average reward: -2.11
+2019-02-26 22:41:10,820 :  Train Episode: 960, total numsteps: 24025, reward: -1.99, average reward: -2.11
+2019-02-26 22:41:11,049 : Test Episode: 960, reward: -1.3909073344570362
+2019-02-26 22:41:11,359 :  Train Episode: 961, total numsteps: 24050, reward: -2.41, average reward: -2.11
+2019-02-26 22:41:11,563 :  Train Episode: 962, total numsteps: 24075, reward: -2.03, average reward: -2.11
+2019-02-26 22:41:11,823 :  Train Episode: 963, total numsteps: 24100, reward: -2.19, average reward: -2.11
+2019-02-26 22:41:13,665 :  Train Episode: 964, total numsteps: 24125, reward: -2.61, average reward: -2.12
+2019-02-26 22:41:13,932 :  Train Episode: 965, total numsteps: 24150, reward: -1.97, average reward: -2.12
+2019-02-26 22:41:14,217 :  Train Episode: 966, total numsteps: 24175, reward: -2.18, average reward: -2.12
+2019-02-26 22:41:14,406 :  Train Episode: 967, total numsteps: 24200, reward: -2.09, average reward: -2.12
+2019-02-26 22:41:14,937 :  Train Episode: 968, total numsteps: 24225, reward: -2.0, average reward: -2.12
+2019-02-26 22:41:15,040 :  Train Episode: 969, total numsteps: 24250, reward: -2.46, average reward: -2.12
+2019-02-26 22:41:15,135 :  Train Episode: 970, total numsteps: 24275, reward: -1.96, average reward: -2.12
+2019-02-26 22:41:15,220 : Test Episode: 970, reward: -1.5621042258823612
+2019-02-26 22:41:15,310 :  Train Episode: 971, total numsteps: 24300, reward: -2.12, average reward: -2.12
+2019-02-26 22:41:15,813 :  Train Episode: 972, total numsteps: 24325, reward: -2.19, average reward: -2.12
+2019-02-26 22:41:15,914 :  Train Episode: 973, total numsteps: 24350, reward: -1.99, average reward: -2.12
+2019-02-26 22:41:16,040 :  Train Episode: 974, total numsteps: 24375, reward: -2.33, average reward: -2.12
+2019-02-26 22:41:16,165 :  Train Episode: 975, total numsteps: 24400, reward: -2.45, average reward: -2.13
+2019-02-26 22:41:17,001 :  Train Episode: 976, total numsteps: 24425, reward: -1.84, average reward: -2.12
+2019-02-26 22:41:17,111 :  Train Episode: 977, total numsteps: 24450, reward: -2.23, average reward: -2.12
+2019-02-26 22:41:17,223 :  Train Episode: 978, total numsteps: 24475, reward: -2.2, average reward: -2.13
+2019-02-26 22:41:17,328 :  Train Episode: 979, total numsteps: 24500, reward: -1.78, average reward: -2.12
+2019-02-26 22:41:17,809 :  Train Episode: 980, total numsteps: 24525, reward: -2.05, average reward: -2.12
+2019-02-26 22:41:17,897 : Test Episode: 980, reward: -1.4979433587534121
+2019-02-26 22:41:17,990 :  Train Episode: 981, total numsteps: 24550, reward: -1.85, average reward: -2.11
+2019-02-26 22:41:18,093 :  Train Episode: 982, total numsteps: 24575, reward: -1.89, average reward: -2.11
+2019-02-26 22:41:18,186 :  Train Episode: 983, total numsteps: 24600, reward: -2.74, average reward: -2.12
+2019-02-26 22:41:18,662 :  Train Episode: 984, total numsteps: 24625, reward: -1.78, average reward: -2.12
+2019-02-26 22:41:18,781 :  Train Episode: 985, total numsteps: 24650, reward: -1.9, average reward: -2.12
+2019-02-26 22:41:18,895 :  Train Episode: 986, total numsteps: 24675, reward: -2.3, average reward: -2.12
+2019-02-26 22:41:18,997 :  Train Episode: 987, total numsteps: 24700, reward: -1.88, average reward: -2.12
+2019-02-26 22:41:19,512 :  Train Episode: 988, total numsteps: 24725, reward: -2.27, average reward: -2.12
+2019-02-26 22:41:19,604 :  Train Episode: 989, total numsteps: 24750, reward: -2.65, average reward: -2.13
+2019-02-26 22:41:19,696 :  Train Episode: 990, total numsteps: 24775, reward: -1.75, average reward: -2.13
+2019-02-26 22:41:19,783 : Test Episode: 990, reward: -1.5299846128471783
+2019-02-26 22:41:19,876 :  Train Episode: 991, total numsteps: 24800, reward: -2.05, average reward: -2.12
+2019-02-26 22:41:20,371 :  Train Episode: 992, total numsteps: 24825, reward: -1.7, average reward: -2.12
+2019-02-26 22:41:20,460 :  Train Episode: 993, total numsteps: 24850, reward: -1.69, average reward: -2.11
+2019-02-26 22:41:20,550 :  Train Episode: 994, total numsteps: 24875, reward: -2.04, average reward: -2.11
+2019-02-26 22:41:20,641 :  Train Episode: 995, total numsteps: 24900, reward: -2.26, average reward: -2.11
+2019-02-26 22:41:21,152 :  Train Episode: 996, total numsteps: 24925, reward: -1.64, average reward: -2.11
+2019-02-26 22:41:21,241 :  Train Episode: 997, total numsteps: 24950, reward: -2.18, average reward: -2.1
+2019-02-26 22:41:21,331 :  Train Episode: 998, total numsteps: 24975, reward: -2.14, average reward: -2.1
+2019-02-26 22:41:21,419 :  Train Episode: 999, total numsteps: 25000, reward: -1.83, average reward: -2.1
+2019-02-26 22:41:21,900 :  Train Episode: 1000, total numsteps: 25025, reward: -2.37, average reward: -2.11
+2019-02-26 22:41:22,063 : Test Episode: 1000, reward: -1.5067218360521015
+2019-02-26 22:41:22,155 :  Train Episode: 1001, total numsteps: 25050, reward: -2.17, average reward: -2.11
+2019-02-26 22:41:22,248 :  Train Episode: 1002, total numsteps: 25075, reward: -1.94, average reward: -2.11
+2019-02-26 22:41:22,340 :  Train Episode: 1003, total numsteps: 25100, reward: -2.37, average reward: -2.11
+2019-02-26 22:41:22,824 :  Train Episode: 1004, total numsteps: 25125, reward: -2.07, average reward: -2.11
+2019-02-26 22:41:22,915 :  Train Episode: 1005, total numsteps: 25150, reward: -1.93, average reward: -2.11
+2019-02-26 22:41:23,006 :  Train Episode: 1006, total numsteps: 25175, reward: -1.71, average reward: -2.1
+2019-02-26 22:41:23,096 :  Train Episode: 1007, total numsteps: 25200, reward: -1.71, average reward: -2.09
+2019-02-26 22:41:23,588 :  Train Episode: 1008, total numsteps: 25225, reward: -2.51, average reward: -2.09
+2019-02-26 22:41:23,681 :  Train Episode: 1009, total numsteps: 25250, reward: -2.25, average reward: -2.1
+2019-02-26 22:41:23,779 :  Train Episode: 1010, total numsteps: 25275, reward: -1.86, average reward: -2.09
+2019-02-26 22:41:23,867 : Test Episode: 1010, reward: -1.4233594178934692
+2019-02-26 22:41:23,991 :  Train Episode: 1011, total numsteps: 25300, reward: -1.8, average reward: -2.09
+2019-02-26 22:41:24,668 :  Train Episode: 1012, total numsteps: 25325, reward: -1.55, average reward: -2.09
+2019-02-26 22:41:24,786 :  Train Episode: 1013, total numsteps: 25350, reward: -1.74, average reward: -2.08
+2019-02-26 22:41:24,905 :  Train Episode: 1014, total numsteps: 25375, reward: -2.0, average reward: -2.08
+2019-02-26 22:41:25,008 :  Train Episode: 1015, total numsteps: 25400, reward: -2.47, average reward: -2.09
+2019-02-26 22:41:25,559 :  Train Episode: 1016, total numsteps: 25425, reward: -2.6, average reward: -2.09
+2019-02-26 22:41:25,647 :  Train Episode: 1017, total numsteps: 25450, reward: -2.29, average reward: -2.1
+2019-02-26 22:41:25,738 :  Train Episode: 1018, total numsteps: 25475, reward: -1.97, average reward: -2.09
+2019-02-26 22:41:25,837 :  Train Episode: 1019, total numsteps: 25500, reward: -2.01, average reward: -2.09
+2019-02-26 22:41:26,426 :  Train Episode: 1020, total numsteps: 25525, reward: -1.66, average reward: -2.08
+2019-02-26 22:41:26,515 : Test Episode: 1020, reward: -1.408092641855034
+2019-02-26 22:41:26,610 :  Train Episode: 1021, total numsteps: 25550, reward: -2.17, average reward: -2.08
+2019-02-26 22:41:26,726 :  Train Episode: 1022, total numsteps: 25575, reward: -2.11, average reward: -2.08
+2019-02-26 22:41:26,827 :  Train Episode: 1023, total numsteps: 25600, reward: -2.05, average reward: -2.08
+2019-02-26 22:41:27,351 :  Train Episode: 1024, total numsteps: 25625, reward: -1.72, average reward: -2.08
+2019-02-26 22:41:27,450 :  Train Episode: 1025, total numsteps: 25650, reward: -2.04, average reward: -2.08
+2019-02-26 22:41:27,548 :  Train Episode: 1026, total numsteps: 25675, reward: -2.25, average reward: -2.08
+2019-02-26 22:41:27,646 :  Train Episode: 1027, total numsteps: 25700, reward: -2.42, average reward: -2.08
+2019-02-26 22:41:28,156 :  Train Episode: 1028, total numsteps: 25725, reward: -2.34, average reward: -2.08
+2019-02-26 22:41:28,255 :  Train Episode: 1029, total numsteps: 25750, reward: -1.85, average reward: -2.08
+2019-02-26 22:41:28,355 :  Train Episode: 1030, total numsteps: 25775, reward: -2.08, average reward: -2.07
+2019-02-26 22:41:28,449 : Test Episode: 1030, reward: -1.5173641106373514
+2019-02-26 22:41:28,546 :  Train Episode: 1031, total numsteps: 25800, reward: -2.47, average reward: -2.08
+2019-02-26 22:41:29,056 :  Train Episode: 1032, total numsteps: 25825, reward: -1.79, average reward: -2.08
+2019-02-26 22:41:29,163 :  Train Episode: 1033, total numsteps: 25850, reward: -1.96, average reward: -2.08
+2019-02-26 22:41:29,260 :  Train Episode: 1034, total numsteps: 25875, reward: -2.15, average reward: -2.08
+2019-02-26 22:41:29,359 :  Train Episode: 1035, total numsteps: 25900, reward: -1.86, average reward: -2.08
+2019-02-26 22:41:29,863 :  Train Episode: 1036, total numsteps: 25925, reward: -1.91, average reward: -2.08
+2019-02-26 22:41:29,969 :  Train Episode: 1037, total numsteps: 25950, reward: -1.99, average reward: -2.08
+2019-02-26 22:41:30,071 :  Train Episode: 1038, total numsteps: 25975, reward: -2.08, average reward: -2.08
+2019-02-26 22:41:30,173 :  Train Episode: 1039, total numsteps: 26000, reward: -2.28, average reward: -2.08
+2019-02-26 22:41:30,677 :  Train Episode: 1040, total numsteps: 26025, reward: -1.96, average reward: -2.07
+2019-02-26 22:41:30,764 : Test Episode: 1040, reward: -1.6258875457569701
+2019-02-26 22:41:30,861 :  Train Episode: 1041, total numsteps: 26050, reward: -1.79, average reward: -2.07
+2019-02-26 22:41:30,950 :  Train Episode: 1042, total numsteps: 26075, reward: -2.15, average reward: -2.07
+2019-02-26 22:41:31,040 :  Train Episode: 1043, total numsteps: 26100, reward: -1.79, average reward: -2.07
+2019-02-26 22:41:31,558 :  Train Episode: 1044, total numsteps: 26125, reward: -1.82, average reward: -2.07
+2019-02-26 22:41:31,650 :  Train Episode: 1045, total numsteps: 26150, reward: -2.63, average reward: -2.07
+2019-02-26 22:41:31,742 :  Train Episode: 1046, total numsteps: 26175, reward: -2.85, average reward: -2.08
+2019-02-26 22:41:31,834 :  Train Episode: 1047, total numsteps: 26200, reward: -1.73, average reward: -2.08
+2019-02-26 22:41:32,352 :  Train Episode: 1048, total numsteps: 26225, reward: -1.91, average reward: -2.07
+2019-02-26 22:41:32,443 :  Train Episode: 1049, total numsteps: 26250, reward: -2.24, average reward: -2.08
+2019-02-26 22:41:32,535 :  Train Episode: 1050, total numsteps: 26275, reward: -2.03, average reward: -2.08
+2019-02-26 22:41:32,622 : Test Episode: 1050, reward: -1.4079112710168251
+2019-02-26 22:41:32,714 :  Train Episode: 1051, total numsteps: 26300, reward: -2.19, average reward: -2.08
+2019-02-26 22:41:33,182 :  Train Episode: 1052, total numsteps: 26325, reward: -1.77, average reward: -2.08
+2019-02-26 22:41:33,274 :  Train Episode: 1053, total numsteps: 26350, reward: -2.15, average reward: -2.08
+2019-02-26 22:41:33,364 :  Train Episode: 1054, total numsteps: 26375, reward: -1.8, average reward: -2.08
+2019-02-26 22:41:33,454 :  Train Episode: 1055, total numsteps: 26400, reward: -2.41, average reward: -2.07
+2019-02-26 22:41:33,957 :  Train Episode: 1056, total numsteps: 26425, reward: -2.07, average reward: -2.07
+2019-02-26 22:41:34,054 :  Train Episode: 1057, total numsteps: 26450, reward: -2.02, average reward: -2.07
+2019-02-26 22:41:34,155 :  Train Episode: 1058, total numsteps: 26475, reward: -2.08, average reward: -2.07
+2019-02-26 22:41:34,252 :  Train Episode: 1059, total numsteps: 26500, reward: -2.52, average reward: -2.08
+2019-02-26 22:41:34,739 :  Train Episode: 1060, total numsteps: 26525, reward: -2.33, average reward: -2.08
+2019-02-26 22:41:34,832 : Test Episode: 1060, reward: -1.6999349215581279
+2019-02-26 22:41:34,930 :  Train Episode: 1061, total numsteps: 26550, reward: -1.72, average reward: -2.08
+2019-02-26 22:41:35,029 :  Train Episode: 1062, total numsteps: 26575, reward: -2.25, average reward: -2.08
+2019-02-26 22:41:35,126 :  Train Episode: 1063, total numsteps: 26600, reward: -2.0, average reward: -2.08
+2019-02-26 22:41:35,631 :  Train Episode: 1064, total numsteps: 26625, reward: -1.94, average reward: -2.07
+2019-02-26 22:41:35,729 :  Train Episode: 1065, total numsteps: 26650, reward: -1.84, average reward: -2.07
+2019-02-26 22:41:35,827 :  Train Episode: 1066, total numsteps: 26675, reward: -1.89, average reward: -2.07
+2019-02-26 22:41:35,925 :  Train Episode: 1067, total numsteps: 26700, reward: -1.87, average reward: -2.06
+2019-02-26 22:41:36,416 :  Train Episode: 1068, total numsteps: 26725, reward: -1.95, average reward: -2.06
+2019-02-26 22:41:36,506 :  Train Episode: 1069, total numsteps: 26750, reward: -1.92, average reward: -2.06
+2019-02-26 22:41:36,596 :  Train Episode: 1070, total numsteps: 26775, reward: -1.67, average reward: -2.06
+2019-02-26 22:41:36,681 : Test Episode: 1070, reward: -1.3734015546498664
+2019-02-26 22:41:36,771 :  Train Episode: 1071, total numsteps: 26800, reward: -1.92, average reward: -2.05
+2019-02-26 22:41:37,261 :  Train Episode: 1072, total numsteps: 26825, reward: -2.01, average reward: -2.05
+2019-02-26 22:41:37,350 :  Train Episode: 1073, total numsteps: 26850, reward: -2.5, average reward: -2.06
+2019-02-26 22:41:37,439 :  Train Episode: 1074, total numsteps: 26875, reward: -2.01, average reward: -2.05
+2019-02-26 22:41:37,528 :  Train Episode: 1075, total numsteps: 26900, reward: -1.87, average reward: -2.05
+2019-02-26 22:41:38,036 :  Train Episode: 1076, total numsteps: 26925, reward: -2.1, average reward: -2.05
+2019-02-26 22:41:38,127 :  Train Episode: 1077, total numsteps: 26950, reward: -2.21, average reward: -2.05
+2019-02-26 22:41:38,218 :  Train Episode: 1078, total numsteps: 26975, reward: -1.99, average reward: -2.05
+2019-02-26 22:41:38,309 :  Train Episode: 1079, total numsteps: 27000, reward: -2.11, average reward: -2.05
+2019-02-26 22:41:38,821 :  Train Episode: 1080, total numsteps: 27025, reward: -2.17, average reward: -2.05
+2019-02-26 22:41:38,916 : Test Episode: 1080, reward: -1.4689985146106888
+2019-02-26 22:41:39,006 :  Train Episode: 1081, total numsteps: 27050, reward: -1.86, average reward: -2.05
+2019-02-26 22:41:39,096 :  Train Episode: 1082, total numsteps: 27075, reward: -2.45, average reward: -2.06
+2019-02-26 22:41:39,189 :  Train Episode: 1083, total numsteps: 27100, reward: -2.04, average reward: -2.05
+2019-02-26 22:41:39,674 :  Train Episode: 1084, total numsteps: 27125, reward: -1.74, average reward: -2.05
+2019-02-26 22:41:39,765 :  Train Episode: 1085, total numsteps: 27150, reward: -1.95, average reward: -2.05
+2019-02-26 22:41:39,856 :  Train Episode: 1086, total numsteps: 27175, reward: -1.98, average reward: -2.05
+2019-02-26 22:41:39,947 :  Train Episode: 1087, total numsteps: 27200, reward: -2.58, average reward: -2.06
+2019-02-26 22:41:40,453 :  Train Episode: 1088, total numsteps: 27225, reward: -1.86, average reward: -2.05
+2019-02-26 22:41:40,555 :  Train Episode: 1089, total numsteps: 27250, reward: -2.45, average reward: -2.05
+2019-02-26 22:41:40,646 :  Train Episode: 1090, total numsteps: 27275, reward: -2.21, average reward: -2.05
+2019-02-26 22:41:40,731 : Test Episode: 1090, reward: -1.602956371683712
+2019-02-26 22:41:40,822 :  Train Episode: 1091, total numsteps: 27300, reward: -2.29, average reward: -2.06
+2019-02-26 22:41:41,311 :  Train Episode: 1092, total numsteps: 27325, reward: -2.23, average reward: -2.06
+2019-02-26 22:41:41,404 :  Train Episode: 1093, total numsteps: 27350, reward: -2.01, average reward: -2.06
+2019-02-26 22:41:41,496 :  Train Episode: 1094, total numsteps: 27375, reward: -2.13, average reward: -2.07
+2019-02-26 22:41:41,588 :  Train Episode: 1095, total numsteps: 27400, reward: -1.81, average reward: -2.06
+2019-02-26 22:41:42,075 :  Train Episode: 1096, total numsteps: 27425, reward: -1.81, average reward: -2.06
+2019-02-26 22:41:42,174 :  Train Episode: 1097, total numsteps: 27450, reward: -2.21, average reward: -2.06
+2019-02-26 22:41:42,273 :  Train Episode: 1098, total numsteps: 27475, reward: -1.59, average reward: -2.06
+2019-02-26 22:41:42,370 :  Train Episode: 1099, total numsteps: 27500, reward: -1.87, average reward: -2.06
+2019-02-26 22:41:42,873 :  Train Episode: 1100, total numsteps: 27525, reward: -1.98, average reward: -2.05
+2019-02-26 22:41:43,023 : Test Episode: 1100, reward: -1.3393311336359253
+2019-02-26 22:41:43,114 :  Train Episode: 1101, total numsteps: 27550, reward: -2.22, average reward: -2.05
+2019-02-26 22:41:43,206 :  Train Episode: 1102, total numsteps: 27575, reward: -1.94, average reward: -2.05
+2019-02-26 22:41:43,299 :  Train Episode: 1103, total numsteps: 27600, reward: -1.83, average reward: -2.05
+2019-02-26 22:41:43,784 :  Train Episode: 1104, total numsteps: 27625, reward: -1.75, average reward: -2.05
+2019-02-26 22:41:43,892 :  Train Episode: 1105, total numsteps: 27650, reward: -2.01, average reward: -2.05
+2019-02-26 22:41:43,988 :  Train Episode: 1106, total numsteps: 27675, reward: -2.15, average reward: -2.05
+2019-02-26 22:41:44,128 :  Train Episode: 1107, total numsteps: 27700, reward: -1.89, average reward: -2.05
+2019-02-26 22:41:44,699 :  Train Episode: 1108, total numsteps: 27725, reward: -2.01, average reward: -2.05
+2019-02-26 22:41:44,796 :  Train Episode: 1109, total numsteps: 27750, reward: -2.12, average reward: -2.05
+2019-02-26 22:41:44,891 :  Train Episode: 1110, total numsteps: 27775, reward: -1.93, average reward: -2.05
+2019-02-26 22:41:44,980 : Test Episode: 1110, reward: -1.352735720814539
+2019-02-26 22:41:45,070 :  Train Episode: 1111, total numsteps: 27800, reward: -1.89, average reward: -2.05
+2019-02-26 22:41:45,536 :  Train Episode: 1112, total numsteps: 27825, reward: -2.06, average reward: -2.05
+2019-02-26 22:41:45,631 :  Train Episode: 1113, total numsteps: 27850, reward: -2.15, average reward: -2.06
+2019-02-26 22:41:45,721 :  Train Episode: 1114, total numsteps: 27875, reward: -1.93, average reward: -2.06
+2019-02-26 22:41:45,812 :  Train Episode: 1115, total numsteps: 27900, reward: -2.38, average reward: -2.06
+2019-02-26 22:41:46,471 :  Train Episode: 1116, total numsteps: 27925, reward: -2.32, average reward: -2.05
+2019-02-26 22:41:46,583 :  Train Episode: 1117, total numsteps: 27950, reward: -2.03, average reward: -2.05
+2019-02-26 22:41:46,678 :  Train Episode: 1118, total numsteps: 27975, reward: -1.91, average reward: -2.05
+2019-02-26 22:41:46,773 :  Train Episode: 1119, total numsteps: 28000, reward: -2.38, average reward: -2.05
