@@ -4,7 +4,6 @@ import numpy as np
 import torch
 import itertools
 import torch.nn.functional as F
-from torch.optim import Adam
 from utils.misc import soft_update, hard_update
 from utils.model import GaussianPolicy, QNetwork, ValueNetwork, DeterministicPolicy
 from utils.agents import SACAgent
@@ -48,9 +47,14 @@ class SAC(object):
         return [a.select_action(obs, eval=eval) for a, obs
                 in zip(self.agents, observations)]
 
+    def anneal_alpha(self):
+        for agent in self.agents:
+            agent.alpha = agent.alpha * 0.999
+
     def update_parameters(self, agent_i, sample, updates,flip_critic=False):
         obs, acs, rews, next_obs, dones = sample
         curr_agent = self.agents[agent_i]
+        print(curr_agent.alpha)
 
         obs_batch = torch.FloatTensor(obs[agent_i])
         next_obs_batch = torch.FloatTensor(next_obs[agent_i])

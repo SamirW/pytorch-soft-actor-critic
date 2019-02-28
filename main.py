@@ -1,3 +1,4 @@
+import pickle
 import numpy as np
 import itertools
 import argparse
@@ -40,7 +41,7 @@ parser.add_argument('--batch_size', type=int, default=1024, metavar='N',
                     help='batch size (default: 1024)')
 parser.add_argument('--num_eps', type=int, default=1e5, metavar='N',
                     help='maximum number of episodes (default: 1e5)')
-parser.add_argument('--max_ep_length', type=int, default=25, metavar='N',
+parser.add_argument('--max_ep_length', type=int, default=50, metavar='N',
                     help='maximum number of steps in episode (default: 50)')
 parser.add_argument('--hidden_size', type=int, default=256, metavar='N',
                     help='hidden size (default: 256)')
@@ -78,6 +79,8 @@ parser.add_argument('--save_buffer', action='store_true', default=False,
                     help='save replay buffer (default: False)')
 parser.add_argument('--log_comment', type=str, default='',
                     help='comment for log file')
+parser.add_argument('--anneal_alpha', action='store_true', default=False,
+                    help='')
 args = parser.parse_args()
 
 
@@ -157,7 +160,7 @@ for i_episode in itertools.count():
             [acsp.shape[0] for acsp in env.action_space])
         flip = True
 
-    obs = env.reset(flip=flip)
+    obs = env.reset()
     episode_reward = 0
     ep_step = 0
 
@@ -186,10 +189,15 @@ for i_episode in itertools.count():
 
         # Add to buffer
         replay_buffer.push(obs, agent_actions, rewards, next_obs, dones)
+        # replay_buffer.push(obs, agent_actions, rewards, next_obs, np.array([False, False]).reshape(1, 2))  # NOTE Setting done False
 
-        if len(replay_buffer) > args.batch_size:
+        if len(replay_buffer) > args.batch_size and i_episode > args.start_eps:
             # Number of steps before updating
             if (total_numsteps % args.steps_per_update) == 0:
+                # Anneal alpha
+                if args.anneal_alpha:
+                    sac.anneal_alpha()
+
                 # Number of updates per step in environment
                 for i in range(args.updates_per_update):
                     for a_i in range(sac.nagents):
@@ -234,12 +242,12 @@ for i_episode in itertools.count():
         " Train Episode: {}, total numsteps: {}, reward: {}, average reward: {}".format(i_episode, total_numsteps, np.round(total_rewards[-1], 2),
                                                                                         np.round(np.mean(total_rewards[-100:]), 2)))
     if i_episode % 10 == 0 and args.eval is True:
-        obs = env.reset(flip=flip)
+        obs = env.reset()
         test_ep_step = 0
         episode_reward = 0
         while True:
             # Render
-            if i_episode % 100 == 0:
+            if i_episode % 200 == 0:
                 env.render()
 
             # Find action
@@ -271,25 +279,30 @@ for i_episode in itertools.count():
             "Test Episode: {}, reward: {}".format(i_episode, test_rewards[-1]))
         print("----------------------------------------")
 
-    if (i_episode + 1) == args.distill_ep:
-        print("************Distilling***********")
+    if i_episode % 5000 == 0:
+        sac.save(str(run_dir / ('model_' + str(i_episode) + '.pt')))
+        with open(str(run_dir / ('replay_buffer_' + str(i_episode) + '.pkl')), 'wb') as output:
+            pickle.dump(replay_buffer, output, -1)
 
-        # Save buffer
-        os.makedirs(str(run_dir / 'incremental'), exist_ok=True)
-        sac.save(str(run_dir / 'incremental' / ('before_distillation.pt')))
+    # if (i_episode + 1) == args.distill_ep:
+    #     print("************Distilling***********")
 
-        # Distill
-        sac.distill(args.distill_num, args.distill_batch_size, replay_buffer,
-                    pass_actor=args.distill_pass_actor, pass_critic=args.distill_pass_critic)
+    #     # Save buffer
+    #     os.makedirs(str(run_dir / 'incremental'), exist_ok=True)
+    #     sac.save(str(run_dir / 'incremental' / ('before_distillation.pt')))
 
-if args.save_buffer:
-    print("*******Saving Replay Buffer******")
-    import pickle
-    with open(str(run_dir / 'replay_buffer.pkl'), 'wb') as output:
-        pickle.dump(replay_buffer, output, -1)
+    #     # Distill
+    #     sac.distill(args.distill_num, args.distill_batch_size, replay_buffer,
+    #                 pass_actor=args.distill_pass_actor, pass_critic=args.distill_pass_critic)
 
-print("*******Saving and Closing*******")
-sac.save(str(run_dir / 'model.pt'))
-env.close()
-writer.export_scalars_to_json(str(log_dir / 'summary.json'))
-writer.close()
+# if args.save_buffer:
+#     print("*******Saving Replay Buffer******")
+#     import pickle
+#     with open(str(run_dir / 'replay_buffer.pkl'), 'wb') as output:
+#         pickle.dump(replay_buffer, output, -1)
+# 
+# print("*******Saving and Closing*******")
+# sac.save(str(run_dir / 'model.pt'))
+# env.close()
+# writer.export_scalars_to_json(str(log_dir / 'summary.json'))
+# writer.close()
